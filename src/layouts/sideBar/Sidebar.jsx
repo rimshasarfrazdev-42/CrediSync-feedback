@@ -1,0 +1,47 @@
+import { topMenu, bottomMenu } from "../../constants/menuConfig";
+import SidebarItem from "./SidebarItem";
+export default function SideBar({ isSidebarOpen, toggleSidebar }) {
+  return (
+    <aside
+      className={`
+        w-[260px] h-screen bg-white border-r border-tertiary/10
+        flex flex-col justify-between py-4 items-center z-50
+        transition-transform duration-300 ease-in-out
+        fixed inset-y-0 left-0
+        ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+        lg:translate-x-0 lg:sticky lg:top-0
+      `}
+    >
+      <div>
+        <div className="flex items-center justify-between px-2 pb-3 mb-10 border-b">
+          <div className="flex items-center gap-2 ">
+            <img src="/Dashboard/logo.svg" alt="logo" />
+          </div>
+          <button
+            onClick={toggleSidebar} 
+            className="flex items-center justify-center w-10 h-8 border border-gray-300 rounded-md "
+          >
+            <img src="/Dashboard/arrow.svg" alt="Close Menu" />
+          </button>
+        </div>
+        <nav className="px-2 space-y-2 text-secondary">
+          {topMenu.map((item, i) => (
+            <SidebarItem
+              key={i}
+              icon={item.icon}
+              text={item.text}
+              active={i === 0}
+                  path={item.path}  
+                    tab={item.tab}   
+            />
+          ))}
+        </nav>
+      </div>
+      <div className="w-full px-4 space-y-2 text-secondary ">
+        {bottomMenu.map((item, i) => (
+          <SidebarItem key={i} icon={item.icon} text={item.text} path={item.path}  tab={item.tab}   />
+        ))}
+      </div>
+    </aside>
+  );
+}
