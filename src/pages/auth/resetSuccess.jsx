@@ -14,13 +14,18 @@ export default function ResetSuccess() {
     // <PublicLayout>
     <div className="flex h-screen gap-6 p-4 bg-white">
       {/* Left Side - Image */}
-      <div className="hidden w-1/2 border rounded-2xl md:flex">
-        <img src="/doctors-img.svg" alt="Business Meeting" className="object-cover w-full h-full rounded-2xl" />
-      </div>
+   <div className="hidden w-1/2 border lg:flex rounded-2xl">
+  <img
+    src="/doctors-img.svg"
+    alt="Medical professionals"
+    className="object-cover w-full h-full rounded-2xl"
+  />
+</div>
+
 
       {/* Right Side - Success Message */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm md:w-1/2 rounded-2xl">
-        <div className="w-full p-6 text-center">
+      <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+        <div className="w-full text-center">
           <div className="flex items-center justify-center my-4">
             {/* <Link to="/">
               <img src="/Navbar-Logo.png" alt="NavBar-logo" className="w-[180px] md:w-[180px] lg:w-[200px] h-auto" />

@@ -32,7 +32,7 @@ const Login = () => {
 
       {/* Right Side */}
       <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
-        <div className="w-full p-6 bg-white">
+        <div className="w-full bg-white">
           <h1 className="mb-1 text-[31px] font-semibold text-center text-slate-900">
             Login
           </h1>
