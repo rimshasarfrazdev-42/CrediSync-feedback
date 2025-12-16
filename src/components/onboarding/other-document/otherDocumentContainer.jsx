@@ -44,8 +44,7 @@ const navigate = useNavigate();
   return (
     <>
       <FormStepHeader info="Other Documents" step="6" progress={100} />
-      <div className="flex items-center justify-between my-5">
-        <p className="text-lg font-bold text-secondary">Other Documents</p>
+      <div className="flex justify-end my-5">
         <Button onClick={addMoreDocumentForm}>Add Another</Button>
       </div>
       {/* Education Records Container */}

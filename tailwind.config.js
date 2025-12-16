@@ -7,7 +7,7 @@ export default {
         primary: "#163B6D",
         secondary: "#111827",
         tertiary: "#92949F",
-        subtext: "374151",
+        subtext: "#374151",
         appBg: "#D5DCF6",
       },
       fontFamily: {
