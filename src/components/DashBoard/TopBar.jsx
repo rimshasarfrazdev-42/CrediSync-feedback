@@ -1,6 +1,6 @@
 export default function TopBar({ toggleSidebar, openModal }) {
   return (
-    <header className="sticky top-0 z-50 bg-white border-b border-tertiary/20 px-6 py-4 flex items-center justify-between">
+    <header className="sticky top-0 z-50 bg-white border-b border-tertiary/20 px-6 py-5 flex items-center justify-between">
       <div className="flex items-center gap-4">
         <button className="xl:hidden" onClick={toggleSidebar}>
           <img src="/Dashboard/hamburger.svg" alt="Hamburger Menu" />

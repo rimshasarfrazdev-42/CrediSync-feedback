@@ -13,9 +13,9 @@ export default function SideBar({ isSidebarOpen, toggleSidebar }) {
       `}
     >
       <div>
-        <div className="flex items-center justify-between px-2 pb-3 mb-10 border-b">
+        <div className="flex items-center justify-between px-2 pb-3 mb-10 border-b gap-3">
           <div className="flex items-center gap-2 ">
-            <img src="/Dashboard/logo.svg" alt="logo" />
+            <img src="/Dashboard/logo.svg" alt="logo" className="w-48"/>
           </div>
           <button
             onClick={toggleSidebar} 
