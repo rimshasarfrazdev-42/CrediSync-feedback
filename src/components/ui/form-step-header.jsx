@@ -9,7 +9,7 @@ function FormStepHeader({ info, step, progress }) {
         <p className="text-xl font-semibold leading-snug sm:text-2xl lg:text-3xl text-secondary">Step {step} of 6</p>
 
         {/* Sub Text */}
-        <p className="text-sm sm:text-base lg:text-[22px] text-secondary font-medium leading-relaxed">{info}</p>
+        <p className="text-sm sm:text-base lg:text-[22px] text-subtext font-medium leading-relaxed">{info}</p>
       </div>
       <div className="w-[30%]">
         <Progress value={progress} />
