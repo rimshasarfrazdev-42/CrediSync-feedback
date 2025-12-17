@@ -17,6 +17,7 @@ const CredentialSharingContainer = ({ activeSharesContent, incomingRequestsConte
         subHeading="Share your credentials securely with institutions"
         buttonText="Share Access"
         openModal={openModal}
+        icon="/CredentialSharing/Share.svg"
       />
       <div className="w-full h-full mt-4">
       <div className="flex items-center p-1 border md:gap-2 w-fit bg-tertiary/5 md:p-2 rounded-t-xl border-tertiary/10 ">

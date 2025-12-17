@@ -10,7 +10,7 @@ export default function VerificationSuccessModal({ onClose }) {
     };
   }, []);
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-secondary/80"></div>
       <div ref={modalRef} className="relative w-full max-w-xl p-8 text-center bg-white shadow-xl rounded-2xl">
         <div className="flex justify-center mb-4">

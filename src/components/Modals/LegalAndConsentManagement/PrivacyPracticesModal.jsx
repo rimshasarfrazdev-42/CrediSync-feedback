@@ -27,9 +27,9 @@ export default function PrivacyPracticeModal({ closeModal }) {
           </button>
         </div>
         <div
-          className="flex items-center max-w-4xl px-2 py-3 mx-auto mt-4 space-x-2 bg-gray-100 border border-gray-300 rounded-lg shadow-sm "
+          className="flex items-start  lg:items-center max-w-4xl px-2 py-3 mx-auto mt-4 space-x-2 bg-gray-100 border border-gray-300 rounded-lg shadow-sm "
         >
-          <img src="/ConsentAndLegalInfo/noticeIcon.svg" alt="noticeIcon" />
+          <img src="/ConsentAndLegalInfo/noticeIcon.svg" alt="noticeIcon" className='mt-1 lg:mt-0' />
           <p className="text-primary text-[13.5px]">
             This notice describes how your medical information may be used and disclosed and how you can get access to
             this information.

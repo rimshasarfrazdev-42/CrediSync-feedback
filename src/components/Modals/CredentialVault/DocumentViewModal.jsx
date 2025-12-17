@@ -23,7 +23,7 @@ export default function DocumentViewModal({ doc, onClose, onOpenReplace, onOpenV
     onOpenDelete(doc);
   };
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-secondary/80"></div>
       <div ref={modalRef} className="relative w-full max-w-2xl bg-white border border-gray-200 shadow-xl rounded-xl">
         <div className="px-6 pt-6">
@@ -32,7 +32,7 @@ export default function DocumentViewModal({ doc, onClose, onOpenReplace, onOpenV
         </div>
         <div className="p-6">
           <div className="flex flex-col items-center justify-center border border-dotted border-tertiary/30 bg-tertiary/5 rounded-xl h-60">
-            <img src="/Dashboard/document.svg" className="w-10 opacity-60" />
+            <img src="/CredentialVault/document.svg" className="w-10 opacity-60" />
             <p className="mt-1 text-sm font-medium text-tertiary">Document Preview</p>
             <p className="text-xs text-secondary">{doc.fileName || `${doc.type}.pdf`}</p>
           </div>

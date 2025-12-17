@@ -9,19 +9,22 @@ export default function SideBar({ isSidebarOpen, toggleSidebar }) {
         transition-transform duration-300 ease-in-out
         fixed inset-y-0 left-0
         ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
-        lg:translate-x-0 lg:sticky lg:top-0
       `}
     >
-      <div>
-        <div className="flex items-center justify-between px-2 pb-3 mb-10 border-b">
+      <div className="w-full">
+        <div className="flex items-center justify-between px-4 pb-3 py-2 mb-4 border-b gap-4">
           <div className="flex items-center gap-2 ">
-            <img src="/Dashboard/logo.svg" alt="logo" />
+          <img src="/Dashboard/logo.svg" alt="logo" className="w-60"/>
           </div>
           <button
             onClick={toggleSidebar} 
-            className="flex items-center justify-center w-10 h-8 border border-gray-300 rounded-md "
+            className="flex items-center justify-center w-10 h-8 border border-gray-300 rounded-md hover:bg-gray-50"
           >
-            <img src="/Dashboard/arrow.svg" alt="Close Menu" />
+            <img 
+              src="/Dashboard/arrow.svg" 
+              alt="Close Menu" 
+              className="transition-transform duration-300"
+            />
           </button>
         </div>
         <nav className="px-2 space-y-2 text-secondary">
@@ -31,15 +34,15 @@ export default function SideBar({ isSidebarOpen, toggleSidebar }) {
               icon={item.icon}
               text={item.text}
               active={i === 0}
-                  path={item.path}  
-                    tab={item.tab}   
+              path={item.path}  
+              tab={item.tab}   
             />
           ))}
         </nav>
       </div>
       <div className="w-full px-4 space-y-2 text-secondary ">
         {bottomMenu.map((item, i) => (
-          <SidebarItem key={i} icon={item.icon} text={item.text} path={item.path}  tab={item.tab}   />
+          <SidebarItem key={i} icon={item.icon} text={item.text} path={item.path} tab={item.tab} />
         ))}
       </div>
     </aside>

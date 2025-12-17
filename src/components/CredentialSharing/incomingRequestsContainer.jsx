@@ -7,7 +7,6 @@ import { incomingRequestsData } from "../../constants/incomingRequestsData";
 const IncomingRequestsContainer = () => {
   const [modalType, setModalType] = useState(null); 
   const [selectedRequest, setSelectedRequest] = useState(null);
-
   const openModal = (type, request) => {
     setSelectedRequest(request);
     setModalType(type);

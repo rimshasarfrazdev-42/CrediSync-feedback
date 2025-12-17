@@ -8,7 +8,7 @@ const IncomingRequestsTable = ({ requests = [], openModal }) => {
         Approve or reject credential access requests from verified institutions.
       </p>
       <div className="overflow-hidden bg-white border border-tertiary/30 rounded-xl">
-        <div className="hidden grid-cols-4 px-6 py-3 text-sm font-medium md:grid bg-gray-50 text-secondary">
+        <div className="hidden grid-cols-4 px-6 py-3 text-sm font-medium md:grid bg-[#92949F1A] text-secondary">
           <div>Name</div>
           <div>Access Type</div>
           <div>Purpose</div>
@@ -22,7 +22,7 @@ const IncomingRequestsTable = ({ requests = [], openModal }) => {
             <div
               className="block p-3 mb-3 border border-gray-200 rounded-lg shadow-sm md:hidden text-tertiary"
             >
-              <div className="text-lg font-semibold text-secondary">{row.Name}</div>
+              <div className=" text-lg font-semibold text-secondary">{row.Name}</div>
               <div className="text-sm mt-0.5">{row.Purpose}</div>
               <div className="text-smmt-0.5">{row.accessType}</div>
               <div className="flex items-center gap-2 mt-4">
@@ -35,9 +35,9 @@ const IncomingRequestsTable = ({ requests = [], openModal }) => {
               </div>
             </div>
             <div
-              className="hidden md:grid md:grid-cols-4 px-3 py-1.5 border-t text-tertiary border-tertiary/10 text-sm items-center"
+              className="hidden  md:grid md:grid-cols-4 px-3 py-1.5 border-t text-tertiary border-tertiary/10 text-sm items-center"
             >
-              <div>{row.Name}</div>
+              <div className="px-3">{row.Name}</div>
               <div className="px-2">{row.accessType}</div>
               <div>{row.Purpose}</div>
               <div className="flex items-center justify-end gap-1">

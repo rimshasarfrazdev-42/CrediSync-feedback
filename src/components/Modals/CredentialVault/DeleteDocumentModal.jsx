@@ -16,7 +16,7 @@ export default function DeleteDocumentModal({ doc, onClose, onConfirmDelete }) {
     };
   }, []);
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-secondary/80"></div>
       <div ref={modalRef} className="relative w-full max-w-lg p-6 bg-white shadow-xl  rounded-xl">
         <h2 className="mb-4 text-xl font-semibold text-secondary">Delete Document</h2>

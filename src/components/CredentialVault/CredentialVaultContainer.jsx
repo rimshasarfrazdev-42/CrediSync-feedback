@@ -55,8 +55,9 @@ const CredentialVaultContainer = () => {
       <WelcomeBanner
         heading="Credential Vault"
         subHeading="Manage and track all your healthcare credentials"
-        buttonText="Upload Button"
+        buttonText="Upload Document"
         openModal={() => setIsUploadModalOpen(true)}
+        icon="/CredentialVault/upload1.svg"
       />
 
       <YourDocuments onViewDocument={(doc) => setSelectedDoc(doc)} />
