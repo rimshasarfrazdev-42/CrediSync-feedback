@@ -159,9 +159,9 @@ export default function UserProfileForm({ user, onSave }) {
               {isEditing && (
                 <label
                   htmlFor="avatarUpload"
-                  className="absolute bottom-0 right-0 p-1.5 bg-indigo-600 rounded-full cursor-pointer shadow hover:bg-indigo-700 transition"
+                  className="absolute bottom-0 right-0 p-1.5 bg-primary rounded-full cursor-pointer shadow transition"
                 >
-                  <Camera className="w-4 h-4 text-white" />
+                  <Camera className="w-4 h-4 text-white " />
                   <input
                     type="file"
                     id="avatarUpload"
