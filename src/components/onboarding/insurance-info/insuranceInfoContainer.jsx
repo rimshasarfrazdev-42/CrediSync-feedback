@@ -32,7 +32,7 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
     setRerender((prev) => prev + 1);
   };
   return (
-    <div className="w-full p-5 mb-8 bg-white border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
+    <div className="w-full mb-8 bg-white ">
       <FormStepHeader info="Insurance Details" step="5" progress={83} />
       <div className="flex justify-end my-5">
         <Button onClick={addMoreInsuranceForm}>Add Another</Button>
@@ -52,7 +52,7 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
               )}
             </div>
 
-            <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               <div className="flex flex-col">
                 <p className="mb-2 text-base font-semibold text-secondary">Insurer Name<span className="ml-1 text-red-500">*</span></p>
                 <Input
@@ -74,8 +74,8 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
               <div className="flex flex-col">
                 <p className="mb-2 text-base font-semibold text-secondary">Coverage Limits<span className="ml-1 text-red-500">*</span></p>
                 <Select value={block.coverageLimits || undefined} onValueChange={(value) => (block.coverageLimits = value)}>
-                  <SelectTrigger className="w-full h-10 border border-gray-300">
-                    <SelectValue placeholder="Select Coverage Limits" />
+                  <SelectTrigger className="w-full h-10 border border-gray-300 text-left items-center">
+                    <SelectValue placeholder="Select Coverage Limits " />
                   </SelectTrigger>
                   <SelectContent className="bg-white border border-gray-300 ">
                     <SelectItem value="$1,000,000 / $3,000,000">$1,000,000 / $3,000,000</SelectItem>

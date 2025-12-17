@@ -44,19 +44,19 @@ function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm,
                 )}
               </div>
 
-              <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="flex flex-col">
                   <p className="mb-2 text-base font-semibold text-secondary">Hospital/Facility<span className="ml-1 text-red-500">*</span></p>
                   <Select
                     value={block.hospital || undefined}
-                    onValueChange={(value) => handleValueChange(block, 'hospital', value)} 
+                    onValueChange={(value) => handleValueChange(block, 'hospital', value)}
                   >
                     <SelectTrigger
-                      className="w-full h-auto min-h-[2.5rem] border border-gray-300 text-left items-center py-2" 
+                      className="w-full h-auto min-h-[2.5rem] border border-gray-300 text-left items-center py-2"
                     >
                       <SelectValue
                         placeholder="Select Hospital or Facility Name"
-                        className="whitespace-normal leading-snug" 
+                        className="whitespace-normal leading-snug"
                       />
                     </SelectTrigger>
                     <SelectContent className="bg-white border border-gray-300 ">
@@ -75,8 +75,11 @@ function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm,
                   <div className="relative">
                     <Input
                       placeholder="MM/DD/YYYY"
-                      defaultValue={block.startDate}
-                      onChange={(e) => (block.startDate = e.target.value)}
+                      value={block.startDate || ''}
+                      onChange={(e) => {
+                        block.startDate = e.target.value;
+                        if (setRerender) setRerender(prev => prev + 1);
+                      }}
                       className="pr-12"
                     />
                     <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
@@ -132,8 +135,11 @@ function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm,
                   <div className="relative">
                     <Input
                       placeholder="MM/DD/YYYY or Present"
-                      defaultValue={block.endDate}
-                      onChange={(e) => (block.endDate = e.target.value)}
+                      value={block.endDate || ''}
+                      onChange={(e) => {
+                        block.endDate = e.target.value;
+                        if (setRerender) setRerender(prev => prev + 1);
+                      }}
                       className="pr-12"
                     />
                     <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">

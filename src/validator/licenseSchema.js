@@ -19,6 +19,6 @@ export const licenseSchema = Yup.object().shape({
         ),
   boardName: Yup.string(),
   specialty: Yup.string(),
-  uploadLicense: Yup.mixed(),
-  uploadCertificate: Yup.mixed(),
+  uploadLicense: Yup.mixed().required('Upload license is required'),
+  uploadCertificate: Yup.mixed().required('Upload certificate is required'),
 });

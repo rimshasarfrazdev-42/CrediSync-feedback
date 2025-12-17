@@ -59,7 +59,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
   return (
     <>
       <FormStepHeader info="Personal Info" step="1" progress={17} />
-      <div className="grid w-full grid-cols-1 gap-4 p-5 mt-5 border sm:grid-cols-2 md:grid-cols-3 min-h-96 rounded-3xl border-zinc-200">
+      <div className="grid w-full grid-cols-1 gap-4 p-5 mt-5 border  md:grid-cols-2 lg:grid-cols-3 min-h-96 rounded-3xl border-zinc-200">
         <div className="flex flex-col">
 
           <p className="mb-2 text-base font-semibold text-secondary">First Name<span className="text-red-500 ml-1">*</span></p>

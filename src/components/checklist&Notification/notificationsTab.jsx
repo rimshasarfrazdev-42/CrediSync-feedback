@@ -4,27 +4,26 @@ import {
   Search as SearchIcon,
   Clock3,
   CheckCircle2,
-  AlertTriangle,
   UserPlus2,
-  XCircle,
+  CircleAlert 
 } from "lucide-react";
 
 const ICON_CONFIG = {
   warning: {
     Icon: Clock3,
-    className: "bg-amber-50 text-amber-500",
+    className: "text-pending/50",
   },
   success: {
     Icon: CheckCircle2,
-    className: "bg-emerald-50 text-emerald-500",
+    className: "text-active/50",
   },
   info: {
-    Icon: UserPlus2,
-    className: "bg-indigo-50 text-indigo-500",
+    Icon: CircleAlert,
+    className: "text-info/50 rotate-180 transition-transform",
   },
   error: {
-    Icon: XCircle,
-    className: "bg-rose-50 text-rose-500",
+    Icon: CircleAlert ,
+    className: "text-expired/50",
   },
 };
 
@@ -171,11 +170,14 @@ export default function NotificationsTab({ items, onItemsChange }) {
             className="w-full rounded-lg border border-slate-200 bg-white py-2.5 px-3 text-xs sm:text-sm text-slate-700 focus:border-primary focus:outline-none focus:ring-1 focus:ring-sky-500 sm:w-44"
           >
             <option value="all">All Notifications</option>
-            {categories.map((cat) => (
+            <option value="expiry-alert">Expiry Alerts</option>
+            <option value="verification">Verifications</option>
+            <option value="access-req">Access Requests</option>
+            {/* {categories.map((cat) => (
               <option key={cat} value={cat}>
                 {cat}
               </option>
-            ))}
+            ))} */}
           </select>
 
           <select
@@ -233,9 +235,9 @@ export default function NotificationsTab({ items, onItemsChange }) {
                   >
                     <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3">
                       <div
-                        className={`mt-1 flex h-8 w-8 items-center justify-center rounded-full ${className}`}
+                        className={`flex h-8 w-8 items-center justify-center rounded-full ${className}`}
                       >
-                        <Icon className="w-4 h-4" />
+                        <Icon className="w-5 h-5" />
                       </div>
 
                       <div className="flex-1">

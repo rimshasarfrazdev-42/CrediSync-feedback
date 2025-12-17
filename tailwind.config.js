@@ -9,6 +9,11 @@ export default {
         tertiary: "#92949F",
         subtext: "#374151",
         appBg: "#D5DCF6",
+        active:"#22C55E",
+        pending:"#D7AE0B",
+        expired:"#EF4444",
+        info:"#213BBD"
+
       },
       fontFamily: {
         inter: ['Inter', 'system-ui', 'sans-serif'],

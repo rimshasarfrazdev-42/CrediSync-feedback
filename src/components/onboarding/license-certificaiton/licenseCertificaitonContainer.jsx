@@ -50,7 +50,7 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
 
       <div className="grid w-full grid-cols-1 gap-6 mt-5">
         <div className="w-full p-5 border rounded-3xl border-zinc-200">
-          <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
 
             {/* License Number - FIX: Switched to value */}
             <div className="flex flex-col">
@@ -84,7 +84,6 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
               {errors.issuingState && <p className="text-sm text-red-600">{errors.issuingState}</p>}
             </div>
 
-            {/* Issue Date (Already using value) */}
             <div className="flex flex-col">
               <p className="mb-2 text-base font-semibold text-secondary">Issue Date<span className="ml-1 text-red-500">*</span></p>
               <div className="relative">
@@ -125,7 +124,6 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
               {errors.issueDate && <p className="text-sm text-red-600">{errors.issueDate}</p>}
             </div>
 
-            {/* Expiry Date (Already using value) */}
             <div className="flex flex-col">
               <p className="mb-2 text-base font-semibold text-secondary">Expiry Date<span className="ml-1 text-red-500">*</span></p>
               <div className="relative">

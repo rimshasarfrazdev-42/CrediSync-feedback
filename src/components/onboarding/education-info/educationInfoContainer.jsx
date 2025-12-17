@@ -51,7 +51,7 @@ function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, se
               )}
             </div>
 
-            <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               <div className="flex flex-col">
                 <p className="mb-2 text-base font-semibold text-secondary">Institution<span className="ml-1 text-red-500">*</span></p>
                 <Input placeholder="Institution Name" defaultValue={block.institution} onChange={(e) => (block.institution = e.target.value)} />
