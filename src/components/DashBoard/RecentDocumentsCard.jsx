@@ -1,30 +1,18 @@
 import { useState, useRef } from 'react';
 import { recentDocuments, statusColors } from '../../constants/dashboardData/documents';
 import useClickOutside from '../../hooks/useClickOutside';
-import { useNavigate } from 'react-router-dom';
-
 export default function RecentDocumentsCard() {
   const [statusOpen, setStatusOpen] = useState(false);
-  const [selectedStatus, setSelectedStatus] = useState("Status");
+  const [selectedStatus, setSelectedStatus] = useState('Status');
   const [actionOpenIndex, setActionOpenIndex] = useState(null);
-
-  const navigate = useNavigate();
+  const [showAll, setShowAll] = useState(false);
   const statusRef = useRef(null);
   const actionRefs = useRef({});
-
   useClickOutside(statusRef, () => setStatusOpen(false));
   useClickOutside({ current: actionRefs.current[actionOpenIndex] }, () => setActionOpenIndex(null));
-
-  // 🔹 FILTER LOGIC
   const filteredDocuments =
-    selectedStatus === "Status"
-      ? recentDocuments
-      : recentDocuments.filter((doc) => doc.status === selectedStatus);
-
-  const handelclick = () => {
-    navigate('/credential-vault');
-  };
-
+    selectedStatus === 'Status' ? recentDocuments : recentDocuments.filter((doc) => doc.status === selectedStatus);
+  const visibleDocuments = showAll ? filteredDocuments : filteredDocuments.slice(0, 3);
   return (
     <div className="relative w-full p-4 mt-6 border shadow-sm sm:p-6 sm:mt-8 rounded-xl hover:shadow-md border-tertiary/10">
       <div className="relative flex flex-col gap-3 mb-4 sm:flex-row sm:items-center sm:justify-between">
@@ -32,8 +20,6 @@ export default function RecentDocumentsCard() {
           <h2 className="text-base font-semibold sm:text-lg">Recent Documents</h2>
           <p className="text-xs sm:text-sm text-tertiary">Your latest credential updates</p>
         </div>
-
-        {/* Status Dropdown */}
         <div className="relative w-full sm:w-auto sm:max-w-xs" ref={statusRef}>
           <button
             onClick={() => setStatusOpen(!statusOpen)}
@@ -42,17 +28,17 @@ export default function RecentDocumentsCard() {
             {selectedStatus}
             <img src="/Dashboard/downArrows.svg" alt="Down arrow" />
           </button>
-
           {statusOpen && (
-            <div className="absolute right-0 z-20 w-full mt-1 bg-white border rounded-md shadow-lg sm:right-auto sm:w-fit">
-              {["Status", "Active", "Completed", "Expired"].map((option, i) => (
+            <div className="absolute right-0 z-20 w-full mt-1 bg-white border rounded-md shadow-lg sm:right-auto">
+              {['Active', 'Pending', 'Expired'].map((option) => (
                 <p
-                  key={i}
+                  key={option}
                   onClick={() => {
                     setSelectedStatus(option);
+                    setShowAll(false);
                     setStatusOpen(false);
                   }}
-                  className="px-3 py-1 text-[13px] hover:bg-dashboard cursor-pointer"
+                  className="px-3 py-1 text-[13px] hover:bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC] cursor-pointer"
                 >
                   {option}
                 </p>
@@ -61,78 +47,64 @@ export default function RecentDocumentsCard() {
           )}
         </div>
       </div>
-
-      {/* Desktop / Tablet Table View */}
       <div className="hidden sm:block">
         <div className="overflow-x-auto border rounded-lg">
           <table className="w-full text-sm min-w-[650px]">
             <thead>
-              <tr className="text-left border-b text-secondary bg-tertiary/10">
+              <tr className="text-left border-b text-secondary bg-[#92949F1A]">
                 <th className="py-3 px-3 min-w-[150px]">Document Type</th>
                 <th className="py-3 min-w-[150px]">Issuer</th>
                 <th className="py-3 min-w-[120px]">Status</th>
                 <th className="py-3 min-w-[120px]">Upload Date</th>
                 <th className="py-3 min-w-[120px]">Expiry Date</th>
-                <th className="py-3 min-w-[80px]">Actions</th>
+                <th className="py-3 px-3 min-w-[80px] text-right">Actions</th>
               </tr>
             </thead>
-
             <tbody className="text-tertiary">
-              {filteredDocuments.map((doc, index) => (
-                <tr key={index} className="relative transition border-b hover:bg-dashboard">
+              {visibleDocuments.map((doc, index) => (
+                <tr
+                  key={index}
+                  className="relative transition border-b hover:bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC]"
+                >
                   <td className="flex items-center gap-2 px-3 py-5">
                     <img src="/Dashboard/document.svg" alt="Document Icon" />
                     {doc.type}
                   </td>
-
                   <td className="py-3">{doc.issuer}</td>
-
                   <td className="py-3">
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${statusColors[doc.status]}`}>
                       {doc.status}
                     </span>
                   </td>
-
                   <td className="py-3">{doc.upload}</td>
                   <td className="py-3">{doc.expiry}</td>
-
-                  <td
-                    className="relative py-3"
-                    ref={(el) => (actionRefs.current[index] = el)}
-                  >
+                  <td className="relative py-3 text-right px-4" ref={(el) => (actionRefs.current[index] = el)}>
                     <button
                       className="p-1"
-                      onClick={() =>
-                        setActionOpenIndex(actionOpenIndex === index ? null : index)
-                      }
+                      onClick={() => setActionOpenIndex(actionOpenIndex === index ? null : index)}
                     >
-                      <img src="/Dashboard/movesVertical.svg" alt="Three dots icon" />
+                      <img src="/Dashboard/movesVertical.svg" alt="Actions" />
                     </button>
-
                     {actionOpenIndex === index && (
-                      <div className="text-secondary absolute right-[90%] top-[-18%] w-24 bg-white shadow-lg rounded-lg border z-30 text-xs">
+                      <div className="absolute right-[40%] top-[-22%] w-24 bg-white shadow-lg rounded-lg border z-30 text-xs text-secondary">
                         <p className="flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-dashboard">
-                          <img src="/Dashboard/view.svg" alt="View Icon" />
-                          View
+                          <img src="/Dashboard/view.svg" /> View
                         </p>
                         <p className="flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-dashboard">
-                          <img src="/Dashboard/download.svg" alt="Download Icon" />
-                          Download
+                          <img src="/Dashboard/download.svg" /> Download
                         </p>
                         <p className="flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-dashboard">
-                          <img src="/Dashboard/share.svg" alt="Share Icon" />
-                          Share
+                          <img src="/Dashboard/share.svg" /> Share
                         </p>
                       </div>
                     )}
                   </td>
                 </tr>
               ))}
-
-              {filteredDocuments.length === 0 && (
+              {visibleDocuments.length === 0 && (
                 <tr>
                   <td colSpan={6} className="py-6 text-center text-tertiary">
-                    No documents found for "{selectedStatus}"
+                    No documents found
                   </td>
                 </tr>
               )}
@@ -140,90 +112,50 @@ export default function RecentDocumentsCard() {
           </table>
         </div>
       </div>
-
-      {/* Mobile Card View */}
-      <div className="block sm:hidden">
-        {filteredDocuments.length === 0 && (
-          <div className="py-6 text-sm text-center text-tertiary">
-            No documents found for "{selectedStatus}"
-          </div>
-        )}
-
-        <div className="space-y-3">
-          {filteredDocuments.map((doc, index) => (
-            <div
-              key={index}
-              className="relative p-3 border rounded-lg shadow-xs bg-white/80"
-              ref={(el) => (actionRefs.current[index] = el)}
-            >
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex items-center gap-2">
-                  <img
-                    src="/Dashboard/document.svg"
-                    alt="Document Icon"
-                    className="flex-shrink-0 w-6 h-6"
-                  />
-                  <div>
-                    <p className="text-sm font-medium">{doc.type}</p>
-                    <p className="text-xs text-tertiary">Issuer: {doc.issuer}</p>
-                  </div>
+      <div className="block sm:hidden space-y-3">
+        {visibleDocuments.map((doc, index) => (
+          <div
+            key={index}
+            className="relative p-3 border rounded-lg bg-white"
+            ref={(el) => (actionRefs.current[index] = el)}
+          >
+            <div className="flex items-start justify-between">
+              <div className="flex gap-2">
+                <img src="/Dashboard/document.svg" className="w-6 h-6" />
+                <div>
+                  <p className="text-sm font-medium">{doc.type}</p>
+                  <p className="text-xs text-tertiary">Issuer: {doc.issuer}</p>
                 </div>
-
-                <button
-                  className="flex-shrink-0 p-1"
-                  onClick={() =>
-                    setActionOpenIndex(actionOpenIndex === index ? null : index)
-                  }
-                >
-                  <img
-                    src="/Dashboard/movesVertical.svg"
-                    alt="Three dots icon"
-                    className="w-4 h-4"
-                  />
-                </button>
               </div>
-
-              <div className="flex flex-wrap items-center gap-2 mt-3 text-xs">
-                <span className={`px-3 py-1 rounded-full font-medium ${statusColors[doc.status]}`}>
-                  {doc.status}
-                </span>
-                <span className="text-tertiary">
-                  Upload: <span className="font-medium">{doc.upload}</span>
-                </span>
-                <span className="text-tertiary">
-                  Expiry: <span className="font-medium">{doc.expiry}</span>
-                </span>
-              </div>
-
-              {actionOpenIndex === index && (
-                <div className="absolute z-30 text-xs bg-white border rounded-lg shadow-lg right-2 top-10 w-28 text-secondary">
-                  <p className="flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-dashboard">
-                    <img src="/Dashboard/view.svg" alt="View Icon" />
-                    View
-                  </p>
-                  <p className="flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-dashboard">
-                    <img src="/Dashboard/download.svg" alt="Download Icon" />
-                    Download
-                  </p>
-                  <p className="flex items-center gap-2 px-2 py-1 cursor-pointer hover:bg-dashboard">
-                    <img src="/Dashboard/share.svg" alt="Share Icon" />
-                    Share
-                  </p>
-                </div>
-              )}
+              <button onClick={() => setActionOpenIndex(actionOpenIndex === index ? null : index)}>
+                <img src="/Dashboard/movesVertical.svg" className="w-4 h-4" />
+              </button>
             </div>
-          ))}
+            <div className="flex flex-wrap gap-2 mt-3 text-xs">
+              <span className={`px-3 py-1 rounded-full ${statusColors[doc.status]}`}>{doc.status}</span>
+              <span>Upload: {doc.upload}</span>
+              <span>Expiry: {doc.expiry}</span>
+            </div>
+            {actionOpenIndex === index && (
+              <div className="absolute right-2 top-10 w-28 bg-white border rounded-lg shadow-lg z-30 text-xs">
+                <p className="px-2 py-1 hover:bg-dashboard">View</p>
+                <p className="px-2 py-1 hover:bg-dashboard">Download</p>
+                <p className="px-2 py-1 hover:bg-dashboard">Share</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      {filteredDocuments.length > 3 && (
+        <div className="mt-4">
+          <button
+            onClick={() => setShowAll((prev) => !prev)}
+            className="w-full bg-primary text-white py-2.5 rounded-md text-sm font-medium hover:bg-[#093059]"
+          >
+            {showAll ? 'View Less' : 'View All Documents'}
+          </button>
         </div>
-      </div>
-
-      <div className="mt-4 sm:mt-5">
-        <button
-          onClick={handelclick}
-          className="w-full bg-primary text-white py-2.5 sm:py-3 rounded-md text-sm sm:text-base font-medium hover:bg-[#093059] transition"
-        >
-          View All Documents
-        </button>
-      </div>
+      )}
     </div>
   );
 }

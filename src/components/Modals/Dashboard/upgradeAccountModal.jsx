@@ -11,7 +11,7 @@ export default function UpgradeAccountModal({ closeModal }) {
           Upgrade your account
           <img className="cursor-pointer" src="/Dashboard/close.svg" alt="Close Icon" onClick={closeModal} />
         </h2>
-        <p className="mt-1 text-sm text-tertiary max-w-80">
+        <p className="mt-1 text-sm text-tertiary max-w-96">
           Upgrade to unlock automated verification, full readiness score, secure sharing
         </p>
         <div className="flex items-center justify-between gap-4 mt-8">
