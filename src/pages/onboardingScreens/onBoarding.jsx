@@ -292,6 +292,7 @@ function OnBoarding() {
   const handleSubmit = async () => {
     try {
       // FULL VALIDATION
+      setErrors({});
       await validateAllSteps();
 
       const educationData = educationFormsRef.current.map(({ fileInputRef, ...rest }) => rest);
@@ -330,11 +331,13 @@ function OnBoarding() {
       };
 
       console.log('FINAL JSON:', finalData);
+      return true;
     } catch (err) {
       const formatted = {};
       err.inner?.forEach((e) => (formatted[e.path] = e.message));
       setErrors(formatted);
       console.log('VALIDATION FAILED', formatted);
+      return false;
     }
   };
 
@@ -354,8 +357,8 @@ function OnBoarding() {
         </div>
       </div>
       {/* content section */}
-      <div className="w-full px-5 bg-transparent sm:px-6 lg:px-8">
-        <div className="w-full p-5 mb-8 bg-white border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
+      <div className="w-full px-5 bg-transparent pb-8 sm:px-6 lg:px-8">
+        <div className="w-full p-5  bg-white border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
           {step === 1 ? (
             <PersonalInfoContainer
               step={step}

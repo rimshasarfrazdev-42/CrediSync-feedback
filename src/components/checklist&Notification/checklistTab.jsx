@@ -7,31 +7,89 @@ import UploadDocumentModal from '../Modals/checklistandNotification/UploadDocume
 
 const STATUS_CONFIG = {
   active: {
-    label: 'Active',
-    badgeClass: 'bg-emerald-100 text-emerald-700',
-    dotClass: 'bg-emerald-500',
-    progressClass: 'bg-emerald-500',
+    label: "Active",
+    badgeClass: "bg-active/10 text-active",
+    icon: (
+      <svg
+        className="w-4 h-4 text-active"
+        viewBox="0 0 25 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="m9 12 2 2 4-4" />
+      </svg>
+    ),
+    progressClass: "bg-active",
   },
+
   pending: {
-    label: 'Pending',
-    badgeClass: 'bg-amber-100 text-amber-700',
-    dotClass: 'bg-amber-400',
-    progressClass: 'bg-amber-400',
+    label: "Pending",
+    badgeClass: "bg-pending/10 text-pending",
+    icon: (
+      <svg
+        className="w-4 h-4 text-pending"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </svg>
+    ),
+    progressClass: "bg-pending",
   },
+
   expired: {
-    label: 'Expired',
-    badgeClass: 'bg-rose-100 text-rose-600',
-    dotClass: 'bg-rose-400',
-    progressClass: 'bg-rose-400',
+    label: "Expired",
+    badgeClass: "bg-expired/10 text-expired",
+    icon: (
+    <svg
+        className="w-4 h-4 text-expired"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </svg>
+    ),
+    progressClass: "bg-expired",
   },
-  // Missing is visually “red” like in the screenshot
+
   missing: {
-    label: 'Missing',
-    badgeClass: 'bg-red-50 text-red-600',
-    dotClass: 'bg-red-500',
-    progressClass: 'bg-red-500',
+    label: "Missing",
+    badgeClass: "bg-expired/10 text-expired",
+    icon: (
+     <svg
+        className="w-4 h-4 text-expired"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </svg>
+    ),
+    progressClass: "bg-expired",
   },
 };
+
 
 function TimeIcon() {
   return (
@@ -44,11 +102,19 @@ function TimeIcon() {
 
 function InfoIcon() {
   return (
-    <svg className="h-3.5 w-3.5 text-primary" viewBox="0 0 16 16" fill="none">
-      <circle cx="8" cy="8" r="6.75" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M8 6.2v4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-      <circle cx="8" cy="4.4" r="0.7" fill="currentColor" />
-    </svg>
+    <svg
+        className="w-4 h-4 text-primary rotate-180 transition-transform "
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </svg>
   );
 }
 
@@ -99,26 +165,25 @@ function ChecklistProgress({ items }) {
   return (
     <div className="px-4 py-3 mt-3 bg-white border rounded-2xl border-slate-200 sm:px-5 sm:py-4">
       {/* bar */}
-      <div className="w-full h-3 overflow-hidden rounded-full bg-slate-100">
+      <div className="w-full h-3 overflow-hidden rounded-full bg-[#92949F1F]">
         <div className="flex w-full h-3">
           {segments.map((key, idx) => (
             <div
               key={key}
               style={{ width: `${(counts[key] / total) * 100}%` }}
-              className={`${STATUS_CONFIG[key].progressClass} ${
-                idx === 0 ? 'rounded-l-full' : ''
-              } ${idx === segments.length - 1 ? 'rounded-r-full' : ''}`}
+              className={`${STATUS_CONFIG[key].progressClass} ${idx === 0 ? 'rounded-l-full' : ''
+                } ${idx === segments.length - 1 ? 'rounded-r-full' : ''}`}
             />
           ))}
         </div>
       </div>
 
       {/* legend */}
-      <div className="flex flex-wrap items-center gap-4 mt-3 text-xs sm:text-sm text-slate-600">
+      <div className="flex  items-center gap-4 mt-3 text-[8px] sm:text-sm">
         {order.map((key) => (
           <div key={key} className="flex items-center gap-1.5">
-            <span className={`h-2.5 w-2.5 rounded-full ${STATUS_CONFIG[key].dotClass}`} />
-            <span className="font-medium">
+            {STATUS_CONFIG[key].icon}
+            <span className="font-medium text-subtext">
               {STATUS_CONFIG[key].label} ({counts[key]})
             </span>
           </div>
@@ -147,9 +212,9 @@ function ChecklistItemCard({ item, onAction }) {
           </div>
 
           {/* time + tooltip */}
-          <div className="flex items-center gap-2 mt-2 text-xs text-slate-500">
-            <TimeIcon />
-            <span>{item.estimatedTime}</span>
+          <div className="flex items-center gap-2 mt-2 text-xs">
+            <TimeIcon className="text-tertiary" />
+            <span className='text-tertiary'>{item.estimatedTime}</span>
             {item.tooltip && (
               <div className="relative inline-flex group">
                 <InfoIcon />
@@ -162,14 +227,25 @@ function ChecklistItemCard({ item, onAction }) {
 
           {/* main description */}
           {item.description && (
-            <p className="mt-1 text-xs text-slate-600 sm:text-sm">{item.description}</p>
+            <p className="mt-1 text-xs text-tertiary sm:text-sm">{item.description}</p>
           )}
 
           {/* sub label row */}
           {item.subLabel && (
-            <div className="flex items-center gap-2 mt-2 text-xs text-slate-500">
-              {item.status === 'active' ? <TimeIcon /> : <DocumentIcon />}
-              <span>{item.subLabel}</span>
+            <div className="flex items-center gap-2 mt-2 text-xs">
+              {item.status === 'active' ? <svg className="w-4 h-4 text-subtext" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="10" r="7.25" stroke="currentColor" strokeWidth="1.5" />
+                <path d="M10 5.5V10l2.5 2.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+              </svg>
+                : <svg className="w-4 h-4 text-subtext" viewBox="0 0 20 20" fill="none">
+                  <path
+                    d="M6 2.5A1.5 1.5 0 0 1 7.5 1h5.086a1.5 1.5 0 0 1 1.06.44l3.414 3.414A1.5 1.5 0 0 1 17 5.914V16.5A1.5 1.5 0 0 1 15.5 18h-9A1.5 1.5 0 0 1 5 16.5v-14Z"
+                    stroke="currentColor"
+                    strokeWidth="1.4"
+                  />
+                  <path d="M12 1.25V4a1 1 0 0 0 1 1h2.75" stroke="currentColor" strokeWidth="1.4" />
+                </svg>}
+              <span className='text-subtext'>{item.subLabel}</span>
             </div>
           )}
 
@@ -186,8 +262,8 @@ function ChecklistItemCard({ item, onAction }) {
                       action.variant === 'primary'
                         ? 'inline-flex items-center rounded-lg bg-primary px-3.5 py-2 text-xs font-semibold text-white hover:bg-[#082b5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 sm:text-sm'
                         : action.variant === 'ghost'
-                        ? 'inline-flex items-center rounded-lg border border-transparent px-3.5 py-2 text-xs font-medium text-slate-700 underline hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 sm:text-sm'
-                        : 'inline-flex items-center rounded-lg border border-primary px-3.5 py-2 text-xs font-medium text-primary hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 sm:text-sm'
+                          ? 'inline-flex items-center rounded-lg border border-transparent px-3.5 py-2 text-xs font-medium text-slate-700 underline hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 sm:text-sm'
+                          : 'inline-flex items-center rounded-lg border border-primary px-3.5 py-2 text-xs font-medium text-primary hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 sm:text-sm'
                     }
                   >
                     {action.label}

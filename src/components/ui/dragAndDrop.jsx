@@ -2,11 +2,32 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Upload, Image, CircleCheck, Trash2, ShieldCheck } from 'lucide-react';
 import { Button } from '../ui/button';
 import { Input } from './input';
+import { toast } from 'sonner';
 
 function DragAndDrop({ imageContainer, onUpdate, savedImage }) {
   const fileInputRef = useRef(null);
   const [fileData, setFileData] = useState(null);
+  const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png'];
+  const MAX_SIZE_MB = 10;
+  const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
+const isValidFile = (file) => {
+    if (!file) return false;
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      toast.error("Invalid file format", {
+        description: "Please upload a JPG or PNG image.",
+      });
+      return false;
+    }
+    if (file.size > MAX_SIZE_BYTES) {
+      toast.error("File too large", {
+        description: `Maximum file size allowed is ${MAX_SIZE_MB}MB.`,
+      });
+      return false;
+    }
+
+    return true;
+  };
   const openFilePicker = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
@@ -18,34 +39,34 @@ function DragAndDrop({ imageContainer, onUpdate, savedImage }) {
   };
 
   // Handle Drop function
-  const handleDrop = (e) => {
+ const handleDrop = (e) => {
     e.preventDefault();
     const droppedFile = e.dataTransfer.files[0];
-    if (droppedFile) {
+    
+    if (droppedFile && isValidFile(droppedFile)) {
       const previewURL = URL.createObjectURL(droppedFile);
       const fileObj = {
         url: previewURL,
         name: droppedFile.name,
       };
       setFileData(fileObj);
-      imageContainer.current = fileObj;
+      imageContainer.current = droppedFile; 
       onUpdate && onUpdate();
     }
   };
-  // Handle File Changes function
   const handleFileChanges = async (e) => {
     const file = e.target.files?.[0] || null;
-    
-    if (file) {
+
+    if (file && isValidFile(file)) {
       const previewURL = URL.createObjectURL(file);
       const fileObj = {
         url: previewURL,
         name: file.name,
       };
       setFileData(fileObj);
-      imageContainer.current = fileObj;
-      onUpdate && onUpdate();
+      imageContainer.current = file; 
     }
+    e.target.value = '';
   };
   // Remove File function
   const removeFile = () => {
@@ -56,8 +77,8 @@ function DragAndDrop({ imageContainer, onUpdate, savedImage }) {
 
   useEffect(() => {
     if (savedImage) {
-      imageContainer.current = { ...savedImage };
-      setFileData({ ...savedImage });
+      imageContainer.current = {savedImage };
+      setFileData({savedImage });
     }
   }, [savedImage]);
 
@@ -117,7 +138,7 @@ function DragAndDrop({ imageContainer, onUpdate, savedImage }) {
               <Upload size={35} />
             </div>
             <div>
-              <p className="text-rare text-[16px] font-normal">Drag & drop your file here, or</p>
+              <p className="text-subtext text-[16px] font-normal">Drag & drop your file here, or</p>
             </div>
             <Button className="!bg-primary !text-white px-8 mt-4 text-center" onClick={openFilePicker}>
               <span>Browse Files</span>

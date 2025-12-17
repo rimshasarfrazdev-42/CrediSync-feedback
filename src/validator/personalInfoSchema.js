@@ -19,13 +19,14 @@ export const personalInfoSchema = Yup.object().shape({
       'Date must be in MM/DD/YYYY format'
     ),
   email: Yup.string()
-  .trim()
-  .required('Email is required')
-  .matches(
-    /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-    'Invalid email format'
-  ),
+    .trim()
+    .required('Email is required')
+    .matches(
+      /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+      'Invalid email format'
+    ),
   contact: Yup.string()
+    .trim()
     .required('Contact is required')
     .matches(
       /^\(\d{3}\)\s\d{3}-\d{4}$/,
@@ -48,8 +49,8 @@ export const personalInfoSchema = Yup.object().shape({
     .matches(/^[A-Za-z]{2}$/, 'State must be 2-letter code (e.g. CA)')
     .required('State is required'),
   zip: Yup.string()
+  .trim()
     .required('Zip is required'),
-    // .matches(/^\d{5}(-\d{4})?$/, 'Invalid Zip Code'),
   country: Yup.string()
     .trim()
     .matches(/^[A-Za-z\s'-]+$/, 'Country can only contain letters')

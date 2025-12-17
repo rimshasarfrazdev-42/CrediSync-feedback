@@ -13,7 +13,7 @@ export default function ChecklistNotification() {
 
   return (
     <MainLayout>
-      <div className="min-h-screen px-4 py-6 ">
+      <div className="min-h-screen px-0 md:px-4 py-6 ">
         <UpperHeader />
         <div className="w-full h-full mt-4">
           <div className="flex items-center p-1 border md:gap-2 w-fit bg-tertiary/5 md:p-2 rounded-t-xl border-tertiary/10">
