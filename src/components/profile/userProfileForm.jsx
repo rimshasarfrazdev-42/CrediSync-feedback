@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Camera } from "lucide-react";
 
 // adjust these relative paths if needed
@@ -9,41 +9,129 @@ export default function UserProfileForm({ user, onSave }) {
   const [formData, setFormData] = useState(user || {});
   const [isEditing, setIsEditing] = useState(false);
 
+  // ✅ validation errors
+  const [errors, setErrors] = useState({});
+
   // which legal modal is open: "TermsAndConditions" | "PrivacyPolicy" | null
   const [activeModal, setActiveModal] = useState(null);
 
+  // ✅ keep form in sync if `user` prop changes
+  useEffect(() => {
+    setFormData(user || {});
+    setErrors({});
+    setIsEditing(false);
+  }, [user]);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+
+    // clear field error on typing
+    setErrors((prev) => ({
+      ...prev,
+      [name]: "",
     }));
   };
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setFormData((prev) => ({
-        ...prev,
-        avatarUrl: imageUrl,
-        avatarFile: file,
-      }));
+    if (!file) return;
+
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    const maxSize = 3 * 1024 * 1024; // 3MB
+
+    if (!allowed.includes(file.type)) {
+      setErrors((prev) => ({ ...prev, avatarFile: "Only JPG, PNG, or WEBP images are allowed." }));
+      return;
     }
+    if (file.size > maxSize) {
+      setErrors((prev) => ({ ...prev, avatarFile: "Image size must be 3MB or less." }));
+      return;
+    }
+
+    const imageUrl = URL.createObjectURL(file);
+    setFormData((prev) => ({
+      ...prev,
+      avatarUrl: imageUrl,
+      avatarFile: file,
+    }));
+
+    setErrors((prev) => ({ ...prev, avatarFile: "" }));
+  };
+
+  const handleCloseModal = () => setActiveModal(null);
+
+  // ✅ validators
+  const validators = useMemo(
+    () => ({
+      firstName: (v) => {
+        if (!v?.trim()) return "First name is required.";
+        if (v.trim().length < 2) return "First name must be at least 2 characters.";
+        if (!/^[a-zA-Z\s.'-]+$/.test(v.trim())) return "First name contains invalid characters.";
+        return "";
+      },
+      lastName: (v) => {
+        if (!v?.trim()) return "Last name is required.";
+        if (v.trim().length < 2) return "Last name must be at least 2 characters.";
+        if (!/^[a-zA-Z\s.'-]+$/.test(v.trim())) return "Last name contains invalid characters.";
+        return "";
+      },
+      phone: (v) => {
+        if (!v?.trim()) return "Contact number is required.";
+        const digits = v.replace(/[^\d]/g, "");
+        if (digits.length < 10 || digits.length > 15) return "Enter a valid contact number.";
+        return "";
+      },
+      address: (v) => {
+        if (!v?.trim()) return "Address is required.";
+        if (v.trim().length < 6) return "Address must be at least 6 characters.";
+        return "";
+      },
+      role: (v) => {
+        if (!v?.trim()) return "Role is required.";
+        return "";
+      },
+    }),
+    []
+  );
+
+  const validateAll = () => {
+    const newErrors = {};
+
+    // validate only editable fields (email is disabled)
+    newErrors.firstName = validators.firstName(formData.firstName);
+    newErrors.lastName = validators.lastName(formData.lastName);
+    newErrors.phone = validators.phone(formData.phone);
+    newErrors.address = validators.address(formData.address);
+    newErrors.role = validators.role(formData.role);
+
+    // remove empty messages
+    Object.keys(newErrors).forEach((k) => {
+      if (!newErrors[k]) delete newErrors[k];
+    });
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!validateAll()) return;
+
     onSave?.(formData);
     setIsEditing(false);
   };
 
   const handleCancel = () => {
     setFormData(user || {});
+    setErrors({});
     setIsEditing(false);
   };
-
-  const handleCloseModal = () => setActiveModal(null);
 
   return (
     <>
@@ -96,6 +184,10 @@ export default function UserProfileForm({ user, onSave }) {
           </div>
         </div>
 
+        {errors.avatarFile && (
+          <p className="mb-4 text-sm text-red-600">{errors.avatarFile}</p>
+        )}
+
         <hr className="w-full mb-6 border-gray-200" />
 
         {/* Form Section */}
@@ -113,8 +205,11 @@ export default function UserProfileForm({ user, onSave }) {
                 onChange={handleChange}
                 disabled={!isEditing}
                 placeholder="Enter First Name"
-                className="block w-full px-3 py-2 mt-1 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className={`block w-full px-3 py-2 mt-1 text-sm text-gray-900 bg-white border rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed ${
+                  errors.firstName ? "border-red-500" : "border-gray-300"
+                }`}
               />
+              {errors.firstName && <p className="mt-1 text-sm text-red-600">{errors.firstName}</p>}
             </div>
 
             <div>
@@ -128,8 +223,11 @@ export default function UserProfileForm({ user, onSave }) {
                 onChange={handleChange}
                 disabled={!isEditing}
                 placeholder="Enter Last Name"
-                className="block w-full px-3 py-2 mt-1 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className={`block w-full px-3 py-2 mt-1 text-sm text-gray-900 bg-white border rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed ${
+                  errors.lastName ? "border-red-500" : "border-gray-300"
+                }`}
               />
+              {errors.lastName && <p className="mt-1 text-sm text-red-600">{errors.lastName}</p>}
             </div>
           </div>
 
@@ -160,8 +258,11 @@ export default function UserProfileForm({ user, onSave }) {
                 onChange={handleChange}
                 disabled={!isEditing}
                 placeholder="(555) 201-1488"
-                className="block w-full px-3 py-2 mt-1 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className={`block w-full px-3 py-2 mt-1 text-sm text-gray-900 bg-white border rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed ${
+                  errors.phone ? "border-red-500" : "border-gray-300"
+                }`}
               />
+              {errors.phone && <p className="mt-1 text-sm text-red-600">{errors.phone}</p>}
             </div>
           </div>
 
@@ -178,8 +279,11 @@ export default function UserProfileForm({ user, onSave }) {
                 onChange={handleChange}
                 disabled={!isEditing}
                 placeholder="1200 Lakeshore Dr, Suite 200"
-                className="block w-full px-3 py-2 mt-1 text-sm text-gray-900 bg-white border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className={`block w-full px-3 py-2 mt-1 text-sm text-gray-900 bg-white border rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed ${
+                  errors.address ? "border-red-500" : "border-gray-300"
+                }`}
               />
+              {errors.address && <p className="mt-1 text-sm text-red-600">{errors.address}</p>}
             </div>
 
             <div>
@@ -191,7 +295,9 @@ export default function UserProfileForm({ user, onSave }) {
                 value={formData.role || ""}
                 onChange={handleChange}
                 disabled={!isEditing}
-                className="block w-full px-3 py-2 mt-1 text-sm bg-white border border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed"
+                className={`block w-full px-3 py-2 mt-1 text-sm bg-white border rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:bg-gray-100 disabled:cursor-not-allowed ${
+                  errors.role ? "border-red-500" : "border-gray-300"
+                }`}
               >
                 <option value="">Select Role</option>
                 <option value="licensed-appraiser">MD/DO</option>
@@ -200,6 +306,7 @@ export default function UserProfileForm({ user, onSave }) {
                 <option value="reviewer">PA</option>
                 <option value="reviewer">AA</option>
               </select>
+              {errors.role && <p className="mt-1 text-sm text-red-600">{errors.role}</p>}
             </div>
           </div>
 

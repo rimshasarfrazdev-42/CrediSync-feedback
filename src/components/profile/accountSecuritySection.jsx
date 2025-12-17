@@ -341,34 +341,39 @@ function AccountSecuritySection() {
             </button>
           </div>
         </section>
+<section className="w-full px-4 py-4 bg-white border shadow-sm rounded-xl border-slate-200 sm:px-6 sm:py-5">
+  <div className="flex items-start gap-2">
+    <img
+      src="/session-icon.svg"
+      alt="Session control"
+      className="mt-[2px] h-5 w-5 shrink-0"
+    />
 
-        {/* Session Control */}
-        <section className="flex flex-col gap-3 px-4 py-4 border rounded-lg border-slate-200 sm:px-5 sm:py-4">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <div className="flex items-center gap-2">
-                {/* you can swap this img for LogOut if you prefer */}
-                <img src="/session-icon.svg" alt="Session control" className="w-5 h-5" />
-                <h3 className="text-sm font-semibold text-secondary sm:text-base">
-                  Session Control
-                </h3>
-              </div>
-              <p className="mt-1 text-xs text-tertiary sm:text-sm">
-                Logout from all devices where you are currently signed in. You
-                will need to log in again on this device.
-              </p>
-            </div>
-          </div>
+    <div className="flex-1 min-w-0">
+      <h3 className="text-[14px] font-semibold text-secondary sm:text-[17px]">
+        Session Control
+      </h3>
 
-          <button
-            type="button"
+      <p className="mt-1 text-[12px] leading-snug text-slate-500 sm:text-[13px]">
+        Logout from all devices where you are currently signed in. You will need
+        to log in again on this device.
+      </p>
+
+      <div className="mt-3">
+        <button
+          type="button"
           onClick={() => setOpen(true)}
-            disabled={loggingOut}
-            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-[#0d2a4d] w-full sm:w-auto disabled:opacity-60 disabled:cursor-not-allowed"
-          >
-            {loggingOut ? "Logging out..." : "Logout from All Devices"}
-          </button>
-        </section>
+          disabled={loggingOut}
+          className="inline-flex items-center justify-center rounded-lg bg-[#0F2F5A] px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-[#0B2547] disabled:cursor-not-allowed disabled:opacity-60"
+        >
+          {loggingOut ? "Logging out..." : "Logout from All Devices"}
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
            <LogoutAllDevicesModal
         isOpen={open}
         onCancel={() => setOpen(false)}

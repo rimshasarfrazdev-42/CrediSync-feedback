@@ -40,25 +40,27 @@ export default function ResetPassword() {
   return (
     <div className="flex h-screen gap-6 p-4 bg-white">
       {/* Left Side - Image */}
-      <div className="hidden w-1/2 border rounded-2xl md:flex">
-        <img
-          src="/doctors-img.svg"
-          alt="Medical professionals"
-          className="object-cover w-full h-full rounded-2xl"
-        />
-      </div>
+   <div className="hidden w-1/2 border lg:flex rounded-2xl">
+  <img
+    src="/doctors-img.svg"
+    alt="Medical professionals"
+    className="object-cover w-full h-full rounded-2xl"
+  />
+</div>
 
+   
       {/* Right Side - Form */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm md:w-1/2 rounded-2xl">
-        <div className="w-full p-6 bg-white">
+      <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+        <div className="w-full bg-white">
           {/* Heading */}
-          <h1 className="mb-1 text-2xl sm:text-[31px] font-semibold text-center text-slate-900">
-            Reset Your Password
-          </h1>
-          <p className="mb-6 text-sm font-medium text-center text-slate-900 sm:text-[20px]">
-            Enter your email address and we&apos;ll send you instructions to
-            reset your password.
-          </p>
+     <h1 className="mb-1 text-2xl font-semibold text-center sm:text-3xl md:text-4xl lg:text-5xl text-slate-900">
+  Reset Your Password
+</h1>
+<p className="mb-6 text-sm font-medium text-center sm:text-base md:text-lg lg:text-xl text-slate-900">
+  Enter your email address and we&apos;ll send you instructions to
+  reset your password.
+</p>
+
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">

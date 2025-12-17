@@ -35,18 +35,18 @@ const VerifiedSection = () => {
   return (
     <div className="flex h-screen gap-6 p-4 bg-white">
       {/* Left Side - Image */}
-      <div className="hidden w-1/2 border rounded-2xl md:flex">
+      <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img src="/doctors-img.svg" alt="Medical professionals" className="object-cover w-full h-full rounded-2xl" />
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm md:w-1/2 rounded-2xl">
-        <div className="w-full p-6 bg-white">
+      <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+        <div className="w-full bg-white">
           {/* Heading */}
-          <h1 className="mb-3 text-center text-2xl font-semibold text-slate-900 sm:text-[31px]">
+          <h1 className="mb-3 text-center text-2xl font-semibold text-secondary sm:text-[31px]">
             Identity Verification
           </h1>
-          <p className="mb-6 text-center text-sm font-medium text-slate-900 sm:text-[20px]">
+          <p className="mb-6 text-center text-sm font-medium text-[#374151] sm:text-[20px]">
             Validate your credentials against the official NPI Registry. Your data remains private and encrypted.
           </p>
 
