@@ -33,12 +33,18 @@ const Home = () => {
     navigate('/login');
   };
 
-  return (
-    <div className="flex items-center justify-center bg-gradient-to-r from-[#F0FFFE] to-[#F8FAFC] min-h-screen px-4 py-6 md:px-6 lg:px-14">
-      <main className="w-full mx-auto">
-        <section className="flex flex-col">
+return (
+ <div className="bg-gradient-to-r from-[#F0FFFE] to-[#F8FAFC] lg:min-h-[100svh] w-full px-3 sm:px-6 ">
+
+  <main className="w-full max-w-none">
+
+      {/* Use grid so footer has reserved space on md+ and never overlaps content */}
+    <section className="flex w-full flex-col py-4 lg:min-h-[100svh] lg:py-6">
+
+        {/* CONTENT */}
+        <div className="flex flex-col flex-1">
           {/* Heading */}
-          <header className="mb-6 text-center md:mb-10">
+          <header className="mb-4 text-center md:mb-6">
             <h1 className="text-[1.5rem] md:text-[2.2rem] font-bold tracking-tight text-[#163B6D]">
               Welcome to CrediSync
             </h1>
@@ -49,7 +55,8 @@ const Home = () => {
 
           {/* Main video card */}
           <div className="rounded-2xl border border-[#e0ecff] bg-[#f9fcff] shadow-[0_18px_45px_rgba(15,27,61,0.08)]">
-            <div className="relative overflow-hidden rounded-2xl aspect-video group">
+            {/* cap height so page never overflows on laptop/tablet */}
+            <div className="relative overflow-hidden rounded-2xl w-full aspect-video max-h-[46vh] md:max-h-[52vh]">
               <video
                 ref={videoRef}
                 className="absolute inset-0 object-cover w-full h-full"
@@ -58,10 +65,8 @@ const Home = () => {
                 onEnded={handleVideoEnded}
               />
 
-              {/* Play button + caption (only when NOT playing) */}
               {!isPlaying && (
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  {/* Play button (centered) */}
                   <button
                     type="button"
                     onClick={handleTogglePlay}
@@ -75,20 +80,19 @@ const Home = () => {
                     </div>
                   </button>
 
-                  {/* Caption pinned to bottom */}
-                  <div className="absolute bottom-4 left-1/2 -translate-x-1/2  rounded-lg bg-gradient-to-r from-[#F0FFFE] to-[#F8FAFC] px-4 py-2 text-center text-[10px] sm:text-[13px] md:text-[18px] text-[#374151] shadow-xl border border-[#e6eefc] whitespace-nowrap ">
+                  {/* Caption pinned to bottom - allow wrap on small screens to prevent overflow */}
+                  <div className="absolute bottom-3 left-3 right-3 sm:left-1/2 sm:right-auto sm:-translate-x-1/2 rounded-lg bg-gradient-to-r from-[#F0FFFE] to-[#F8FAFC] px-3 py-2 text-center text-[10px] sm:text-[13px] md:text-[16px] text-[#374151] shadow-xl border border-[#e6eefc]">
                     New to CrediSync? Watch this 1-minute walkthrough to get started.
                   </div>
                 </div>
               )}
 
-              {/* Pause button: only visible on hover when playing */}
               {isPlaying && (
                 <button
                   type="button"
                   onClick={handleTogglePlay}
                   aria-label="Pause introduction video"
-                  className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                  className="absolute inset-0 flex items-center justify-center transition-opacity duration-300 opacity-0 hover:opacity-100"
                 >
                   <div className="flex h-16 w-16 md:h-20 md:w-20 items-center justify-center rounded-full bg-gradient-to-r from-[#F0FFFE] to-[#F8FAFC] shadow-[0_14px_30px_rgba(15,27,61,0.22)] hover:scale-[1.03] transition-all">
                     <svg viewBox="0 0 48 48" className="w-16 h-16 md:w-32 md:h-32">
@@ -102,20 +106,19 @@ const Home = () => {
           </div>
 
           {/* Button options card */}
-          <div className="mt-5 mb-6">
+          <div className="mt-4">
             <div className="flex flex-col rounded-2xl overflow-hidden border border-[#d3e2ff] bg-white shadow-[0_10px_25px_rgba(15,27,61,0.06)]">
               <div className="grid grid-cols-1 gap-3 p-4 md:grid-cols-2 md:gap-6 md:px-5">
-                {/* Delegate */}
                 <div className="flex flex-col">
                   <button
                     type="button"
                     onClick={handleDelegateClick}
                     className={[
-                      'w-full px-4 py-3.5 bg-white text-center font-semibold',
-                      'text-[14px] sm:text-[15px] md:text-[17px]',
-                      'text-[#92949F] border border-[#92949F] rounded-lg',
-                      'whitespace-nowrap',
-                    ].join(' ')}
+                      "w-full px-4 py-3.5 bg-white text-center font-semibold",
+                      "text-[14px] sm:text-[15px] md:text-[17px]",
+                      "text-[#92949F] border border-[#92949F] rounded-lg",
+                      "whitespace-nowrap",
+                    ].join(" ")}
                   >
                     Delegate to my Admin / Coordinator
                   </button>
@@ -125,19 +128,22 @@ const Home = () => {
                   </p>
                 </div>
 
-                <DelegateModal isOpen={showModal} onClose={() => setShowModal(false)} onSendInvite={handleSendInvite} />
+                <DelegateModal
+                  isOpen={showModal}
+                  onClose={() => setShowModal(false)}
+                  onSendInvite={handleSendInvite}
+                />
 
-                {/* I've got this */}
                 <div className="flex flex-col">
                   <button
                     onClick={handelClick}
                     type="button"
                     className={[
-                      'w-full px-4 py-3.5 bg-primary text-white text-center font-semibold',
-                      'text-[14px] sm:text-[15px] md:text-[17px]',
-                      'border border-gray-200 rounded-lg',
-                      'whitespace-nowrap',
-                    ].join(' ')}
+                      "w-full px-4 py-3.5 bg-primary text-white text-center font-semibold",
+                      "text-[14px] sm:text-[15px] md:text-[17px]",
+                      "border border-gray-200 rounded-lg",
+                      "whitespace-nowrap",
+                    ].join(" ")}
                   >
                     I’ve got this for now!
                   </button>
@@ -151,27 +157,32 @@ const Home = () => {
           </div>
 
           <button
-            onClick={handelClick}
-            className="mx-auto mt-2 text-[13px] sm:text-[14px] md:text-[16px] text-primary font-semibold whitespace-nowrap"
-          >
-            Watch later from my Dashboard
-          </button>
+      onClick={handelClick}
+      className="mx-auto mt-2 mb-0 lg:mt-10 text-[13px] sm:text-[14px] md:text-[16px] underline text-primary font-semibold"
+    >
+      Watch later from my Dashboard
+    </button>
+        </div>
 
-          <footer className="md:fixed md:left-0 md:right-0 md:bottom-0 md:bg-transparent md:py-4 lg:static lg:py-0 mt-6 text-center text-[13px] sm:text-[14px] md:text-[15px] text-[#8a94ab]">
-            <div className="inline-flex items-center gap-2">
-              <svg viewBox="0 0 20 20" className="w-4 h-4" fill="none">
-                <rect x="4" y="8" width="12" height="9" rx="2" stroke="#8a94ab" strokeWidth="1.3" />
-                <path d="M7 8V6.5A3.5 3.5 0 0 1 10.5 3 3.5 3.5 0 0 1 14 6.5V8" stroke="#8a94ab" strokeWidth="1.3" />
-              </svg>
-              HIPAA &amp; SOC 2 Compliant | Your data is secure
-            </div>
-          </footer>
+        {/* FOOTER (never fixed; always fits, no scroll) */}
+        <footer className="mt-4 lg:mt-auto pt-2 md:pt-4 text-center text-[13px] sm:text-[14px] md:text-[15px] text-[#8a94ab]">
+          <div className="inline-flex flex-wrap items-center justify-center gap-2">
+            <svg viewBox="0 0 20 20" className="w-5 h-5" fill="none">
+              <rect x="4" y="8" width="12" height="9" rx="2" stroke="#8a94ab" strokeWidth="1.3" />
+              <path
+                d="M7 8V6.5A3.5 3.5 0 0 1 10.5 3 3.5 3.5 0 0 1 14 6.5V8"
+                stroke="#8a94ab"
+                strokeWidth="1.3"
+              />
+            </svg>
+            HIPAA &amp; SOC 2 Compliant | Your data is secure
+          </div>
+        </footer>
+      </section>
+    </main>
+  </div>
+);
 
-          <div className="md:h-12 lg:hidden" />
-        </section>
-      </main>
-    </div>
-  );
 };
 
 export default Home;
