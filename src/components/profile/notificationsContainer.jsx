@@ -30,7 +30,7 @@ function NotificationsContainer() {
   return (
     <>
       <div className="">
-        <div className="grid w-full grid-cols-1 gap-6 p-6 bg-white border min-h-60 border-tertiary/15 rounded-b-xl rounded-tr-xl">
+        <div className="grid w-full grid-cols-1 gap-6 p-6 bg-white border min-h-60 border-tertiary/15 rounded-b-xl lg:rounded-r-xl">
           {/* Top Section */}
           <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
             {/* Left */}

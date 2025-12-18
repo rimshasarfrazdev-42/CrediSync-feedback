@@ -108,7 +108,7 @@ function DelegatedAccessContainer() {
 
   return (
     <div>
-      <div className="grid w-full grid-cols-1 gap-6 p-4 bg-white border border-gray-200 min-h-60 sm:p-6 rounded-r-xl rounded-b-xl">
+      <div className="grid w-full grid-cols-1 gap-6 p-4 bg-white border border-gray-200 min-h-60 sm:p-6 lg:rounded-r-xl rounded-b-xl">
         {/* Top Section */}
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Left Content */}

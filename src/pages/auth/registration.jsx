@@ -76,7 +76,7 @@ export default function SignUp() {
     }, 1000);
   };
 
-  // ✅ Clicking checkbox toggles acceptance only when both already accepted.
+  // Clicking checkbox toggles acceptance only when both already accepted.
   // If not accepted, we don’t open any modal automatically (per your request).
   const handleAgreementCheckboxChange = () => {
     if (agreementChecked) {

@@ -135,7 +135,7 @@ export default function UserProfileForm({ user, onSave }) {
 
   return (
     <>
-      <div className="w-full p-4 mx-auto bg-white border border-gray-200 shadow-sm rounded-b-xl rounded-r-xl sm:p-6">
+      <div className="w-full p-4 mx-auto bg-white border border-gray-200 shadow-sm rounded-b-xl lg:rounded-r-xl sm:p-6">
         {/* Card header */}
         <div className="mb-6">
           <h2 className="text-lg font-semibold text-secondary sm:text-[18px]">

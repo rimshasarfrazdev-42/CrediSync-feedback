@@ -29,7 +29,8 @@ export default function ResetPassword() {
     }
 
     if (isValid) {
-      navigate("/create-new-password");
+     navigate(`/verify-email?mode=reset&email=${encodeURIComponent(email)}&next=/create-new-password`);
+
     }
   };
 

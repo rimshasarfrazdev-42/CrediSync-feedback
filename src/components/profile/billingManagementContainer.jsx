@@ -13,7 +13,7 @@ function BillingManagementContainer() {
 
   return (
     <div className="">
-      <div className="grid w-full grid-cols-1 gap-6 p-4 bg-white border sm:p-6 min-h-60 border-tertiary/15 rounded-b-xl rounded-tr-xl">
+      <div className="grid w-full grid-cols-1 gap-6 p-4 bg-white border sm:p-6 min-h-60 border-tertiary/15 rounded-b-xl lg:rounded-tr-xl">
         {/* Current Plan Card */}
         <div className="w-full p-4 bg-white border border-gray-200 shadow-sm rounded-xl sm:p-6">
           {/* Top Section */}

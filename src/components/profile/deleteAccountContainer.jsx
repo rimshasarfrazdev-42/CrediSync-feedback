@@ -14,7 +14,7 @@ import { DialogTitle } from '@radix-ui/react-dialog';
 function DeleteAccountContainer() {
   return (
     <div className="">
-      <div className="grid w-full grid-cols-1 gap-6 p-4 mx-auto bg-white border sm:p-6 min-h-60 border-tertiary/15 rounded-b-xl rounded-tr-xl">
+      <div className="grid w-full grid-cols-1 gap-6 p-4 mx-auto bg-white border sm:p-6 min-h-60 border-tertiary/15 rounded-b-xl lg:rounded-r-xl">
         {/* Heading Section */}
         <div>
           <p className="text-[16px] sm:text-[18px] md:text-[20px] font-semibold text-secondary">Deactivate Account</p>

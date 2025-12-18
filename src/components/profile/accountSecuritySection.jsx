@@ -142,7 +142,7 @@ function AccountSecuritySection() {
   };
 
   return (
-    <div className="w-full mx-auto bg-white border shadow-sm border-slate-200 rounded-r-xl rounded-b-xl">
+    <div className="w-full mx-auto bg-white border shadow-sm border-slate-200 lg:rounded-r-xl rounded-b-xl">
       {/* Header */}
       <div className="px-4 py-4 sm:px-6">
         <h2 className="text-sm font-semibold text-secondary sm:text-base">Account Security</h2>
