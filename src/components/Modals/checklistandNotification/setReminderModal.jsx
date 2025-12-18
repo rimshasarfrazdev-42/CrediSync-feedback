@@ -145,13 +145,13 @@ export default function SetReminderModal({
             <button
               type="button"
               onClick={onClose}
-              className="w-full inline-flex justify-center px-4 py-2 text-sm font-medium bg-white border rounded-md sm:w-1/2 border-slate-300 text-slate-700 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+              className="inline-flex justify-center px-4 py-2 text-sm font-medium bg-white border rounded-md sm:w-1/2 border-slate-300 text-slate-700 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className=" sm:w-1/2 inline-flex justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-[#082b5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+              className="sm:w-1/2 inline-flex justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-[#082b5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
             >
               Set Reminder
             </button>

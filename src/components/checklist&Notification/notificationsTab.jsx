@@ -4,8 +4,7 @@ import {
   Search as SearchIcon,
   Clock3,
   CheckCircle2,
-  UserPlus2,
-  CircleAlert 
+  CircleAlert
 } from "lucide-react";
 
 const ICON_CONFIG = {
@@ -22,7 +21,7 @@ const ICON_CONFIG = {
     className: "text-info/50 rotate-180 transition-transform",
   },
   error: {
-    Icon: CircleAlert ,
+    Icon: CircleAlert,
     className: "text-expired/50",
   },
 };
@@ -149,7 +148,7 @@ export default function NotificationsTab({ items, onItemsChange }) {
       </div>
 
       {/* Search + filters */}
-      <div className="flex flex-col gap-3 p-4 mt-4 border border-gray-100 rounded-lg shadow-md sm:flex-row sm:items-center">
+      <div className="flex flex-col gap-3 p-4 mt-4 border border-gray-100 rounded-lg shadow-md sm:flex-row sm:items-center ">
         <div className="relative flex-1">
           <span className="absolute inset-y-0 flex items-center pointer-events-none left-3">
             <SearchIcon className="w-4 h-4 text-slate-400" />
@@ -201,26 +200,24 @@ export default function NotificationsTab({ items, onItemsChange }) {
           return (
             <div
               key={n.id}
-              className={`rounded-xl border border-slate-100 bg-white px-4 py-4 sm:px-6 sm:py-4 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:bg-slate-50 transition-colors ${
-                n.isHighlighted && !isRead
-                  ? "border-l-4 border-l-primary"
-                  : ""
-              }`}
+              className={`rounded-xl border border-slate-100 bg-white py-4 px-4 sm:py-4 shadow-[0_1px_3px_rgba(15,23,42,0.04)] hover:bg-slate-50 transition-colors ${n.isHighlighted && !isRead
+                ? "border-l-4 border-l-primary"
+                : ""
+                }`}
             >
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-                <div className="flex items-start flex-1 gap-3">
+              <div className="flex gap-3 sm:items-start sm:justify-between">
+                <div className="flex items-start flex-1 gap-3 ">
                   {/* Checkbox */}
                   <button
                     type="button"
                     onClick={() => handleToggleSelect(n.id)}
-                    className="mt-1"
+                    className="sm:pt-0.5 pt-0"
                   >
                     <span
-                      className={`inline-flex h-4 w-4 items-center justify-center rounded border ${
-                        selectedIds.includes(n.id)
-                          ? "border-primary bg-primary"
-                          : "border-slate-300 bg-white"
-                      }`}
+                      className={`inline-flex h-4 w-4 items-center justify-center rounded border ${selectedIds.includes(n.id)
+                        ? "border-primary bg-primary"
+                        : "border-slate-300 bg-white"
+                        }`}
                     >
                       {selectedIds.includes(n.id) && (
                         <span className="w-2 h-2 bg-white rounded-sm" />
@@ -233,16 +230,14 @@ export default function NotificationsTab({ items, onItemsChange }) {
                     className="flex-1 cursor-pointer"
                     onClick={() => handleRowClick(n.id)}
                   >
-                    <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:gap-3">
-                      <div
-                        className={`flex h-8 w-8 items-center justify-center rounded-full ${className}`}
-                      >
-                        <Icon className="w-5 h-5" />
+                    <div className="flex  gap-2 sm:flex-row sm:items-start sm:gap-3 ">
+                      <div className="sm:pt-0.5 pt-0">
+                        <Icon className={`w-5 h-5 ${className} `} />
                       </div>
 
-                      <div className="flex-1">
+                      <div>
                         <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="text-sm font-semibold sm:text-base text-secondary">
+                          <h3 className="text-sm font-semibold sm:text-base  text-secondary">
                             {n.title}
                           </h3>
                           {n.isNew && (
@@ -251,7 +246,7 @@ export default function NotificationsTab({ items, onItemsChange }) {
                             </span>
                           )}
                         </div>
-                        <p className="mt-1 text-xs sm:text-sm text-slate-600">
+                        <p className="mt-1 text-xs sm:text-sm text-tertiary">
                           {n.message}
                         </p>
                         {n.actionLabel && (
@@ -268,7 +263,7 @@ export default function NotificationsTab({ items, onItemsChange }) {
                 </div>
 
                 <div className="flex items-start justify-end">
-                  <span className="text-xs whitespace-nowrap text-slate-400">
+                  <span className="text-xs whitespace-nowrap text-tertiary">
                     {formatTimeAgo(n.createdAt)}
                   </span>
                 </div>

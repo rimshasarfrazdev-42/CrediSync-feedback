@@ -179,9 +179,9 @@ function ChecklistProgress({ items }) {
       </div>
 
       {/* legend */}
-      <div className="flex  items-center gap-4 mt-3 text-[8px] sm:text-sm">
+      <div className="flex  items-center gap-4 mt-3 text-xs sm:text-sm">
         {order.map((key) => (
-          <div key={key} className="flex items-center gap-1.5">
+          <div key={key} className="flex sm:items-center gap-1">
             {STATUS_CONFIG[key].icon}
             <span className="font-medium text-subtext">
               {STATUS_CONFIG[key].label} ({counts[key]})
