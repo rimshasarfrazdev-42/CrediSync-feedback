@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import SideBar from '../layouts/sideBar/Sidebar';
-import TopBar from '../components/DashBoard/TopBar';
+import TopBar from './TopBar';
 import UpgradeAccountModal from '../components/Modals/Dashboard/UpgradeAccountModal';
 export default function MainLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Default open on desktop

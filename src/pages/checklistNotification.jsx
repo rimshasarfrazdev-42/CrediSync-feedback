@@ -5,6 +5,7 @@ import NotificationsTab from '../components/checklist&Notification/notifications
 import { checklistItemsData, notificationsData } from '../constants/credentialData';
 import MainLayout from '../layouts/MainLayout';
 import { UpperHeader } from '../components/checklist&Notification/upperBanner';
+import WelcomeBanner from '../components/DashBoard/WelcomeBanner';
 
 export default function ChecklistNotification() {
   const [activeTab, setActiveTab] = useState('checklist'); // 'checklist' | 'notifications'
@@ -13,8 +14,12 @@ export default function ChecklistNotification() {
 
   return (
     <MainLayout>
-      <div className="min-h-screen px-0 md:px-4 py-6 ">
-        <UpperHeader />
+      <div className="min-h-screen ">
+       <WelcomeBanner
+        heading="Checklist & Notifications"
+        subHeading="Share your credentials securely with institutions"
+        className="bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC]"
+      />
         <div className="w-full h-full mt-4">
           <div className="flex items-center p-1 border md:gap-2 w-fit bg-tertiary/5 md:p-2 rounded-t-xl border-tertiary/10">
             {/* Checklist Tab */}
