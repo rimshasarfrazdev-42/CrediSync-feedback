@@ -24,7 +24,7 @@ const TermsConditionsModal = ({ open, onClose, onAccept }) => {
       {/* Modal */}
       <div className="relative w-full max-w-7xl mx-3 sm:mx-4 bg-white rounded-2xl shadow-[0_18px_45px_rgba(15,27,61,0.25)] border border-[#e1e6f0] flex flex-col max-h-[90vh] ">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[#e4e8f1]">
+        <div className="flex items-center justify-between px-6 py-4 ">
           <h2 className="text-base font-semibold sm:text-lg text-slate-900">Terms &amp; Conditions</h2>
           <button
             type="button"
@@ -111,13 +111,7 @@ const TermsConditionsModal = ({ open, onClose, onAccept }) => {
 
           {/* Buttons */}
           <div className="flex flex-col items-center justify-center w-full gap-2 sm:flex-row sm:justify-end">
-            <button
-              type="button"
-              onClick={onClose}
-              className="w-full sm:w-auto px-4 py-2 text-[0.8rem] font-medium rounded-md border border-[#d0d6e4] text-slate-700 bg-white hover:bg-slate-50"
-            >
-              Cancel
-            </button>
+            
             <button
               type="button"
               onClick={handleAccept}
@@ -127,6 +121,13 @@ const TermsConditionsModal = ({ open, onClose, onAccept }) => {
               }`}
             >
               Accept &amp; Continue
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="w-full sm:w-auto px-4 py-2 text-[0.8rem] font-medium rounded-md border border-[#d0d6e4] text-slate-700 bg-white hover:bg-slate-50"
+            >
+              Cancel
             </button>
           </div>
         </div>

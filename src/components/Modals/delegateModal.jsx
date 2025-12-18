@@ -93,7 +93,7 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
               Delegate to Your Team
             </h2>
             <p className="mt-1 text-sm sm:text-[14px] text-tertiary">
-              Send a secure link to your admin or coordinator to complete The Intake on your behalf.
+              Send a secure link to your admin or coordinator to complete the intake on your behalf.
             </p>
           </div>
 
@@ -159,19 +159,20 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
           </div>
 
           <div className="flex flex-col gap-3 mt-6 sm:mt-7 sm:flex-row">
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="w-full rounded-md border border-[#92949F] bg-white px-4 py-2.5 text-sm font-semibold text-[#92949F] hover:bg-slate-50"
-            >
-              Cancel
-            </button>
+            
             <button
               type="submit"
               disabled={submitting}
               className="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#123057] disabled:cursor-not-allowed disabled:opacity-80"
             >
               {submitting ? "Sending..." : "Send Invite"}
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="w-full rounded-md border border-[#92949F] bg-white px-4 py-2.5 text-sm font-semibold text-[#92949F] hover:bg-slate-50"
+            >
+              Cancel
             </button>
           </div>
         </form>
