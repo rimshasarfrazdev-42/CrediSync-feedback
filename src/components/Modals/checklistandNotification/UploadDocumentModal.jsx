@@ -157,11 +157,10 @@ export default function UploadDocumentModal({
 
             {/* Drop Zone */}
             <div
-              className={`relative flex min-h-[210px] w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed bg-slate-50 px-4 text-center transition-colors ${
-                dragActive
+              className={`relative flex min-h-[210px] w-full cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed bg-slate-50 px-4 text-center transition-colors ${dragActive
                   ? "border-primary bg-slate-100"
                   : "border-slate-200 hover:border-slate-300"
-              }`}
+                }`}
               onDragOver={handleDragOver}
               onDragEnter={handleDragOver}
               onDragLeave={handleDragLeave}
@@ -249,22 +248,22 @@ export default function UploadDocumentModal({
           </div>
 
           {/* Footer buttons */}
-         <div className="flex flex-col-reverse gap-3 mt-4 sm:flex-row sm:justify-end">
-  <button
-    type="button"
-    onClick={handleCancel}
-    className="inline-flex justify-center w-1/2 px-4 py-2 text-sm font-medium bg-white border rounded-md border-slate-300 text-slate-700 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
-  >
-    Cancel
-  </button>
-  <button
-    type="submit"
-    className="w-1/2 inline-flex justify-center rounded-md bg-[#0B3B7F] px-4 py-2 text-sm font-semibold text-white hover:bg-[#082b5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 disabled:cursor-not-allowed disabled:bg-slate-300"
-    disabled={!file}
-  >
-    Upload Document
-  </button>
-</div>
+          <div className="flex flex-col-reverse gap-3 mt-4 sm:flex-row sm:justify-end">
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="inline-flex justify-center sm:w-1/2 px-4 py-2 text-sm font-medium bg-white border rounded-md border-slate-300 text-slate-700 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="sm:w-1/2 inline-flex justify-center rounded-md bg-[#0B3B7F] px-4 py-2 text-sm font-semibold text-white hover:bg-[#082b5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 disabled:cursor-not-allowed disabled:bg-slate-300"
+              disabled={!file}
+            >
+              Upload Document
+            </button>
+          </div>
 
         </form>
       </div>
