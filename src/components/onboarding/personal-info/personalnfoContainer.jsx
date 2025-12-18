@@ -29,7 +29,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
       middleInitial: refs.middleInitialRef.current,
       lastName: refs.lastNameRef.current,
       otherName: refs.otherNameRef.current,
-      dateOfBirth: dateOfBirth, 
+      dateOfBirth: dateOfBirth,
       email: refs.emailRef.current,
       contact: refs.contactRef.current,
       gender: gender,
@@ -56,6 +56,16 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
+  const COUNTRIES = [
+    "United States", "Canada", "United Kingdom", "Australia", "India", "Germany", "France",
+  ];
+  const COUNTRY_CODES = [
+    { code: "+1", label: "US (+1)" },
+    { code: "+44", label: "UK (+44)" },
+    { code: "+91", label: "IN (+91)" },
+    { code: "+971", label: "UAE (+971)" },
+    { code: "+61", label: "AU (+61)" },
+  ];
   return (
     <>
       <FormStepHeader info="Personal Info" step="1" progress={17} />
@@ -188,13 +198,43 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
           {errors.email && <p className="text-sm text-red-600">{errors.email}</p>}
         </div>
         <div className="flex flex-col">
-          <p className="mb-2 text-base font-semibold text-secondary">Contact Number<span className="text-red-500 ml-1">*</span></p>
-          <Input
-            placeholder="(555) 201-1488"
-            defaultValue={refs.contactRef.current}
-            onChange={(e) => (refs.contactRef.current = e.target.value)}
-          />
-          {errors.contact && <p className="text-sm text-red-600">{errors.contact}</p>}
+          <p className="mb-2 text-base font-semibold text-secondary">
+            Contact Number<span className="text-red-500 ml-1">*</span>
+          </p>
+          <div className="flex gap-2">
+            <div className="w-[110px]">
+              <Select
+                defaultValue="+1"
+                onValueChange={(val) => {
+                  const currentNumber = refs.contactRef.current.replace(/^\+\d+\s?/, "");
+                  refs.contactRef.current = `${val} ${currentNumber}`;
+                }}
+              >
+                <SelectTrigger className="h-10 border-gray-300 text-left">
+                  <SelectValue placeholder="+1" />
+                </SelectTrigger>
+                <SelectContent className="bg-white">
+                  {COUNTRY_CODES.map((item) => (
+                    <SelectItem key={item.code} value={item.code}>
+                      {item.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="flex-1">
+              <Input
+                placeholder="(555) 201-1488"
+                defaultValue={refs.contactRef.current.replace(/^\+\d+\s?/, "")}
+                onChange={(e) => {
+                  const dialCode = refs.contactRef.current.split(' ')[0] || "+1";
+                  refs.contactRef.current = `${dialCode} ${e.target.value}`;
+                }}
+              />
+            </div>
+          </div>
+          {errors.contact && <p className="text-sm text-red-600 mt-1">{errors.contact}</p>}
         </div>
         <div className="flex flex-col">
           <p className="mb-2 text-base font-semibold text-secondary">Gender<span className="text-red-500 ml-1">*</span></p>
@@ -219,7 +259,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
         <div className="flex flex-col">
           <p className="mb-2 text-base font-semibold">Address<span className="text-red-500 ml-1">*</span></p>
           <Input
-            placeholder="1200 Lakeshore Dr, Suite 200"
+            placeholder="123 Main St"
             defaultValue={refs.addressRef.current}
             onChange={(e) => (refs.addressRef.current = e.target.value)}
           />
@@ -256,18 +296,36 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
           {errors.zip && <p className="text-sm text-red-600">{errors.zip}</p>}
         </div>
         <div className="flex flex-col">
-          <p className="mb-2 text-base font-semibold text-secondary">Country<span className="text-red-500 ml-1">*</span></p>
-          <Input
-            placeholder="Country"
-            defaultValue={refs.countryRef.current}
-            onChange={(e) => (refs.countryRef.current = e.target.value)}
-          />
-          {errors.country && <p className="text-sm text-red-600">{errors.country}</p>}
+          <p className="mb-2 text-base font-semibold text-secondary">
+            Country<span className="text-red-500 ml-1">*</span>
+          </p>
+          <Select
+            defaultValue={refs.countryRef.current || undefined}
+            onValueChange={(value) => {
+              refs.countryRef.current = value;
+            }}
+          >
+            <SelectTrigger className="w-full h-10 border border-gray-300">
+              <SelectValue placeholder="Select Country" />
+            </SelectTrigger>
+
+            <SelectContent className="bg-white border border-gray-300 max-h-[250px] overflow-y-auto">
+              {COUNTRIES.map((country) => (
+                <SelectItem key={country} value={country}>
+                  {country}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          {errors.country && (
+            <p className="text-sm text-red-600 mt-1">{errors.country}</p>
+          )}
         </div>
       </div>
       <div className="flex justify-end w-full pt-5 sm:pt-6 md:pt-8">
         <Button
-          type="button" 
+          type="button"
           onClick={validateAndOpenDialog}
         >
           Save & Next

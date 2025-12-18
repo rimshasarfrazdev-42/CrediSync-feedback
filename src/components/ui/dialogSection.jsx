@@ -113,27 +113,26 @@ function DialogSection({
             </DialogDescription>
             <div className="flex w-full p-3 mt-2 space-x-2 text-sm font-normal border rounded-lg bg-primary/10 border-primary/30 text-primary">
               <ShieldCheck className="flex-shrink-0 w-6 h-6 mt-1 md:mt-0" />
-              <span className="leading-snug">
-                Your information is securely verified against official medical databases. No PHI is shared without your
-                consent.
-              </span>
+              <p className="leading-relaxed text-left sm:text-start">
+                Your information is securely verified against official medical databases. No PHI is shared without your consent.
+              </p>
             </div>
           </DialogHeader>
 
           <div className="py-4 space-y-4">
             {/* 2. Review Your Details Section */}
             <section className="p-4 space-y-4 border shadow-sm rounded-xl">
-              <div className="flex flex-wrap items-center justify-between">
+              <div className="flex gap-8 items-start sm:items-center justify-between">
                 <h3 className="text-lg font-medium text-secondary">Review Your Details</h3>
                 <Button
                   variant="ghost"
-                  className="text-primary hover:bg-primary/10 font-semibold text-[16px] mt-2 sm:mt-0"
+                  className="text-primary hover:bg-primary/10 font-semibold text-[16px] mt-1 sm:mt-0"
                   onClick={() => {
                     if (isEditing) handleSave();
                     else setIsEditing(true);
                   }}
                 >
-                  {isEditing ? <Check className="w-4 h-4 mr-2" /> : <Pencil className="w-4 h-4 mr-2" />}
+                  {isEditing ? <Check className="w-4 h-4" /> : <Pencil className="w-4 h-4 " />}
                   {isEditing ? 'Save' : 'Edit'}
                 </Button>
               </div>
@@ -167,11 +166,13 @@ function DialogSection({
                           refs.dateOfBirthRef.current = e.target.value;
                         }
                       }}
-                      className="pr-12"
+                      readOnly={!isEditing}
+                      className={`pr-12 border-gray-300 ${!isEditing ? 'bg-gray-50' : ''}`}
                     />
                     <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
                       <input
                         type="date"
+                        disabled={!isEditing}
                         value={
                           dateOfBirth
                             ? dateOfBirth.split('/').reverse().join('-')
@@ -184,7 +185,6 @@ function DialogSection({
                             const [year, month, day] = value.split('-');
                             const formatted = `${month}/${day}/${year}`;
                             setDateOfBirth(formatted);
-                            // Critical: Update ref immediately after calendar selection
                             refs.dateOfBirthRef.current = formatted;
                           }
                         }}
@@ -196,7 +196,7 @@ function DialogSection({
                           width: '100%',
                           height: '100%',
                           opacity: 0,
-                          cursor: 'pointer',
+                          cursor: isEditing ? 'pointer' : 'default',
                         }}
                       />
                       <svg
@@ -264,7 +264,7 @@ function DialogSection({
                     className="flex flex-col items-start justify-between p-4 transition-shadow border rounded-lg sm:flex-row sm:items-center hover:shadow-md"
                   >
                     {/* Icon */}
-                    <div className="flex items-center justify-center flex-shrink-0 w-10 h-10 text-primary">
+                    <div className="flex items-center sm:justify-center flex-shrink-0 w-10 h-10 text-primary">
                       <Shield size={30} />
                     </div>
 

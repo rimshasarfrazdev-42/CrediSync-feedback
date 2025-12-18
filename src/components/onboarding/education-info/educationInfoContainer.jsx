@@ -3,6 +3,7 @@ import FormStepHeader from '../../ui/form-step-header';
 import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Trash2, Upload } from 'lucide-react';
+import { toast } from 'sonner';
 
 function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, setRerender, errors }) {
 
@@ -17,6 +18,11 @@ function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, se
   };
   const handleFileChange = (e, block) => {
     const selectedFile = e.target.files?.[0];
+    if (selectedFile && selectedFile.size > 2097152) {
+      toast.error("File is too large. Max limit is 2MB.");
+      e.target.value = "";
+      return;
+    }
     if (selectedFile) {
       block.uploadDiploma = selectedFile;
       setRerender((prev) => prev + 1);
@@ -66,7 +72,10 @@ function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, se
 
               <div className="flex flex-col">
                 <p className="mb-2 text-base font-semibold text-secondary">Specialty<span className="ml-1 text-red-500">*</span></p>
-                <Input placeholder="Specialty" defaultValue={block.specialty} onChange={(e) => (block.specialty = e.target.value)} />
+                <Input placeholder="Cardiology"
+                  defaultValue={block.specialty}
+                  onChange={(e) => (block.specialty = e.target.value)}
+                />
                 {errors[`Education[${index}].specialty`] && (<p className="text-sm text-red-600">{errors[`Education[${index}].specialty`]}</p>)}
               </div>
 
@@ -200,7 +209,7 @@ function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, se
                   onClick={() => block.fileInputRef.current.click()}
                 >
                   <p className={`truncate text-sm ${block.uploadDiploma ? 'text-secondary' : 'text-gray-500'}`}>
-                    {block.uploadDiploma ? block.uploadDiploma.name : 'file upload – PDF/JPG/DOCX'}
+                    {block.uploadDiploma ? block.uploadDiploma.name : 'Upload file (PDF/JPG/DOCX, max 2MB)'}
                   </p>
 
                   <div className="flex items-center space-x-2">

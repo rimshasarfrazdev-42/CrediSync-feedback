@@ -48,6 +48,16 @@ function UploadCredentialsContainer() {
         e.target.value = '';
         return;
       }
+      const MAX_SIZE_MB = 5;
+      const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+      if (file.size > MAX_SIZE_BYTES) {
+        toast.error("File too large", {
+          description: `The photo must be smaller than ${MAX_SIZE_MB}MB.`,
+        });
+        e.target.value = '';
+        return;
+      }
+
       setFileData(file);
       const previewURL = URL.createObjectURL(file);
       verification.current = previewURL;
@@ -134,7 +144,7 @@ function UploadCredentialsContainer() {
     };
 
     localStorage.setItem('savedDocs', JSON.stringify(savedDocs));
-    alert('Saved Successfully!');
+    toast.success('Saved Successfully!');
   };
 
   // Load saved data on component mount
@@ -170,8 +180,22 @@ function UploadCredentialsContainer() {
               Upload your key credentialing documents securely.
             </p>
 
-            <div className="flex items-start gap-3 p-4 text-sm font-normal border rounded-lg bg-primary bg-opacity-10 border-primary border-opacity-30 text-primary sm:text-base">
-              <Lock />
+            <div className="flex items-start md:items-center gap-3 p-4 text-sm font-normal border rounded-lg bg-primary bg-opacity-10 border-primary border-opacity-30 text-primary sm:text-base">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="lucide lucide-lock shrink-0 mt-0.5 md:mt-0"
+              >
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
               <span>All uploads are encrypted and stored securely per HIPAA & SOC 2 standards.</span>
             </div>
           </div>
@@ -241,7 +265,7 @@ function UploadCredentialsContainer() {
                     <span className='text-subtext'>Upload Photo</span>
                   </Button>
 
-                  <p className="mt-2 text-sm font-normal text-tertiary">Accepted: JPG, PNG (Max 10MB)</p>
+                  <p className="mt-2 text-sm font-normal text-tertiary">Accepted: JPG, PNG (Max 5MB)</p>
                 </div>
               )}
               <Input
@@ -375,12 +399,12 @@ function UploadCredentialsContainer() {
             {/* Bottom Buttons */}
             <div className="flex flex-col w-full gap-4 mt-4 sm:flex-row">
               <Button
-                className="w-full bg-transparent border-[1px] border-tertiary text-tertiary text-[16px] font-semibold"
+                className="w-full bg-transparent border-[1px] border-tertiary order-2 sm:order-1 text-tertiary text-[16px] font-semibold"
                 onClick={saveAndResumeHandler}
               >
                 Save and Resume Later
               </Button>
-              <Button className="!bg-primary w-full !text-white text-[16px] font-semibold" onClick={submitHandler}>Continue to Verification</Button>
+              <Button className="!bg-primary w-full !text-white text-[16px] sm:order-2 order-1 font-semibold" onClick={submitHandler}>Continue to Verification</Button>
             </div>
           </div>
 
@@ -424,13 +448,16 @@ function UploadCredentialsContainer() {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-center w-full gap-2 px-4 py-5 text-sm sm:px-6 lg:px-8 text-tertiary">
-          <Lock className="text-primary" size={13} />
+        <div className="flex items-center justify-center mx-auto w-full gap-2 px-4 py-5 text-sm sm:px-6 lg:px-8 text-tertiary">
+          {/* Add shrink-0 to prevent the icon from compressing on mobile */}
+          <Lock className="text-primary shrink-0" size={13} />
+
           <span>HIPAA & SOC 2 Compliant • Your data is protected • All files encrypted</span>
         </div>
       </div>
     </>
   );
 }
+{/* <span>HIPAA & SOC 2 Compliant • Your data is protected • All files encrypted</span> */ }
 
 export default UploadCredentialsContainer;
