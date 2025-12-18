@@ -1,6 +1,6 @@
 // src/pages/AccountSettings.jsx
-import React, { useState, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom"; // <-- important
+import React, { useState, useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom"; // <-- important import
 import MainLayout from "../layouts/MainLayout";
 import UserProfileForm from "../components/profile/userProfileForm";
 import BillingManagementContainer from "../components/profile/billingManagementContainer";
@@ -11,6 +11,18 @@ import DelegatedAccessContainer from "../components/profile/delegatedAccessConta
 import NotificationsContainer from "../components/profile/notificationsContainer";
 
 export default function AccountSettings() {
+  const tabsContainerRef = useRef(null);
+
+  const scrollTabs = (direction = "right") => {
+    if (!tabsContainerRef.current) return;
+    const container = tabsContainerRef.current;
+    const scrollAmount = 150; // pixels per click
+    if (direction === "left") {
+      container.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+    } else {
+      container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+    }
+  };
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -78,6 +90,7 @@ export default function AccountSettings() {
         subHeading="Manage your account settings, security preferences, and notifications."
         className="bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC]"
       />
+
       <div className="min-h-screen mt-6">
         <div className="w-full mx-auto">
           {/* Tabs header */}
@@ -119,15 +132,10 @@ export default function AccountSettings() {
                 }}
               />
             )}
-
             {activeTab === "security" && <AccountSecuritySection />}
-
             {activeTab === "notifications" && <NotificationsContainer />}
-
             {activeTab === "account" && <BillingManagementContainer />}
-
             {activeTab === "delegated" && <DelegatedAccessContainer />}
-
             {activeTab === "deactivate" && <DeleteAccountContainer />}
           </div>
         </div>

@@ -1,12 +1,12 @@
 import { Share2 } from 'lucide-react';
 
-const WelcomeBanner = ({ heading, subHeading, buttonText, openModal, className }) => {
+const WelcomeBanner = ({ heading, subHeading, buttonText, openModal, icon, className }) => {
   return (
     <div
       className={`
         w-full rounded-xl p-6 md:p-8 shadow-sm flex flex-col md:flex-row 
         items-start md:items-center justify-between gap-4 md:gap-0
-        ${className || 'bg-dashboard'}  // default bg-dashboard if no className passed
+        ${className || 'bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC]'} 
       `}
     >
       <div>
@@ -25,7 +25,7 @@ const WelcomeBanner = ({ heading, subHeading, buttonText, openModal, className }
             justify-center
           "
         >
-          <Share2 size={18} />
+          <img src={icon} alt="icon" />
           {buttonText}
         </button>
       )}

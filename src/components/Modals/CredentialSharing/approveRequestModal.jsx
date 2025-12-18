@@ -22,7 +22,7 @@ export default function ApproveRequestModal({ closeModal }) {
       <div className="absolute inset-0 bg-secondary/80 "></div>
       <div ref={modalRef} className="relative bg-white rounded-xl shadow-xl w-[520px] p-6 z-50">
         <h2 className="mb-3 text-lg font-semibold text-secondary">Approve Access Request</h2>
-        <div className="p-4 mb-3 text-sm text-gray-700 rounded-lg bg-gray-50">
+        <div className="p-4 mb-3 text-sm text-gray-700 rounded-lg bg-[#92949F1A]">
           <div className="flex justify-between mb-2">
             <span className="font-medium text-subtext">Institution:</span>
             <span className=" text-secondary">Stanford Health Care</span>
@@ -43,12 +43,12 @@ export default function ApproveRequestModal({ closeModal }) {
               <img src="/Dashboard/downArrows.svg" alt="Down arrow" />
             </button>
             {accessExpiryOpen && (
-              <div className="absolute bg-white shadow-lg rounded-md border z-20 w-[90%] ">
+              <div className="absolute bg-white shadow-lg rounded-md border z-20 w-[90%]  ">
                 {['7 Days', '30 Days', 'Never', 'Custom'].map((option, i) => (
                   <p
                     key={i}
                     onClick={() => handleSelectOption(option, setSelectedAccessExpiry, setAccessExpiryOpen)}
-                    className="px-3  text-[13px] hover:bg-dashboard cursor-pointer w-full  rounded-md py-1.5 bg-white focus:outline-none  "
+                    className="px-3  text-[13px] hover:bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC] cursor-pointer w-full  rounded-md py-1.5 bg-white focus:outline-none  "
                   >
                     {option}
                   </p>
@@ -61,7 +61,7 @@ export default function ApproveRequestModal({ closeModal }) {
           <input
             type="checkbox"
             className="
-            mt-[1px]
+            mt-[4px]
             h-4 w-4 
             shrink-0
             appearance-none 

@@ -3,7 +3,7 @@ import LegalAndConsentInfo from '../components/LegalAndConsentManagement/LegalAn
 import LegalAndConsentManagementContainer from '../components/LegalAndConsentManagement/LegalAndConsentManagementContainer';
 import MainLayout from '../layouts/MainLayout';
 import ConsentLogs from '../components/LegalAndConsentManagement/ConsentLogs';
-import NoDataComponent from '../components/CredentialSharing/NoDataComponent';
+import NoDataComponent from '../components/CredentialSharing/noDataComponent';
 const LegalAndConsentManagementPage = () => {
   return (
     <div className="h-100 bg-white">
@@ -16,5 +16,4 @@ const LegalAndConsentManagementPage = () => {
     </div>
   );
 };
-
 export default LegalAndConsentManagementPage;

@@ -3,11 +3,10 @@ import { items } from '../../constants/itemsData';
 import TermsAndConditionsModal from '../../components/Modals/LegalAndConsentManagement/TermsAndConditionsModal';
 import PrivacyPolicyModal from '../../components/Modals/LegalAndConsentManagement/PrivacyPolicyModal';
 import PrivacyPracticeModal from '../../components/Modals/LegalAndConsentManagement/PrivacyPracticesModal';
-export default function LegalAndConsentInfo({closeModal}) {
+export default function LegalAndConsentInfo({ closeModal }) {
   const [activeModal, setActiveModal] = useState(null);
   const openModal = (type) => setActiveModal(type);
   const closeActiveModal = () => setActiveModal(null);
-
   return (
     <div className="w-full p-4 bg-white">
       <h2 className="text-lg font-semibold text-secondary">Consent & Legal Information</h2>
@@ -43,7 +42,7 @@ export default function LegalAndConsentInfo({closeModal}) {
         ))}
       </div>
       <div className="p-5 mt-4 bg-white border border-gray-200 rounded-xl">
-        <div className="flex items-start gap-3">
+        <div className="flex items-start md:flex-row flex-col  gap-3">
           <img src="/ConsentAndLegalInfo/privacyPractice.svg" alt="Privacy practice Icon" />
           <div>
             <h3 className="text-base font-semibold text-secondary">WCAG 2.1 AA Compliant</h3>
@@ -68,17 +67,9 @@ export default function LegalAndConsentInfo({closeModal}) {
           </div>
         </div>
       </div>
-     {activeModal === "PrivacyPolicy" && (
-        <PrivacyPolicyModal closeModal={closeActiveModal} />
-      )}
-
-      {activeModal === "TermsAndConditions" && (
-        <TermsAndConditionsModal closeModal={closeActiveModal} />
-      )}
-
-      {activeModal === "PrivacyPractices" && (
-        <PrivacyPracticeModal closeModal={closeActiveModal} />
-      )}
+      {activeModal === 'PrivacyPolicy' && <PrivacyPolicyModal closeModal={closeActiveModal} />}
+      {activeModal === 'TermsAndConditions' && <TermsAndConditionsModal closeModal={closeActiveModal} />}
+      {activeModal === 'PrivacyPractices' && <PrivacyPracticeModal closeModal={closeActiveModal} />}
     </div>
   );
 }

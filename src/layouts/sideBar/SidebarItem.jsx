@@ -20,8 +20,8 @@ export default function SidebarItem({ icon, text, path, tab }) {
       className={() =>
         `flex items-center gap-2 px-2 py-2 w-full rounded-md transition ${
           isActiveCustom
-            ? "bg-primary bg-opacity-10 font-medium"
-            : "hover:bg-primary hover:bg-opacity-10"
+            ? "bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC] font-medium"
+            : "hover:bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC] "
         }`
       }
     >
