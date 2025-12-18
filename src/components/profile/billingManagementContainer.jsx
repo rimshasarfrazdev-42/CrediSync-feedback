@@ -1,7 +1,7 @@
 import { Button } from '../../components/ui/button';
 import React from 'react';
 import { FileText, Shield } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 function BillingManagementContainer() {
   const invoices = [
     { id: 'INV-001245', date: 'Oct 31, 2025', amount: '$29.99', status: 'Paid' },
@@ -10,7 +10,7 @@ function BillingManagementContainer() {
   ];
 
   const textSecondary = 'text-secondary';
-
+const navigate = useNavigate();
   return (
     <div className="">
       <div className="grid w-full grid-cols-1 gap-6 p-4 bg-white border sm:p-6 min-h-60 border-tertiary/15 rounded-b-xl lg:rounded-tr-xl">
@@ -50,7 +50,9 @@ function BillingManagementContainer() {
 
           {/* Buttons */}
           <div className="flex flex-col gap-3 mt-6 sm:flex-row sm:items-center">
-            <Button className="bg-primary text-white text-[14px] sm:text-[16px] font-semibold w-full sm:w-auto">
+            <Button
+            onClick={() => { navigate ("/choose-plan")}} // Placeholder for actual click handler
+            className="bg-primary text-white text-[14px] sm:text-[16px] font-semibold w-full sm:w-auto">
               Change Plan
             </Button>
 

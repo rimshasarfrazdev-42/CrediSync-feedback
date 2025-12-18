@@ -52,7 +52,7 @@ function choosePlanContainer({ setStep, step }) {
         </div>
 
         <div className="min-h-[490px] bg-transparent w-full">
-          <Tabs defaultValue="Monthly Plan" className="!bg-white w-full">
+          <Tabs defaultValue="Monthly Plan" className="w-full ">
             {/* TAB BUTTONS */}
             <TabsList
               className="w-full max-w-[350px] grid grid-cols-2 h-16 
