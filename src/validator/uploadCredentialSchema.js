@@ -1,24 +1,31 @@
 import * as Yup from 'yup';
 
-const MAX_FILE_SIZE = 10 * 1024 * 1024; 
+const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const SUPPORTED_FORMATS = ['image/jpg', 'image/jpeg', 'image/png'];
 
 const fileValidation = (isRequired = true) => {
-  let schema = Yup.mixed();
-  
+  let schema = Yup.array()
+    .of(
+      Yup.mixed()
+        .test('fileSize', 'One or more files are too large (Max 5MB)', (file) => {
+          if (!file) return true;
+          return file.size <= MAX_FILE_SIZE;
+        })
+        .test('fileFormat', 'Unsupported Format. Only JPG and PNG allowed', (file) => {
+          if (!file) return true;
+          return SUPPORTED_FORMATS.includes(file.type);
+        })
+    );
+    
   if (isRequired) {
-    schema = schema.required('This document is required');
+    schema = schema
+      .min(1, 'This document is required')
+      .required('This document is required');
+  } else {
+    schema = schema.nullable();
   }
 
-  return schema
-    .test('fileSize', 'File size too large (Max 10MB)', (value) => {
-      if (!value) return !isRequired; 
-      return value.size <= MAX_FILE_SIZE;
-    })
-    .test('fileFormat', 'Unsupported Format. Only JPG and PNG are allowed', (value) => {
-      if (!value) return !isRequired; 
-      return SUPPORTED_FORMATS.includes(value.type);
-    });
+  return schema;
 };
 
 export const uploadCredentialSchema = Yup.object().shape({
