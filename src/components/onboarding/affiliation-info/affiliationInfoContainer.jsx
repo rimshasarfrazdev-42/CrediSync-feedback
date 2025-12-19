@@ -3,9 +3,16 @@ import FormStepHeader from '../../ui/form-step-header';
 import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Trash2 } from 'lucide-react';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '../../../components/ui/select';
+import HospitalSearchField from './hospitalSearchField';
+
 
 function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm, deleteAffiliationForm, errors, setRerender }) {
+  const hospitalOptions = [
+    "Cleveland Clinic", "Johns Hopkins Hospital", "Mayo Clinic",
+    "Massachusetts General Hospital", "Houston Methodist Hospital",
+    "Northwestern Memorial Hospital"
+  ];
+
   const formatNativeDate = (nativeValue) => {
     if (!nativeValue) return '';
     const [year, month, day] = nativeValue.split('-');
@@ -45,31 +52,13 @@ function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm,
               </div>
 
               <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="flex flex-col">
-                  <p className="mb-2 text-base font-semibold text-secondary">Hospital/Facility<span className="ml-1 text-red-500">*</span></p>
-                  <Select
-                    value={block.hospital || undefined}
-                    onValueChange={(value) => handleValueChange(block, 'hospital', value)}
-                  >
-                    <SelectTrigger
-                      className="w-full h-auto min-h-[2.5rem] border border-gray-300 text-left items-center py-2"
-                    >
-                      <SelectValue
-                        placeholder="Select Hospital or Facility Name"
-                        className="whitespace-normal leading-snug"
-                      />
-                    </SelectTrigger>
-                    <SelectContent className="bg-white border border-gray-300 ">
-                      <SelectItem value="Cleveland Clinic">Cleveland Clinic</SelectItem>
-                      <SelectItem value="Johns Hopkins Hospital">Johns Hopkins Hospital</SelectItem>
-                      <SelectItem value="Mayo Clinic">Mayo Clinic</SelectItem>
-                      <SelectItem value="Massachusetts General Hospital">Massachusetts General Hospital</SelectItem>
-                      <SelectItem value="Houston Methodist Hospital">Houston Methodist Hospital</SelectItem>
-                      <SelectItem value="Northwestern Memorial Hospital">Northwestern Memorial Hospital</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  {errors[`Affiliation[${index}].hospital`] && (<p className="text-sm text-red-600">{errors[`Affiliation[${index}].hospital`]}</p>)}
-                </div>
+                <HospitalSearchField
+                  block={block}
+                  index={index}
+                  errors={errors}
+                  handleValueChange={handleValueChange}
+                  hospitalOptions={hospitalOptions}
+                />
                 <div className="flex flex-col">
                   <p className="mb-2 text-base font-semibold text-secondary">Start Date<span className="ml-1 text-red-500">*</span></p>
                   <div className="relative">

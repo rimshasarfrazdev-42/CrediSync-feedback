@@ -3,8 +3,9 @@ import FormStepHeader from '../../ui/form-step-header';
 import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Trash2, Upload } from 'lucide-react';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '../../../components/ui/select';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'sonner';
+import DocSearchField from './docSearchField';
 
 
 function OtherDocumentContainer({
@@ -17,6 +18,13 @@ function OtherDocumentContainer({
   handleSubmit,
   errors,
 }) {
+  const doumentOptions = [
+    "Case Logs", "CME", "BLS", "ACLS", "PALS", "ATLS", "ALSO", "NRP", "Other"
+  ]
+  const handleValueChange = (block, fieldName, value) => {
+  block[fieldName] = value;
+  setRerender(prev => prev + 1);
+};
   const formatNativeDate = (nativeValue) => {
     if (!nativeValue) return '';
     const [year, month, day] = nativeValue.split('-');
@@ -30,6 +38,11 @@ function OtherDocumentContainer({
   };
   const handleFileChange = (e, block) => {
     const selectedFile = e.target.files?.[0];
+    if (selectedFile && selectedFile.size > 2097152) {
+      toast.error("File is too large. Max limit is 2MB.");
+      e.target.value = "";
+      return;
+    }
     if (selectedFile) {
       block.uploadFile = selectedFile;
       setRerender((prev) => prev + 1);
@@ -72,32 +85,13 @@ function OtherDocumentContainer({
             </div>
 
             <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
-              <div className="flex flex-col">
-                <p className="mb-2 text-base font-semibold text-secondary">Document Type<span className="ml-1 text-red-500">*</span></p>
-                <Select
-                  value={block.documentType || undefined}
-                  onValueChange={(value) => {
-                    block.documentType = value;
-                    if (setRerender) setRerender(prev => prev + 1);
-                  }}
-                >
-                  <SelectTrigger className="w-full h-10 border border-gray-300">
-                    <SelectValue placeholder="Select Document Type" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-white border border-gray-300 ">
-                    <SelectItem value="Case Logs">Case Logs</SelectItem>
-                    <SelectItem value="CME">CME</SelectItem>
-                    <SelectItem value="BLS">BLS</SelectItem>
-                    <SelectItem value="ACLS">ACLS</SelectItem>
-                    <SelectItem value="PALS">PALS</SelectItem>
-                    <SelectItem value="ATLS">ATLS</SelectItem>
-                    <SelectItem value="ALSO">ALSO</SelectItem>
-                    <SelectItem value="NRP">NRP</SelectItem>
-                    <SelectItem value="Other">Other</SelectItem>
-                  </SelectContent>
-                </Select>
-                {errors[`Documents[${index}].documentType`] && (<p className="text-sm text-red-600">{errors[`Documents[${index}].documentType`]}</p>)}
-              </div>
+              <DocSearchField
+                block={block}
+                index={index}
+                errors={errors}
+                handleValueChange={handleValueChange}
+                docOptions={doumentOptions}
+              />
 
               {/* file upload functionality */}
               <div className="flex flex-col space-y-2">
@@ -107,7 +101,7 @@ function OtherDocumentContainer({
                   onClick={() => block.fileInputRef.current.click()}
                 >
                   <p className={`truncate text-sm ${block.uploadFile ? 'text-secondary' : 'text-gray-500'}`}>
-                    {block.uploadFile ? block.uploadFile.name : 'file upload – no file chosen'}
+                    {block.uploadFile ? block.uploadFile.name : 'No file chosen - Max 2MB (PDF, JPG, DOCX)'}
                   </p>
                   <div className="flex items-center space-x-2">
                     {block.uploadFile && (

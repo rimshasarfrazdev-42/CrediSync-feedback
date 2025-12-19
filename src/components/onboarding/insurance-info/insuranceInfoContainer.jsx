@@ -4,9 +4,10 @@ import { Input } from '../../ui/input';
 import { Button } from '../../ui/button';
 import { Trash2, Upload } from 'lucide-react';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '../../../components/ui/select';
+import { toast } from 'sonner';
 
 function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, deleteInsuranceForm, setRerender, errors }) {
-  
+
   const formatNativeDate = (nativeValue) => {
     if (!nativeValue) return '';
     const [year, month, day] = nativeValue.split('-');
@@ -19,6 +20,11 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
 
   const handleFileChange = (e, block) => {
     const selectedFile = e.target.files?.[0];
+    if (selectedFile && selectedFile.size > 2097152) {
+      toast.error("File is too large. Max limit is 2MB.");
+      e.target.value = "";
+      return;
+    }
     if (selectedFile) {
       block.uploadCertificate = selectedFile;
       setRerender((prev) => prev + 1);
@@ -78,10 +84,10 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                     <SelectValue placeholder="Select Coverage Limits " />
                   </SelectTrigger>
                   <SelectContent className="bg-white border border-gray-300 ">
+                    <SelectItem value="$500,000 / $1,500,000">$500,000 / $1,500,000</SelectItem>
                     <SelectItem value="$1,000,000 / $3,000,000">$1,000,000 / $3,000,000</SelectItem>
                     <SelectItem value="$2,000,000 / $4,000,000">$2,000,000 / $4,000,000</SelectItem>
-                    <SelectItem value="$500,000 / $1,500,000">$500,000 / $1,500,000</SelectItem>
-                    <SelectItem value="$3,000,000 / $5,000,000">$3,000,000 / $5,000,000</SelectItem>
+                    <SelectItem value="$5,000,000 / $150,000,000">$5,000,000 / $150,000,000</SelectItem>
                   </SelectContent>
                 </Select>
                 {errors[`Insurance[${index}].coverageLimits`] && (<p className="text-sm text-red-600">{errors[`Insurance[${index}].coverageLimits`]}</p>)}
@@ -215,7 +221,12 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                   <p
                     className={`truncate text-sm ${block.uploadCertificate ? 'text-secondary' : 'text-gray-500'}`}
                   >
-                    {block.uploadCertificate ? block.uploadCertificate.name : 'Upload COI or Malpractice File'}
+                    {block.uploadCertificate
+                      ? block.uploadCertificate.name
+                      :
+                      <span className="">Upload COI or Malpractice File (Max 2MB)</span>
+
+                    }
                   </p>
                   <div className="flex items-center space-x-2">
                     {block.uploadCertificate && (

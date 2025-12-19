@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import FormStepHeader from '../../ui/form-step-header';
 import { Input } from '../../ui/input';
 import { Upload, Trash2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
 
@@ -19,6 +20,11 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
 
   const handleLicenseUpload = (e) => {
     const file = e.target.files?.[0] || null;
+    if (file && file.size > 2097152) {
+      toast.error("File is too large. Max limit is 2MB.");
+      e.target.value = "";
+      return;
+    }
     licenseRefs.uploadLicenseRef.current = file;
     setRerender(prev => prev + 1);
   };
@@ -32,6 +38,11 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
 
   const handleCertificateUpload = (e) => {
     const file = e.target.files?.[0] || null;
+    if (file && file.size > 2097152) {
+      toast.error("File is too large. Max limit is 2MB.");
+      e.target.value = "";
+      return;
+    }
     licenseRefs.uploadCertificateRef.current = file;
     setRerender(prev => prev + 1);
   };
@@ -174,7 +185,15 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
                 onClick={() => licenseRefs.fileLicenseInputRef.current.click()}
               >
                 <p className={`truncate text-sm ${licenseRefs.uploadLicenseRef.current ? 'text-secondary' : 'text-gray-500'}`}>
-                  {licenseRefs.uploadLicenseRef.current ? licenseRefs.uploadLicenseRef.current.name : 'file upload – no file chosen'}
+                  {licenseRefs.uploadLicenseRef.current
+                    ? licenseRefs.uploadLicenseRef.current.name
+                    : (
+                      <>
+                        <span className="hidden md:inline">No file chosen — Max 2MB (PDF, JPG, DOCX)</span>
+                        <span className="inline md:hidden">No file chosen (Max 2MB)</span>
+                      </>
+                    )
+                  }
                 </p>
                 <div className="flex items-center space-x-2">
                   {licenseRefs.uploadLicenseRef.current && (
@@ -195,7 +214,7 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
                   className="hidden"
                 />
               </div>
-                {errors.uploadLicense && <p className="text-sm text-red-600">{errors.uploadLicense}</p>}
+              {errors.uploadLicense && <p className="text-sm text-red-600">{errors.uploadLicense}</p>}
             </div>
           </div>
         </div>
@@ -205,7 +224,7 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
             <div className="flex flex-col">
               <p className="mb-2 text-base font-semibold text-secondary">Board Name</p>
               <Input
-                placeholder="American Board of Internal Medicine"
+                placeholder="American Board of Medicine"
                 value={licenseRefs.boardNameRef.current || ''}
                 onChange={(e) => {
                   licenseRefs.boardNameRef.current = e.target.value;
@@ -234,7 +253,15 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
               onClick={() => licenseRefs.fileCertificateInputRef.current.click()}
             >
               <p className={`truncate text-sm ${licenseRefs.uploadCertificateRef.current ? 'text-secondary' : 'text-gray-500'}`}>
-                {licenseRefs.uploadCertificateRef.current ? licenseRefs.uploadCertificateRef.current.name : 'file upload – no file chosen'}
+                {licenseRefs.uploadCertificateRef.current
+                  ? licenseRefs.uploadCertificateRef.current.name
+                  : (
+                    <>
+                      <span className="hidden sm:inline">No file chosen — Max 2MB (PDF, JPG, DOCX)</span>
+                      <span className="inline sm:hidden">No file chosen (Max 2MB)</span>
+                    </>
+                  )
+                }
               </p>
               <div className="flex items-center space-x-2">
                 {licenseRefs.uploadCertificateRef.current && (
@@ -255,7 +282,7 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
                 className="hidden"
               />
             </div>
-              {errors.uploadCertificate && <p className="text-sm text-red-600">{errors.uploadCertificate}</p>}
+            {errors.uploadCertificate && <p className="text-sm text-red-600">{errors.uploadCertificate}</p>}
           </div>
         </div>
       </div>

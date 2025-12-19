@@ -8,7 +8,7 @@ function DragAndDrop({ imageContainer, onUpdate, savedImage }) {
   const fileInputRef = useRef(null);
   const [fileData, setFileData] = useState(null);
   const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png'];
-  const MAX_SIZE_MB = 10;
+  const MAX_SIZE_MB = 5;
   const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
 
 const isValidFile = (file) => {
@@ -143,7 +143,7 @@ const isValidFile = (file) => {
             <Button className="!bg-primary !text-white px-8 mt-4 text-center" onClick={openFilePicker}>
               <span>Browse Files</span>
             </Button>
-            <p className="text-tertiary mt-2 text-[14px]">Accepted: JPG, PNG (Max 10MB)</p>
+            <p className="text-tertiary mt-2 text-[14px]">Accepted: JPG, PNG (Max 5MB)</p>
           </div>
         </>
       )}
