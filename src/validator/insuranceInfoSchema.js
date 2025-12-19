@@ -4,7 +4,15 @@ export const insuranceSchema = Yup.object({
   Insurance: Yup.array().of(
     Yup.object().shape({
       insurerName: Yup.string().required('Insurer name is required'),
-      policyNumber: Yup.string().required('Policy number is required'),
+      policyNumber: Yup.string()
+        .required('Policy number is required')
+
+        .matches(
+          /^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9\-/]+$/,
+          'Enter a valid policy format (e.g., ABC-12345 or POL/001)'
+        )
+        .min(5, 'Policy number is too short')
+        .max(25, 'Policy number is too long'),
       coverageLimits: Yup.string().required('Coverage limit is required'),
       startDate: Yup.string()
         .required('Start Date is required.')

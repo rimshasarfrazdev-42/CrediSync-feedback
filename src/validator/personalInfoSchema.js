@@ -29,8 +29,8 @@ export const personalInfoSchema = Yup.object().shape({
     .trim()
     .required('Contact is required')
     .matches(
-      /^\(\d{3}\)\s\d{3}-\d{4}$/,
-      'Contact must be in format (555) 201-1488'
+      /^(\+\d{1,3}\s?)?(\(\d{3}\)\s\d{3}-\d{4}|\d{7,15})$/,
+      'Invalid phone number format'
     ),
   gender: Yup.string()
     .oneOf(['Male', 'Female', 'Prefer not to say'], 'Invalid gender selection')
@@ -49,7 +49,7 @@ export const personalInfoSchema = Yup.object().shape({
     .matches(/^[A-Za-z]{2}$/, 'State must be 2-letter code (e.g. CA)')
     .required('State is required'),
   zip: Yup.string()
-  .trim()
+    .trim()
     .required('Zip is required'),
   country: Yup.string()
     .trim()
