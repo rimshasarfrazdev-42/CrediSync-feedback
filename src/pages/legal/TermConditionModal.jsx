@@ -24,7 +24,7 @@ const TermsConditionsModal = ({ open, onClose, onAccept }) => {
       {/* Modal */}
       <div className="relative w-full max-w-7xl mx-3 sm:mx-4 bg-white rounded-2xl shadow-[0_18px_45px_rgba(15,27,61,0.25)] border border-[#e1e6f0] flex flex-col max-h-[90vh] ">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 ">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#e4e8f1] ">
           <h2 className="text-base font-semibold sm:text-lg text-slate-900">Terms &amp; Conditions</h2>
           <button
             type="button"
@@ -97,7 +97,7 @@ const TermsConditionsModal = ({ open, onClose, onAccept }) => {
         </div>
 
         {/* Footer */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-6 py-4 border-t border-[#e4e8f1] bg-slate-50/70">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-6 py-4 border-t border-[#e4e8f1] ">
           {/* Checkbox */}
           <label className="inline-flex items-center gap-2 text-[0.8rem] text-slate-700 whitespace-nowrap">
             <input

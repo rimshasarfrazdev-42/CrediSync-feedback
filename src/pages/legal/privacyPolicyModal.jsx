@@ -24,8 +24,8 @@ const PrivacyPolicyModal = ({ open, onClose, onAccept }) => {
       {/* Modal */}
       <div className="relative w-full max-w-7xl mx-3 sm:mx-4 bg-white rounded-2xl shadow-[0_18px_45px_rgba(15,27,61,0.25)] border border-[#e1e6f0] flex flex-col max-h-[88vh]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4">
-          <h2 className="text-base font-semibold sm:text-lg text-slate-900">Privacy Policy</h2>
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[#e4e8f1]">
+          <h2 className="text-base font-semibold sm:text-lg text-secondary">Privacy Policy</h2>
           <button
             type="button"
             onClick={onClose}
@@ -44,10 +44,10 @@ const PrivacyPolicyModal = ({ open, onClose, onAccept }) => {
             disclose, and safeguard your information when you use the CrediSync Provider Portal.
           </p>
 
-          <h3 className="mt-3 font-semibold text-slate-900">Information We Collect</h3>
+          <h3 className="mt-3 font-semibold text-secondary">Information We Collect</h3>
           <p>We collect several types of information from and about users of our platform, including:</p>
 
-          <h4 className="mt-1 font-semibold text-slate-900">Protected Health Information (PHI)</h4>
+          <h4 className="mt-1 font-semibold text-secondary">Protected Health Information (PHI)</h4>
           <ul className="space-y-1 list-disc list-inside">
             <li>Medical licenses and board certifications</li>
             <li>Drug Enforcement Administration registration numbers</li>
@@ -56,7 +56,7 @@ const PrivacyPolicyModal = ({ open, onClose, onAccept }) => {
             <li>Hospital privileges and affiliations</li>
           </ul>
 
-          <h4 className="mt-2 font-semibold text-slate-900">Contact Information</h4>
+          <h4 className="mt-2 font-semibold text-secondary">Contact Information</h4>
           <ul className="space-y-1 list-disc list-inside">
             <li>Full name and professional credentials</li>
             <li>Email address and phone number</li>
@@ -64,7 +64,7 @@ const PrivacyPolicyModal = ({ open, onClose, onAccept }) => {
             <li>Emergency contact information</li>
           </ul>
 
-          <h4 className="mt-2 font-semibold text-slate-900">License and Credential Details</h4>
+          <h4 className="mt-2 font-semibold text-secondary">License and Credential Details</h4>
           <ul className="space-y-1 list-disc list-inside">
             <li>Educational background (medical school, residency, fellowships)</li>
             <li>Specialty and sub-specialty certifications</li>
@@ -73,7 +73,7 @@ const PrivacyPolicyModal = ({ open, onClose, onAccept }) => {
             <li>Professional references</li>
           </ul>
 
-          <h4 className="mt-2 font-semibold text-slate-900">Technical and Usage Information</h4>
+          <h4 className="mt-2 font-semibold text-secondary">Technical and Usage Information</h4>
           <ul className="space-y-1 list-disc list-inside">
             <li>IP address and device information</li>
             <li>Browser type and operating system</li>
@@ -82,7 +82,7 @@ const PrivacyPolicyModal = ({ open, onClose, onAccept }) => {
             <li>Cookies and similar tracking technologies</li>
           </ul>
 
-          <h3 className="mt-3 font-semibold text-slate-900">How We Use Your Data</h3>
+          <h3 className="mt-3 font-semibold text-secondary">How We Use Your Data</h3>
           <p>CrediSync uses your information for verification and compliance purposes, including:</p>
           <ul className="space-y-1 list-disc list-inside">
             <li>Credentialing and verification</li>
@@ -92,20 +92,22 @@ const PrivacyPolicyModal = ({ open, onClose, onAccept }) => {
         </div>
 
         {/* Footer */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-6 py-4 border-t border-[#e4e8f1] bg-slate-50/60">
+         {/* Footer */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-6 py-4 border-t border-[#e4e8f1] ">
+          {/* Checkbox */}
           <label className="inline-flex items-center gap-2 text-[0.8rem] text-slate-700 whitespace-nowrap">
-  <input
-    type="checkbox"
-    className="h-3.5 w-3.5 rounded border border-[#b6bfd1]"
-    checked={isChecked}
-    onChange={(e) => setIsChecked(e.target.checked)}
-  />
-  <span>I have read and agree to this document.</span>
-</label>
+            <input
+              type="checkbox"
+              className="h-3.5 w-3.5 rounded border border-[#b6bfd1]"
+              checked={isChecked}
+              onChange={(e) => setIsChecked(e.target.checked)}
+            />
+            <span>I have read and agree to this document.</span>
+          </label>
 
+          {/* Buttons */}
           <div className="flex flex-col items-center justify-center w-full gap-2 sm:flex-row sm:justify-end">
-           
-
+            
             <button
               type="button"
               onClick={handleAccept}
@@ -116,7 +118,7 @@ const PrivacyPolicyModal = ({ open, onClose, onAccept }) => {
             >
               Accept &amp; Continue
             </button>
-             <button
+            <button
               type="button"
               onClick={onClose}
               className="w-full sm:w-auto px-4 py-2 text-[0.8rem] font-medium rounded-md border border-[#d0d6e4] text-slate-700 bg-white hover:bg-slate-50"

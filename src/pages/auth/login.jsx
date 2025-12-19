@@ -20,7 +20,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen gap-6 p-4 bg-white ">
+    <div className="flex h-screen gap-6 p-2 bg-white">
       {/* Left Side */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img
@@ -31,19 +31,19 @@ const Login = () => {
       </div>
 
       {/* Right Side */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+      <div className="flex items-center justify-center w-full px-4 shadow-sm lg:border lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
-          <h1 className="mb-1 text-[31px] font-semibold text-center text-slate-900">
+          <h1 className="text-[22px] sm:text-[28px] font-semibold text-center text-slate-900">
             Login
           </h1>
-          <p className="mb-6 text-[20px] font-medium text-center text-slate-800 sm:text-base">
+          <p className="mt-1 text-[14px] sm:text-[16px] font-medium text-center text-slate-800 mb-6">
             Sign in to continue your credentialing journey.
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email */}
             <div>
-              <label className="block mb-1 text-[18px] font-medium text-gray-800">
+              <label className="block mb-1 text-[14px] sm:text-[16px] font-medium text-gray-700">
                 Email Address
               </label>
               <input
@@ -58,12 +58,12 @@ const Login = () => {
 
             {/* Password */}
             <div>
-              <label className="block mb-1 text-[18px] font-medium text-gray-800">
+              <label className="block mb-1 text-[14px] sm:text-[16px] font-medium text-gray-700">
                 Password
               </label>
               <input
                 type="password"
-                placeholder="Strong Password"
+                placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required

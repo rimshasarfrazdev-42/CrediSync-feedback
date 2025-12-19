@@ -92,7 +92,7 @@ export default function SignUp() {
 
   return (
     <div
-      className="flex h-screen gap-6 p-3 sm:p-4 md:p-6"
+      className="flex h-screen gap-6 p-3 bg-white sm:p-4 md:p-6"
      
     >
       {/* Left Image */}
@@ -105,11 +105,11 @@ export default function SignUp() {
       </div>
 
       {/* Right Form */}
-      <div className="flex items-center justify-center w-full px-3 bg-white border shadow-sm lg:w-1/2 rounded-2xl sm:px-4 md:px-6">
+      <div className="flex items-center justify-center w-full px-3 bg-white shadow-sm lg:border lg:w-1/2 rounded-2xl sm:px-4 md:px-6">
         <div className="w-full">
           <div className="mb-5 text-center">
-            <h2 className="text-[22px] sm:text-[28px] font-semibold text-slate-800">Registration</h2>
-            <p className="mt-1 text-[14px] sm:text-[16px] font-medium text-gray-600">
+            <h2 className="text-[22px] sm:text-[28px] font-semibold text-secondary">Registration</h2>
+            <p className="mt-1 text-[14px] sm:text-[16px] font-medium text-tertiary">
               Protected under HIPAA &amp; SOC 2 Standards
             </p>
           </div>

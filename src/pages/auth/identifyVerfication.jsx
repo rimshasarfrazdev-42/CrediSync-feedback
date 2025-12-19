@@ -88,7 +88,8 @@ const IdentityVerification = () => {
           <h1 className="mb-3 text-center text-2xl font-semibold text-secondary sm:text-[31px]">
             Identity Verification
           </h1>
-          <p className="mb-6 text-center text-sm font-medium text-[#374151] sm:text-[20px]">
+          <p className="mb-6 text-center text-sm font-medium text-[#374151] sm:text-[20
+          px]">
             Validate your credentials against the official NPI Registry. Your data remains private and encrypted.
           </p>
 
