@@ -85,10 +85,10 @@ const IdentityVerification = () => {
       <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
-          <h1 className="mb-3 text-center text-2xl font-semibold text-secondary sm:text-[31px]">
+          <h1 className="mb-3 text-center text-xl font-semibold text-secondary sm:text-2xl">
             Identity Verification
           </h1>
-          <p className="mb-6 text-center text-sm font-medium text-[#374151] sm:text-[20px]">
+          <p className="mb-6 md:px-14 px-2 text-center text-sm font-medium text-[#374151] sm:text-base">
             Validate your credentials against the official NPI Registry. Your data remains private and encrypted.
           </p>
 
@@ -130,7 +130,7 @@ const IdentityVerification = () => {
                 inputMode="numeric"
                 maxLength={10}
                 required
-                placeholder="10-digit NPI"
+                placeholder="10-digits NPI"
                 value={npiNumber}
                 onChange={handleNpiChange}
                 className="w-full rounded-md border border-[#d7dde6] bg-white p-2.5 text-sm text-black placeholder:text-slate-400 focus:border-[#1f4fbf] focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70"

@@ -22,7 +22,13 @@ export default function ResetPassword() {
 
     // Validate email
     if (!validateEmail(email)) {
-      setEmailError("Please enter a valid email address.");
+      if(email==""){
+  setEmailError("Please enter the email address.");
+      }else{
+         setEmailError("Please enter a valid email address.");
+      }
+
+    
       isValid = false;
     } else {
       setEmailError("");
@@ -54,10 +60,10 @@ export default function ResetPassword() {
       <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
-     <h1 className="mb-1 text-2xl font-semibold text-center sm:text-3xl md:text-4xl lg:text-5xl text-slate-900">
+     <h1 className="mb-1 text-xl font-semibold text-center sm:text-2xl md:text-3xl lg:text-4xl text-slate-900">
   Reset Your Password
 </h1>
-<p className="mb-6 text-sm font-medium text-center sm:text-base md:text-lg lg:text-xl text-slate-900">
+<p className="mb-6  px-6 text-xs font-medium text-center sm:text-sm md:text-base lg:text-lg text-[#374151]">
   Enter your email address and we&apos;ll send you instructions to
   reset your password.
 </p>
