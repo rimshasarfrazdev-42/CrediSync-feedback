@@ -129,18 +129,18 @@ export default function NotificationsTab({ items, onItemsChange }) {
           </p>
         </div>
 
-        <div className="flex gap-4 text-xs sm:text-sm">
+        <div className="flex gap-4 text-xs ">
           <button
             type="button"
             onClick={handleMarkAllAsRead}
-            className="font-semibold text-[16px] text-primary hover:underline"
+            className="font-semibold lg:text-[16px] text-[14px] text-primary hover:underline"
           >
             Mark All as Read
           </button>
           <button
             type="button"
             onClick={handleClearAll}
-            className="rounded-lg bg-primary text-[16px] px-3.5 py-2 font-semibold text-white hover:bg-[#082b5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+            className="rounded-lg bg-primary lg:text-[16px] text-[14px] px-3.5 py-2 font-semibold text-white hover:bg-[#082b5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
           >
             Clear All
           </button>
@@ -230,14 +230,14 @@ export default function NotificationsTab({ items, onItemsChange }) {
                     className="flex-1 cursor-pointer"
                     onClick={() => handleRowClick(n.id)}
                   >
-                    <div className="flex  gap-2 sm:flex-row sm:items-start sm:gap-3 ">
+                    <div className="flex gap-2 sm:flex-row sm:items-start sm:gap-3 ">
                       <div className="sm:pt-0.5 pt-0">
                         <Icon className={`w-5 h-5 ${className} `} />
                       </div>
 
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
-                          <h3 className="text-sm font-semibold sm:text-base  text-secondary">
+                          <h3 className="text-sm font-semibold sm:text-base text-secondary">
                             {n.title}
                           </h3>
                           {n.isNew && (

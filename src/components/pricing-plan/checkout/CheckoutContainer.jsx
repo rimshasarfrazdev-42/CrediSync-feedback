@@ -3,6 +3,7 @@ import { Button } from '../../../components/ui/button';
 import { Input } from '../../../components/ui/input';
 import { useNavigate } from 'react-router-dom';
 import { checkOutSchema } from '../../../validator/checkOutSchema';
+import WelcomeBanner from '../../DashBoard/WelcomeBanner';
 
 function CheckoutContainer() {
   const navigate = useNavigate();
@@ -63,14 +64,18 @@ function CheckoutContainer() {
 
   return (
     <div className="grid w-full grid-cols-1 gap-5 ">
-      <div className="p-5 h-[120px] bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC] rounded-[12px] shadow-md">
+      {/* <div className="p-5 h-[120px] bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC] rounded-[12px] shadow-md">
         <h1 className="text-[25px] text-secondary font-bold mb-1">Complete Your Purchase</h1>
         <p className="text-rare text-[16px] font-normal mb-8">
           Enter your payment information to activate your subscription
         </p>
-      </div>
+      </div> */}
+       <WelcomeBanner
+        heading="Complete Your Purchase"
+        subHeading=" Enter your payment information to activate your subscription"
+        />
 
-      <div className="w-full py-6 bg-transparent">
+      <div className="w-full bg-transparent">
         <div className="grid w-full grid-cols-1 gap-8 p-6 bg-white border border-tertiary border-opacity-15 rounded-3xl lg:grid-cols-12">
           {/* LEFT: PAYMENT INFORMATION */}
           <div className="w-full space-y-5 lg:col-span-8 border rounded-xl p-[24px]">

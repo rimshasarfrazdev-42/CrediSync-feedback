@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../../components/ui/button';
 import { CircleCheck } from 'lucide-react';
+import WelcomeBanner from '../../DashBoard/WelcomeBanner';
 
 function SubscriptionActiveContainer() {
   const [data, setData] = useState(null);
@@ -14,14 +15,12 @@ function SubscriptionActiveContainer() {
   return (
     <>
       <div className="grid w-full grid-cols-1 gap-5 ">
-        <div className="p-5 h-[120px] bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC] rounded-[12px] shadow-md">
-          <h1 className="text-[25px] text-secondary font-bold mb-1">Choose Your Plan</h1>
-          <p className="text-rare text-[16px] font-normal mb-8">
-            Select the perfect plan for your needs. Always flexible to scale.
-          </p>
-        </div>
+        <WelcomeBanner
+        heading="Choose Your Plan"
+        subHeading="Select the perfect plan for your needs. Always flexible to scale."
+        />
 
-        <div className="flex w-full py-6 bg-transparent ">
+        <div className="flex w-full bg-transparent ">
           <div
             className="w-full p-6 space-y-8 bg-white border border-tertiary border-opacity-15 rounded-3xl"
           >
