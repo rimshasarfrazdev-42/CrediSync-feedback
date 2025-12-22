@@ -53,8 +53,7 @@ export default function MarkNotApplicableModal({
   };
 
   const fieldClass = (key) =>
-    `w-full rounded-md border px-3 py-2 text-sm text-secondary placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 ${
-      errors[key] ? "border-rose-400" : "border-slate-300"
+    `w-full rounded-md border px-3 py-2 text-sm text-secondary placeholder:text-slate-400 focus:outline-none focus:ring-1 focus:ring-sky-500 focus:border-sky-500 ${errors[key] ? "border-rose-400" : "border-slate-300"
     }`;
 
   return (
@@ -92,9 +91,8 @@ export default function MarkNotApplicableModal({
                   : undefined
               }
               readOnly={!allowEditItem}
-              className={`${fieldClass("item")} ${
-                !allowEditItem ? "bg-slate-50 cursor-not-allowed" : ""
-              }`}
+              className={`${fieldClass("item")} ${!allowEditItem ? "bg-slate-50 cursor-not-allowed" : ""
+                }`}
             />
           </div>
 
@@ -122,9 +120,8 @@ export default function MarkNotApplicableModal({
                 type="checkbox"
                 checked={confirmed}
                 onChange={(e) => setConfirmed(e.target.checked)}
-                className={`mt-0.5 h-4 w-4 rounded border ${
-                  errors.confirmed ? "border-rose-400" : "border-slate-300"
-                } text-[#0B3B7F] focus:ring-[#0B3B7F]`}
+                className={`mt-0.5 h-4 w-4 rounded border ${errors.confirmed ? "border-rose-400" : "border-slate-300"
+                  } text-[#0B3B7F] focus:ring-[#0B3B7F]`}
               />
               <span>
                 I confirm this credential does not apply to my professional role.
@@ -136,21 +133,22 @@ export default function MarkNotApplicableModal({
           </div>
 
           {/* Footer buttons */}
-          <div className="flex flex-col-reverse gap-3 mt-2 sm:flex-row sm:justify-end">
+          <div className="flex w-full gap-3 bg-slate-50">
             <button
               type="button"
               onClick={onClose}
-              className="inline-flex justify-center px-4 py-2 text-sm font-medium bg-white border rounded-md border-slate-300 text-slate-700 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+              className="w-full inline-flex justify-center px-4 py-2 text-sm font-medium bg-white border rounded-md border-slate-300 text-slate-700 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="inline-flex justify-center rounded-md bg-[#0B3B7F] px-4 py-2 text-sm font-semibold text-white hover:bg-[#082b5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+              className="w-full inline-flex justify-center rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
             >
               Mark N/A
             </button>
           </div>
+
         </form>
       </div>
     </div>

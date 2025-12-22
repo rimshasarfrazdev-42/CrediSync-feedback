@@ -1,7 +1,4 @@
-import AccountSettings from "../pages/AccountSettings";
-import Checkout from "../pages/pricingPlan/checkout";
-import ChoosePlan from "../pages/pricingPlan/choosePlan";
-import SubscriptionActive from "../pages/pricingPlan/subscriptionActive";
+
 
 export const routePaths = {
   Home: '/',

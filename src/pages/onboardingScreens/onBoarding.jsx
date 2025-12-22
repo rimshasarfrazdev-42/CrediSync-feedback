@@ -224,7 +224,9 @@ function OnBoarding() {
           specialty: specialtyRef.current,
           uploadLicense: uploadLicenseRef.current,
           uploadCertificate: uploadCertificateRef.current,
-        });
+        },
+        { abortEarly: false }
+      );
       if (step === 5) {
         await insuranceSchema.validate({ Insurance: InsuranceFormsRef.current }, { abortEarly: false });
       }
@@ -277,7 +279,7 @@ function OnBoarding() {
         uploadLicense: uploadLicenseRef.current,
         uploadCertificate: uploadCertificateRef.current,
       },
-      { abortEarly: false },
+      { abortEarly: false }
     );
 
     await insuranceSchema.validate({ Insurance: InsuranceFormsRef.current }, { abortEarly: false });
@@ -290,6 +292,7 @@ function OnBoarding() {
   const handleSubmit = async () => {
     try {
       // FULL VALIDATION
+      setErrors({});
       await validateAllSteps();
 
       const educationData = educationFormsRef.current.map(({ fileInputRef, ...rest }) => rest);
@@ -328,11 +331,13 @@ function OnBoarding() {
       };
 
       console.log('FINAL JSON:', finalData);
+      return true;
     } catch (err) {
       const formatted = {};
       err.inner?.forEach((e) => (formatted[e.path] = e.message));
       setErrors(formatted);
       console.log('VALIDATION FAILED', formatted);
+      return false;
     }
   };
 
@@ -342,18 +347,18 @@ function OnBoarding() {
       <div className="w-full px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8">
         <div className="flex flex-col w-full gap-3 p-5 bg-white border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
           {/* Heading */}
-          <p className="text-[20px] sm:text-[28px] lg:text-[39px] font-semibold text-secondary leading-snug">
+          <p className="text-[20px] sm:text-[28px] lg:text-[39px] font-semibold text-[#111827] leading-snug">
             Provider Onboarding
           </p>
           {/* Sub Text */}
-          <p className="text-sm sm:text-base lg:text-18px] text-secondary font-medium leading-relaxed">
+          <p className="text-sm sm:text-base lg:text-[18px] text-subtext font-medium leading-relaxed">
             Complete the steps to finish your profile. Your data is stored securely and PHI-safe.
           </p>
         </div>
       </div>
       {/* content section */}
-      <div className="w-full px-5 bg-transparent sm:px-6 lg:px-8">
-        <div className="w-full p-5 mb-8 bg-white border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
+      <div className="w-full px-5 bg-transparent pb-8 sm:px-6 lg:px-8">
+        <div className="w-full p-5  bg-white border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
           {step === 1 ? (
             <PersonalInfoContainer
               step={step}
@@ -362,6 +367,7 @@ function OnBoarding() {
               refs={allRefs}
               submit={handleSubmit}
               errors={errors}
+              setErrors={setErrors}
             />
           ) : step === 2 ? (
             <EducationInfoContainer
@@ -377,6 +383,7 @@ function OnBoarding() {
               addMoreAffiliationForm={addMoreAffiliationForm}
               deleteAffiliationForm={deleteAffiliationForm}
               errors={errors}
+              setRerender={setRerender}
             />
           ) : step === 4 ? (
             <LicenseCertificationContainer licenseRefs={licenseRefs} setRerender={setRerender} errors={errors} />

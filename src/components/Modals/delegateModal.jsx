@@ -1,23 +1,21 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-const roleOptions = [
-  "Admin",
-  "Credentialing Coordinator",
-  "HR",
-  "Other",
-];
+const roleOptions = ["Admin", "Credentialing Coordinator", "HR", "Other"];
 
 const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
- const [adminName, setAdminName] = useState("");
+  const emailInputRef = useRef<HTMLInputElement | null>(null);
+
+  const [adminName, setAdminName] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
-  // Hooks must always run
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
+      // focus email on open (safe)
+      setTimeout(() => emailInputRef.current?.focus(), 0);
     } else {
       document.body.style.overflow = "";
     }
@@ -26,7 +24,6 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
     };
   }, [isOpen]);
 
-  // Conditional render after hooks
   if (!isOpen) return null;
 
   const resetState = () => {
@@ -39,7 +36,7 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
 
   const handleCancel = () => {
     resetState();
-    onClose && onClose();
+    onClose?.();
   };
 
   const handleSubmit = async (e) => {
@@ -59,15 +56,13 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
 
     try {
       setSubmitting(true);
-      if (onSendInvite) {
-        await onSendInvite({
-          adminName: adminName.trim() || null,
-          email: email.trim(),
-          role,
-        });
-      }
+      await onSendInvite?.({
+        adminName: adminName.trim() || null,
+        email: email.trim(),
+        role,
+      });
       resetState();
-      onClose && onClose();
+      onClose?.();
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Please try again.");
@@ -77,16 +72,12 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
   };
 
   const handleOverlayClick = (e) => {
-    // close only when clicking on the backdrop, not on the card
-    if (e.target === e.currentTarget) {
-      handleCancel();
-    }
+    if (e.target === e.currentTarget) handleCancel();
   };
-  
 
   return (
     <div
-      className="fixed inset-0 z-40 flex items-center justify-center px-4 bg-slate-900/80 backdrop-blur-[2px] sm:px-6 overflow-hidden"
+      className="fixed inset-0 z-40 flex items-center justify-center px-4 bg-secondary/80 backdrop-blur-[2px] sm:px-6 overflow-hidden"
       onClick={handleOverlayClick}
     >
       <div
@@ -97,23 +88,16 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
         onClick={(e) => e.stopPropagation()}
       >
         <form onSubmit={handleSubmit} className="px-6 pt-6 pb-5 sm:px-8 sm:pt-7 sm:pb-6">
-          {/* Title & subtitle */}
           <div className="mb-5">
-            <h2
-              id="delegate-modal-title"
-              className="text-[20px] font-semibold text-secondary"
-            >
+            <h2 id="delegate-modal-title" className="text-[20px] font-semibold text-secondary">
               Delegate to Your Team
             </h2>
             <p className="mt-1 text-sm sm:text-[14px] text-tertiary">
-              Send a secure link to your admin or coordinator to complete The Intake
-              on your behalf.
+              Send a secure link to your admin or coordinator to complete the intake on your behalf.
             </p>
           </div>
 
-          {/* Fields */}
           <div className="space-y-2">
-            {/* Admin Name */}
             <div>
               <label className="block mb-1 text-sm font-medium text-secondary">
                 Admin Name <span className="font-normal text-tertiary">(Optional)</span>
@@ -127,12 +111,10 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
               />
             </div>
 
-            {/* Email */}
             <div>
-              <label className="block mb-1 text-sm font-medium text-secondary">
-                Email Address
-              </label>
+              <label className="block mb-1 text-sm font-medium text-secondary">Email Address</label>
               <input
+                useref={emailInputRef}
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -142,11 +124,8 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
               />
             </div>
 
-            {/* Role */}
             <div>
-              <label className="block mb-1 text-sm font-medium text-secondary">
-                Role
-              </label>
+              <label className="block mb-1 text-sm font-medium text-secondary">Role</label>
               <div className="relative">
                 <select
                   value={role}
@@ -162,14 +141,8 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
                   ))}
                 </select>
 
-                {/* Chevron icon */}
                 <span className="absolute inset-y-0 flex items-center pointer-events-none right-3">
-                  <svg
-                    className="w-4 h-4 text-slate-500"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    aria-hidden="true"
-                  >
+                  <svg className="w-4 h-4 text-slate-500" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                     <path
                       d="M6 8l4 4 4-4"
                       stroke="currentColor"
@@ -182,29 +155,24 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
               </div>
             </div>
 
-            {/* Error message */}
-            {error && (
-              <p className="text-xs text-red-600">
-                {error}
-              </p>
-            )}
+            {error && <p className="text-xs text-red-600">{error}</p>}
           </div>
 
-          {/* Actions */}
-          <div className="flex flex-col gap-3 mt-6 sm:mt-7 sm:flex-row ">
-            <button
-              type="button"
-              onClick={handleCancel}
-              className="w-full rounded-md border border-[#dde3f0] bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 "
-            >
-              Cancel
-            </button>
+          <div className="flex flex-col gap-3 mt-6 sm:mt-7 sm:flex-row">
+            
             <button
               type="submit"
               disabled={submitting}
-              className="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#123057] disabled:cursor-not-allowed disabled:opacity-80 "
+              className="w-full rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-white hover:bg-[#123057] disabled:cursor-not-allowed disabled:opacity-80"
             >
               {submitting ? "Sending..." : "Send Invite"}
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="w-full rounded-md border border-[#92949F] bg-white px-4 py-2.5 text-sm font-semibold text-[#92949F] hover:bg-slate-50"
+            >
+              Cancel
             </button>
           </div>
         </form>

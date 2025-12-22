@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Lock, Camera, Upload, ShieldCheck, CircleCheck, Trash2, Image } from 'lucide-react';
+import { Lock, Camera, Upload, ShieldCheck, CircleCheck, Trash2, Image, X } from 'lucide-react';
 import CardHeader from '../ui/cardHeader';
 import { Button } from '../ui/button';
 import { Progress } from '../ui/progress';
@@ -7,6 +7,8 @@ import DragAndDrop from '../ui/dragAndDrop';
 import { Input } from '../ui/input';
 import { uploadCredentialSchema } from '../../validator/uploadCredentialSchema';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
+
 
 function UploadCredentialsContainer() {
   const GovernmentID = useRef(null);
@@ -14,31 +16,52 @@ function UploadCredentialsContainer() {
   const MedicalLicense = useRef(null);
   const BoardCertification = useRef(null);
   const CertificateOfInsurance = useRef(null);
-const navigate =useNavigate();
+  const navigate = useNavigate();
   //optional docs refs
   const DEAcertificate = useRef(null);
   const ResumeCV = useRef(null);
   const VaccinationProof = useRef(null);
   const SupportingDocuments = useRef(null);
-  
+
   // For photo verification section
   const fileInputRef = useRef(null);
   const verification = useRef(null);
   const [fileData, setFileData] = useState(null);
   const [uploadedCount, setUploadedCount] = useState(0);
   const [errors, setErrors] = useState({});
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [tempPhoto, setTempPhoto] = useState(null);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null)
 
-
-  // these functions is used to for photo verification section only use in this container
   const openFilePicker = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
   };
+
   const handleFileChanges = (e) => {
     const file = e.target.files?.[0] || null;
-    setFileData(file);
     if (file) {
+      const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+      if (!allowedTypes.includes(file.type)) {
+        toast.error("Invalid file format", {
+          description: "Please upload a JPG or PNG image.",
+        });
+        e.target.value = '';
+        return;
+      }
+      const MAX_SIZE_MB = 5;
+      const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024;
+      if (file.size > MAX_SIZE_BYTES) {
+        toast.error("File too large", {
+          description: `The photo must be smaller than ${MAX_SIZE_MB}MB.`,
+        });
+        e.target.value = '';
+        return;
+      }
+
+      setFileData(file);
       const previewURL = URL.createObjectURL(file);
       verification.current = previewURL;
     }
@@ -73,6 +96,7 @@ const navigate =useNavigate();
   // Submit Handler function
   const submitHandler = async () => {
     try {
+      setErrors({})
       await uploadCredentialSchema.validate(
         {
           GovernmentID: GovernmentID.current,
@@ -123,7 +147,7 @@ const navigate =useNavigate();
     };
 
     localStorage.setItem('savedDocs', JSON.stringify(savedDocs));
-    alert('Saved Successfully!');
+    toast.success('Saved Successfully!');
   };
 
   // Load saved data on component mount
@@ -140,27 +164,145 @@ const navigate =useNavigate();
     if (saved.ResumeCV) ResumeCV.current = saved.ResumeCV;
     if (saved.VaccinationProof) VaccinationProof.current = saved.VaccinationProof;
     if (saved.SupportingDocuments) SupportingDocuments.current = saved.SupportingDocuments;
-    
+
     updateProgress();
   }, []);
 
+  const startCamera = async () => {
+    setTempPhoto(null);
+    setIsCameraOpen(true)
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
+        audio: false
+      });
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        setIsCameraOpen(true);
+      }
+    } catch (err) {
+      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+        toast.error("Camera Access Denied", {
+          description: "Please allow camera access in your browser settings to verify your identity.",
+        });
+      } else {
+        toast.error("Camera Error", { description: "Could not find a working camera." });
+      }
+    }
+  };
+
+  const stopCamera = () => {
+    const stream = videoRef.current?.srcObject;
+    stream?.getTracks().forEach(track => track.stop());
+    setIsCameraOpen(false);
+    setTempPhoto(null);
+  };
+
+  const capturePhoto = () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+
+    if (video && canvas) {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+      setTempPhoto(dataUrl);
+
+      const stream = video.srcObject;
+      stream?.getTracks().forEach(track => track.stop());
+    }
+  };
+  const retakePhoto = () => {
+    startCamera(); // Restart stream
+  };
+
+  const savePhoto = () => {
+    const byteString = atob(tempPhoto.split(',')[1]);
+    const mimeString = tempPhoto.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) { ia[i] = byteString.charCodeAt(i); }
+
+    const blob = new Blob([ab], { type: mimeString });
+    const file = new File([blob], "identity-capture.jpg", { type: "image/jpeg" });
+
+    setFileData(file);
+    verification.current = URL.createObjectURL(file);
+    setIsCameraOpen(false);
+    setTempPhoto(null);
+    updateProgress();
+  };
+
+  useEffect(() => {
+    if (!isCameraOpen) return;
+
+    const startStream = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
+          audio: false,
+        });
+
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err) {
+        setIsCameraOpen(false);
+
+        if (err.name === "NotAllowedError") {
+          toast.error("Camera Access Denied", {
+            description: "Please allow camera access in browser settings.",
+          });
+        } else {
+          toast.error("Camera Error", {
+            description: "Unable to access camera.",
+          });
+        }
+      }
+    };
+
+    startStream();
+
+    return () => {
+      const stream = videoRef.current?.srcObject;
+      stream?.getTracks().forEach((track) => track.stop());
+    };
+  }, [isCameraOpen]);
   return (
     <>
       {/* Outer Container for max width */}
       <div className="w-full mx-auto">
         {/* Header Section */}
-        <div className="w-full px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-10">
-          <div className="flex flex-col w-full gap-4 p-5 bg-white border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
+        <div className="w-full px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-10 ">
+          <div className="flex flex-col w-full gap-4 p-5  border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
             <p className="text-3xl sm:text-[39px] font-semibold text-secondary leading-tight">
               Upload Your Credentials
             </p>
 
-            <p className="text-sm sm:text-[18px] text-secondary font-medium">
+            <p className="text-sm sm:text-[18px] text-subtext font-medium">
               Upload your key credentialing documents securely.
             </p>
 
-            <div className="flex items-start gap-3 p-4 text-sm font-normal border rounded-lg bg-primary bg-opacity-10 border-primary border-opacity-30 text-primary sm:text-base">
-              <Lock />
+            <div className="flex items-start md:items-center gap-3 p-4 text-sm font-normal border rounded-lg bg-primary bg-opacity-10 border-primary border-opacity-30 text-primary sm:text-base">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                className="lucide lucide-lock shrink-0 mt-0.5 md:mt-0"
+              >
+                <rect width="18" height="11" x="3" y="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
               <span>All uploads are encrypted and stored securely per HIPAA & SOC 2 standards.</span>
             </div>
           </div>
@@ -169,13 +311,13 @@ const navigate =useNavigate();
         {/* CONTENT GRID */}
         <div className="grid w-full grid-cols-1 gap-6 px-4 mb-10 sm:px-6 lg:px-8 md:grid-cols-12">
           {/* LEFT SECTION – 8 COLUMNS */}
-          <div className="flex flex-col w-full gap-6 md:col-span-8">
+          <div className="flex flex-col w-full gap-6 order-2 md:order-1  md:col-span-8">
             {/* Photo Verification */}
             <div className="w-full p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
               <CardHeader
                 heading="Photo Verification"
                 subText="Take or upload a clear photo to verify your identity"
-                status="Required"
+                status={verification.current ? "Uploaded" : "Required"}
               />
               {verification.current ? (
                 <>
@@ -217,7 +359,9 @@ const navigate =useNavigate();
                     <Camera size={40} />
                   </div>
 
-                  <Button className="text-center !bg-primary !text-white mt-4 text-[16px] font-semibold w-full flex items-center gap-2 justify-center">
+                  <Button className="text-center !bg-primary !text-white mt-4 text-[16px] font-semibold w-full flex items-center gap-2 justify-center"
+                    onClick={startCamera}
+                  >
                     <Camera size={24} />
                     <span>Take Photo</span>
                   </Button>
@@ -226,17 +370,17 @@ const navigate =useNavigate();
                     className="text-center text-[16px] font-semibold bg-transparent w-full border-[1px] flex items-center justify-center gap-2 border-rare text-rare mt-4"
                     onClick={openFilePicker}
                   >
-                    <Upload size={24} />
-                    <span>Upload Photo</span>
+                    <Upload size={24} className='text-subtext' />
+                    <span className='text-subtext'>Upload Photo</span>
                   </Button>
 
-                  <p className="mt-2 text-sm font-normal text-tertiary">Accepted: JPG, PNG (Max 10MB)</p>
+                  <p className="mt-2 text-sm font-normal text-tertiary">Accepted: JPG, PNG (Max 5MB)</p>
                 </div>
               )}
               <Input
                 ref={fileInputRef}
                 type="file"
-                accept="image/jpeg,image/png,image/jpg"
+                accept="image/jpeg, image/png"
                 className="hidden"
                 onChange={handleFileChanges}
               />
@@ -244,7 +388,7 @@ const navigate =useNavigate();
 
             {/* REQUIRED TITLE */}
             <div className="w-full">
-              <p className="text-xl font-medium">Required Documents</p>
+              <p className="text-xl font-medium text-subtext">Required Documents</p>
             </div>
 
             {/* Required Docs – Responsive Cards */}
@@ -252,17 +396,17 @@ const navigate =useNavigate();
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
                   heading="Government-issued ID"
-                  subText="Driver's License, Passport, or State ID"
+                  subText="Indetity Verification • Driver's License, Passport, or State ID"
                   status={GovernmentID.current ? 'Uploaded' : 'Pending'}
                 />
-                <DragAndDrop imageContainer={GovernmentID} savedImage={GovernmentID.current ? { ...GovernmentID.current } : null}  onUpdate={updateProgress} />
+                <DragAndDrop imageContainer={GovernmentID} savedImage={GovernmentID.current ? { ...GovernmentID.current } : null} onUpdate={updateProgress} />
                 {errors.GovernmentID && <div className="mt-2 text-red-600">{errors.GovernmentID}</div>}
               </div>
 
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
                   heading="Degree / Diploma"
-                  subText="Education Verification • MD, DO, NP, PA"
+                  subText="Education Verification • MD, DO, NP, or PA Degree Certificate"
                   status={DegreeDiploma.current ? 'Uploaded' : 'Pending'}
                 />
                 <DragAndDrop imageContainer={DegreeDiploma} savedImage={DegreeDiploma.current ? { ...DegreeDiploma.current } : null} onUpdate={updateProgress} />
@@ -272,7 +416,7 @@ const navigate =useNavigate();
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
                   heading="Medical License(s)"
-                  subText="Upload multiple if needed"
+                  subText="Professional License • State medical licenses (upload multiple if needed)"
                   status={MedicalLicense.current ? 'Uploaded' : 'Pending'}
                 />
                 <DragAndDrop imageContainer={MedicalLicense} savedImage={MedicalLicense.current ? { ...MedicalLicense.current } : null} onUpdate={updateProgress} />
@@ -282,7 +426,7 @@ const navigate =useNavigate();
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
                   heading="Board Certification(s)"
-                  subText="ABMS or AOA Certification"
+                  subText="Board Certification • ABMS or AOA Certification documents"
                   status={BoardCertification.current ? 'Uploaded' : 'Pending'}
                 />
                 <DragAndDrop imageContainer={BoardCertification} savedImage={BoardCertification.current ? { ...BoardCertification.current } : null} onUpdate={updateProgress} />
@@ -292,7 +436,7 @@ const navigate =useNavigate();
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
                   heading="Certificate of Insurance (COI)"
-                  subText="Professional liability coverage"
+                  subText="Malpractice Insurance • Current professional liability coverage"
                   status={CertificateOfInsurance.current ? 'Uploaded' : 'Pending'}
                 />
                 <DragAndDrop imageContainer={CertificateOfInsurance} savedImage={CertificateOfInsurance.current ? { ...CertificateOfInsurance.current } : null} onUpdate={updateProgress} />
@@ -304,8 +448,8 @@ const navigate =useNavigate();
 
             {/* OPTIONAL TITLE */}
             <div className="w-full">
-              <p className="text-xl font-medium">Optional Documents</p>
-              <p className="text-[16px] font-normal text-gray-600">These documents help expedite your verification.</p>
+              <p className="text-xl font-medium text-secondary">Optional Documents</p>
+              <p className="text-[16px] font-normal text-subtext">These documents help expedite your verification but are not required to continue.</p>
             </div>
 
             {/* Optional Docs */}
@@ -313,7 +457,7 @@ const navigate =useNavigate();
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
                   heading="DEA Certificate"
-                  subText="Required if prescribing"
+                  subText="DEA / Controlled Substance • Required if prescribing"
                   status={DEAcertificate.current ? 'Uploaded' : 'Pending'}
                 />
                 <DragAndDrop imageContainer={DEAcertificate} savedImage={DEAcertificate.current ? { ...DEAcertificate.current } : null} onUpdate={updateProgress} />
@@ -322,8 +466,8 @@ const navigate =useNavigate();
 
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
-                  heading="Resume or CV"
-                  subText="PDF or Word format"
+                  heading="Resume or Curriculum Vitae"
+                  subText="CV / Resume • PDF or Word format"
                   status={ResumeCV.current ? 'Uploaded' : 'Pending'}
                 />
                 <DragAndDrop imageContainer={ResumeCV} savedImage={ResumeCV.current ? { ...ResumeCV.current } : null} onUpdate={updateProgress} />
@@ -333,7 +477,7 @@ const navigate =useNavigate();
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
                   heading="Vaccination Proof"
-                  subText="COVID, Flu, etc."
+                  subText="Immunization / Health Records • COVID, Flu, or required immunizations"
                   status={VaccinationProof.current ? 'Uploaded' : 'Pending'}
                 />
                 <DragAndDrop imageContainer={VaccinationProof} savedImage={VaccinationProof.current ? { ...VaccinationProof.current } : null} onUpdate={updateProgress} />
@@ -343,7 +487,7 @@ const navigate =useNavigate();
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
                   heading="Supporting Documents"
-                  subText="Background Check, CME Certificates, etc."
+                  subText="Miscellaneous • Background Check, CME certificates, etc."
                   status={SupportingDocuments.current ? 'Uploaded' : 'Pending'}
                 />
                 <DragAndDrop imageContainer={SupportingDocuments} savedImage={SupportingDocuments.current ? { ...SupportingDocuments.current } : null} onUpdate={updateProgress} />
@@ -364,17 +508,17 @@ const navigate =useNavigate();
             {/* Bottom Buttons */}
             <div className="flex flex-col w-full gap-4 mt-4 sm:flex-row">
               <Button
-                className="w-full bg-transparent border-[1px] border-tertiary text-tertiary text-[16px] font-semibold"
+                className="w-full bg-transparent border-[1px] border-tertiary order-2 sm:order-1 text-tertiary text-[16px] font-semibold"
                 onClick={saveAndResumeHandler}
               >
                 Save and Resume Later
               </Button>
-              <Button className="!bg-primary w-full !text-white text-[16px] font-semibold" onClick={submitHandler}>Continue to Verification</Button>
+              <Button className="!bg-primary w-full !text-white text-[16px] sm:order-2 order-1 font-semibold" onClick={submitHandler}>Continue to Verification</Button>
             </div>
           </div>
 
           {/* RIGHT SIDEBAR – Upload Progress */}
-          <div className="w-full p-5 bg-white border shadow-sm md:col-span-4 rounded-3xl border-zinc-200 h-fit">
+          <div className="w-full p-5 bg-white border shadow-sm md:col-span-4 rounded-3xl border-zinc-200 h-fit order-1 md:order-2">
             <div className="flex items-center justify-between mb-3">
               <p className="text-[20px] font-semibold text-secondary">Upload Progress</p>
               <p className="text-[16px] font-normal text-tertiary">{uploadedCount} of 9</p>
@@ -403,20 +547,79 @@ const navigate =useNavigate();
 
             <div className="mt-6">
               <p className="mb-2 text-base font-normal text-secondary">Quick Tips:</p>
-              <ul className="list-disc ml-5 space-y-1 text-[16px] font-normal text-rare">
+              <ul className="list-disc ml-5 space-y-1 text-[16px] font-normal text-subtext">
                 <li>Ensure all documents are clear and legible</li>
-                <li>Verify licenses are current</li>
-                <li>Update documents anytime from your vault</li>
+                <li>Check that licenses are current and not expired</li>
+                <li>You can update documents later from your vault</li>
               </ul>
             </div>
           </div>
         </div>
+        {isCameraOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl overflow-hidden w-full max-w-md shadow-2xl py-1">
+              <div className="px-6 py-1 flex justify-between items-center">
+                <h3 className=" text-xl font-bold text-secondary">
+                  {tempPhoto ? "Review Photo" : "Identity Verification"}
+                </h3>
+                <button onClick={stopCamera} className="p-2 hover:bg-zinc-100 rounded-full">
+                  <X size={24} className="text-zinc-500" />
+                </button>
+              </div>
+
+              <div className="relative aspect-square bg-black mx-6  rounded-xl overflow-hidden shadow-inner">
+                {tempPhoto ? (
+                  <img src={tempPhoto} className="w-full h-full object-cover" alt="Captured" />
+                ) : (
+                  <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover" />
+                )}
+
+                {!tempPhoto && (
+                  <div className="absolute inset-0 border-[30px] border-black/20 pointer-events-none">
+                    <div className="w-full h-full border-2 border-white/40 border-dashed rounded-full" />
+                  </div>
+                )}
+                <canvas ref={canvasRef} className="hidden" />
+              </div>
+
+              <div className="px-6 py-4 flex flex-col">
+                {tempPhoto ? (
+                  <div className="flex gap-4">
+                    <Button
+                      onClick={retakePhoto}
+                      className="flex-1 !bg-zinc-100 !text-secondary border border-zinc-200 py-6 font-bold"
+                    >
+                      Retake
+                    </Button>
+                    <Button
+                      onClick={savePhoto}
+                      className="flex-1 !bg-primary !text-white py-6 font-bold"
+                    >
+                      Use Photo
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    onClick={capturePhoto}
+                    className="w-full !bg-primary !text-white py-6 flex text-lg font-bold"
+                  >
+                    <Camera size={24} /> Take Photo
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
-        <div className="flex items-center justify-center w-full gap-2 px-4 py-5 text-sm sm:px-6 lg:px-8 text-tertiary">
-          <Lock className="text-primary" size={13} />
-          <span>HIPAA & SOC 2 Compliant • Your data is protected • All files encrypted</span>
+        <div className="flex flex-col sm:flex-row items-center justify-center mx-auto w-full gap-2 px-4 py-5 sm:px-6 lg:px-8 text-center sm:text-left">
+          <Lock className="text-primary shrink-0" size={16} />
+
+          <span className="text-sm text-tertiary">
+            HIPAA & SOC 2 Compliant • Your data is protected • All files encrypted
+          </span>
         </div>
+
       </div>
     </>
   );

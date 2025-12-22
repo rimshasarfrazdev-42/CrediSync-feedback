@@ -6,6 +6,7 @@ import { Content } from './layouts/content';
 
 import { useThemeChooser } from './contexts/theme-chooser';
 import { publicRoutes } from './routes';
+import { Toaster } from 'sonner';
 // import your routes array
 
 export const GlobalStyles = createGlobalStyle`
@@ -25,6 +26,7 @@ function App() {
     // <GlobalStyles />
     // <Header />
     <Content>
+      <Toaster position="top-right" richColors />
       <Routes>
         {publicRoutes.map((route) => {
           const Component = route.component;

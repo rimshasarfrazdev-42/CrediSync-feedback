@@ -90,7 +90,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
       role="dialog"
     >
       <div className="relative w-full max-w-lg bg-white shadow-xl rounded-2xl">
-        <form onSubmit={handleSubmit} className="max-h-[90vh] overflow-y-auto px-4 py-5 sm:px-6 sm:py-6">
+        <form onSubmit={handleSubmit} className="max-h-[90vh] overflow-y-auto hide-scrollbar px-4 py-5 sm:px-6 sm:py-6">
           {/* Header */}
           <div className="mb-4 sm:mb-5">
             <h2 className="text-base font-semibold text-secondary sm:text-lg">Add Hospital Privilege Entry</h2>

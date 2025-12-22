@@ -52,264 +52,279 @@ function choosePlanContainer({ setStep, step }) {
         </div>
 
         <div className="min-h-[490px] bg-transparent w-full">
-          <Tabs defaultValue="Monthly Plan" className="!bg-white w-full">
-            {/* TAB BUTTONS */}
-            <TabsList
-              className="w-full max-w-[350px] grid grid-cols-2 h-16 
-      bg-tertiary bg-opacity-10 border-tertiary border-[1px] border-opacity-15 rounded-t-xl rounded-b-none"
+        <Tabs defaultValue="Monthly Plan" className="w-full">
+  {/* OUTER WRAPPER CARD (like screenshot) */}
+  <div className="">
+    {/* Tabs header aligned to top-left */}
+    <TabsList
+      className="inline-grid grid-cols-2 p-1 border rounded-b-none h-11 rounded-xl bg-tertiary/10 border-tertiary/15"
+    >
+      <TabsTrigger
+        value="Monthly Plan"
+        className="
+          h-9 px-4 rounded-t-lg text-[13px] font-semibold text-secondary
+          data-[state=active]:bg-white data-[state=active]:shadow-sm
+          data-[state=active]:text-secondary
+        "
+      >
+        Monthly Plan
+      </TabsTrigger>
+
+      <TabsTrigger
+        value="Annual Plan"
+        className="
+          h-9 px-4 rounded-t-lg text-[13px] font-semibold text-secondary
+          data-[state=active]:bg-white data-[state=active]:shadow-sm
+          data-[state=active]:text-secondary
+        "
+      >
+        Annual Plan
+      </TabsTrigger>
+    </TabsList>
+
+    {/* CONTENT AREA (same card, like screenshot) */}
+    <div className="p-4 bg-white border rounded-r-2xl rounded-b-2xl border-tertiary/10 sm:p-5">
+      {/* MONTHLY */}
+      <TabsContent value="Monthly Plan" className="m-0">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {/* FREE */}
+          <div className="p-5 bg-white border shadow-sm rounded-2xl border-tertiary/10">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-[18px] font-bold text-secondary">Free</h3>
+                <p className="mt-1 text-[13px] text-tertiary">Perfect for getting started</p>
+              </div>
+
+              {/* Current Plan badge */}
+              <span className="rounded-full bg-tertiary/15 px-3 py-1 text-[12px] font-medium text-rare">
+                Current Plan
+              </span>
+            </div>
+
+            <div className="mt-6 text-[34px] font-bold text-secondary">$0</div>
+
+            <Button
+              disabled
+              className="mt-5 w-full rounded-lg bg-tertiary/20 py-6 text-[14px] font-semibold text-tertiary hover:bg-tertiary/20"
             >
-              <TabsTrigger value="Monthly Plan" className="rounded-xl py-2.5 text-[14px] font-semibold text-secondary">
-                Monthly Plan
-              </TabsTrigger>
-              <TabsTrigger value="Annual Plan" className="rounded-xl py-2.5 text-[14px] font-semibold text-secondary">
-                Annual Plan
-              </TabsTrigger>
-            </TabsList>
+              Current Plan
+            </Button>
 
-            {/* MONTHLY PLAN CONTENT */}
-            <TabsContent value="Monthly Plan" className="p-0 mt-0">
-              <div className="flex justify-center w-full">
-                {/* CONTENT CONTAINER */}
-                <div
-                  className="
-          grid grid-cols-1 gap-10 w-full 
-          bg-white p-5 border-tertiary border-[1px] border-opacity-15
-          rounded-b-3xl rounded-tl-none rounded-tr-3xl
-        "
-                >
-                  <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
-                    {/* Free Plan */}
-                    <div className="border-[1px] hover:border-primary rounded-xl p-6 shadow-lg hover:shadow-xl transition bg-white">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h2 className="mb-2 text-xl font-bold text-secondary">Free</h2>
-                          <p className="mb-4 text-sm font-normal text-tertiary">Perfect for getting started</p>
-                        </div>
-                        <div className="rounded-full bg-tertiary/20">
-                          <p className="text-[14px] px-3 text-rare text-center py-0.5">Current Plan</p>
-                        </div>
-                      </div>
+            <h4 className="mt-6 text-[15px] font-semibold text-secondary">What&apos;s Included</h4>
+            <ul className="mt-3 space-y-2 text-[13px] text-rare">
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Basic credential tracking
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Up to 5 documents
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Standard support
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Email notifications
+              </li>
+            </ul>
+          </div>
 
-                      <p className="text-[31px] text-secondary font-bold mb-4">$0</p>
+          {/* PROFESSIONAL (HIGHLIGHT like screenshot) */}
+          <div className="p-5 bg-white border shadow-sm rounded-2xl border-primary/60">
+            <h3 className="text-[18px] font-bold text-secondary">{PLANS.monthly.name}</h3>
+            <p className="mt-1 text-[13px] text-tertiary">For individual practitioners</p>
 
-                      <Button className="w-full bg-tertiary/30 text-tertiary text-[16px] font-semibold py-2.5 rounded-lg">
-                        Current Plan
-                      </Button>
+            <div className="flex items-end gap-1 mt-6">
+              <div className="text-[34px] font-bold text-secondary">${PLANS.monthly.price}</div>
+              <div className="pb-1 text-[13px] text-tertiary">/{PLANS.monthly.billingCycle}</div>
+            </div>
 
-                      <h3 className="font-medium text-secondary text-[18px] mt-6 mb-3">What's Included</h3>
-                      <ul className="space-y-2 text-sm font-normal text-rare">
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Basic credential tracking
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Up to 5 documents
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Standard support
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Email notifications
-                        </li>
-                      </ul>
-                    </div>
+            <Button
+              className="mt-5 w-full rounded-lg bg-primary py-6 text-[14px] font-semibold text-white hover:bg-[#123057]"
+              onClick={() => {
+                localStorage.setItem("selectedPlan", JSON.stringify(PLANS.monthly));
+                navigate("/checkout");
+              }}
+            >
+              Subscribe
+            </Button>
 
-                    {/* Professional Plan */}
-                    <div className="border-[1px] hover:border-primary rounded-xl p-6 shadow-lg hover:shadow-xl transition bg-white">
-                      <h2 className="mb-2 text-xl font-bold text-secondary">{PLANS.monthly.name}</h2>
-                      <p className="mb-4 text-sm font-normal text-tertiary">For individual practitioners</p>
-                      <p className="text-[31px] text-secondary font-bold mb-4">
-                        ${PLANS.monthly.price}
-                        <span className="text-[14px] text-tertiary font-normal">/{PLANS.monthly.billingCycle}</span>
-                      </p>
+            <h4 className="mt-6 text-[15px] font-semibold text-secondary">What&apos;s Included</h4>
+            <ul className="mt-3 space-y-2 text-[13px] text-rare">
+              {PLANS.monthly.features.map((feature, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  <CircleCheck size={14} className="text-primary" /> {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                      <Button
-                        className="w-full !text-white !bg-primary text-[16px] font-semibold py-2.5 rounded-lg transition"
-                        onClick={() => {
-                          localStorage.setItem('selectedPlan', JSON.stringify(PLANS.monthly));
-                          navigate('/checkout');
-                        }}
-                      >
-                        Subscribe
-                      </Button>
+          {/* ENTERPRISE */}
+          <div className="p-5 bg-white border shadow-sm rounded-2xl border-tertiary/10">
+            <h3 className="text-[18px] font-bold text-secondary">Enterprise Plan</h3>
+            <p className="mt-1 text-[13px] text-tertiary">For institutions and organizations</p>
 
-                      <h3 className="font-medium text-secondary text-[18px] mt-6 mb-3">What's Included</h3>
-                      <ul className="space-y-2 text-sm font-normal text-rare">
-                        {PLANS.monthly.features.map((feature, index) => (
-                          <li key={index} className="flex items-center gap-2">
-                            <CircleCheck size={13} className="text-primary" /> {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+            <div className="mt-6 text-[30px] font-bold text-secondary">Custom pricing</div>
 
-                    {/* Enterprise Plan */}
-                      <div className="border-[1px] hover:border-primary rounded-xl p-6 shadow-lg hover:shadow-md transition bg-white">
-                      <h2 className="mb-2 text-xl font-bold text-secondary">Enterprise Plan</h2>
-                      <p className="mb-4 text-sm font-normal text-tertiary">For institutions and organizations</p>
-                      <p className="text-[31px] text-secondary font-bold mb-4">Custom pricing</p>
+            <Button className="mt-5 w-full rounded-lg border border-tertiary/30 bg-white py-6 text-[14px] font-semibold text-tertiary hover:bg-tertiary/5">
+              Contact Sales
+            </Button>
 
-                      <Button className="w-full border-[1px] border-tertiary bg-white text-tertiary text-[16px] font-semibold py-2.5 rounded-lg">
-                        Contact Sales
-                      </Button>
+            <h4 className="mt-6 text-[15px] font-semibold text-secondary">What&apos;s Included</h4>
+            <ul className="mt-3 space-y-2 text-[13px] text-rare">
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Everything in Professional
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Multi-user accounts
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Custom integrations
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Dedicated support
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> SLA guarantee
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Advanced security
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Team management
+              </li>
+            </ul>
+          </div>
+        </div>
 
-                      <h3 className="font-medium text-secondary text-[18px] mt-6 mb-3">What's Included</h3>
-                      <ul className="space-y-2 text-sm font-normal text-rare">
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Everything in Professional
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Multi-user accounts
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Custom integrations
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Dedicated support
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> SLA guarantee
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Advanced security
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Team management
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-tertiary font-normal text-[14px] text-center">
-                      Need help choosing the right plan?
-                    </p>
-                    <p className="text-primary text-[14px] font-semibold text-center">Contact our sales team</p>
-                  </div>
-                </div>
+        {/* Bottom helper text */}
+        <div className="mt-6 text-center">
+          <p className="text-[13px] text-tertiary">Need help choosing the right plan?</p>
+          <button className="text-[13px] font-semibold text-primary hover:underline">
+            Contact our sales team
+          </button>
+        </div>
+      </TabsContent>
+
+      {/* ANNUAL */}
+      <TabsContent value="Annual Plan" className="m-0">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+          {/* FREE */}
+          <div className="p-5 bg-white border shadow-sm rounded-2xl border-tertiary/10">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h3 className="text-[18px] font-bold text-secondary">Free</h3>
+                <p className="mt-1 text-[13px] text-tertiary">Perfect for getting started</p>
               </div>
-            </TabsContent>
 
-            {/* ANNUAL PLAN */}
-            <TabsContent value="Annual Plan" className="p-0 mt-0">
-              <div className="flex justify-center w-full">
-                {/* CONTENT CONTAINER */}
-                <div
-                  className="
-          grid grid-cols-1 gap-10 w-full 
-          bg-white p-5 border-tertiary border-[1px] border-opacity-15
-          rounded-b-3xl rounded-tl-none rounded-tr-3xl
-        "
-                >
-                  <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-3">
-                    {/* Free Plan */}
-                    <div className="border-[1px] hover:border-primary rounded-xl p-6 shadow-lg hover:shadow-xl transition bg-white">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h2 className="mb-2 text-xl font-bold text-secondary">Free</h2>
-                          <p className="mb-4 text-sm font-normal text-tertiary">Perfect for getting started</p>
-                        </div>
-                        <div className="rounded-full bg-tertiary/20">
-                          <p className="text-[14px] px-3 text-rare text-center py-0.5">Current Plan</p>
-                        </div>
-                      </div>
+              <span className="rounded-full bg-tertiary/15 px-3 py-1 text-[12px] font-medium text-rare">
+                Current Plan
+              </span>
+            </div>
 
-                      <p className="text-[31px] text-secondary font-bold mb-4">$0</p>
+            <div className="mt-6 text-[34px] font-bold text-secondary">$0</div>
 
-                      <Button className="w-full bg-tertiary/30 text-tertiary text-[16px] font-semibold py-2.5 rounded-md">
-                        Current Plan
-                      </Button>
+            <Button
+              disabled
+              className="mt-5 w-full rounded-lg bg-tertiary/20 py-6 text-[14px] font-semibold text-tertiary hover:bg-tertiary/20"
+            >
+              Current Plan
+            </Button>
 
-                      <h3 className="font-medium text-secondary text-[18px] mt-6 mb-3">What's Included</h3>
-                      <ul className="space-y-2 text-sm font-normal text-rare">
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Basic credential tracking
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Up to 5 documents
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Standard support
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Email notifications
-                        </li>
-                      </ul>
-                    </div>
+            <h4 className="mt-6 text-[15px] font-semibold text-secondary">What&apos;s Included</h4>
+            <ul className="mt-3 space-y-2 text-[13px] text-rare">
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Basic credential tracking
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Up to 5 documents
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Standard support
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Email notifications
+              </li>
+            </ul>
+          </div>
 
-                    {/* Professional Plan */}
-                    <div className="border-[1px] hover:border-primary rounded-xl p-6 shadow-lg hover:shadow-xl transition bg-white">
-                      <h2 className="mb-2 text-xl font-bold text-secondary">{PLANS.annual.name}</h2>
-                      <p className="mb-4 text-sm font-normal text-tertiary">For individual practitioners</p>
-                      <p className="text-[31px] text-secondary font-bold mb-4">
-                        ${PLANS.annual.price}
-                        <span className="text-[14px] text-tertiary font-normal">/{PLANS.annual.billingCycle}</span>
-                      </p>
+          {/* PROFESSIONAL (HIGHLIGHT like screenshot) */}
+          <div className="p-5 bg-white border shadow-sm rounded-2xl border-primary/60">
+            <h3 className="text-[18px] font-bold text-secondary">{PLANS.annual.name}</h3>
+            <p className="mt-1 text-[13px] text-tertiary">For individual practitioners</p>
 
-                      <Button
-                        className="w-full text-white text-[16px] font-semibold py-2.5 rounded-lg transition"
-                        onClick={() => {
-                          localStorage.setItem('selectedPlan', JSON.stringify(PLANS.annual));
-                          navigate('/checkout');
-                        }}
-                      >
-                        Subscribe
-                      </Button>
+            <div className="flex items-end gap-1 mt-6">
+              <div className="text-[34px] font-bold text-secondary">${PLANS.annual.price}</div>
+              <div className="pb-1 text-[13px] text-tertiary">/{PLANS.annual.billingCycle}</div>
+            </div>
 
-                      <h3 className="font-medium text-secondary text-[18px] mt-6 mb-3">What's Included</h3>
-                      <ul className="space-y-2 text-sm font-normal text-rare">
-                        {PLANS.annual.features.map((feature, index) => (
-                          <li key={index} className="flex items-center gap-2">
-                            <CircleCheck size={13} className="text-primary" /> {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+            <Button
+              className="mt-5 w-full rounded-lg bg-primary py-6 text-[14px] font-semibold text-white hover:bg-[#123057]"
+              onClick={() => {
+                localStorage.setItem("selectedPlan", JSON.stringify(PLANS.annual));
+                navigate("/checkout");
+              }}
+            >
+              Subscribe
+            </Button>
 
-                    {/* Enterprise Plan */}
-                    <div className="border-[1px] hover:border-primary rounded-xl p-6 shadow-lg hover:shadow-xl transition bg-white">
-                      <h2 className="mb-2 text-xl font-bold text-secondary">Enterprise Plan</h2>
-                      <p className="mb-4 text-sm font-normal text-tertiary">For institutions and organizations</p>
-                      <p className="text-[31px] text-secondary font-bold mb-4">Custom pricing</p>
+            <h4 className="mt-6 text-[15px] font-semibold text-secondary">What&apos;s Included</h4>
+            <ul className="mt-3 space-y-2 text-[13px] text-rare">
+              {PLANS.annual.features.map((feature, index) => (
+                <li key={index} className="flex items-center gap-2">
+                  <CircleCheck size={14} className="text-primary" /> {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-                      <Button className="w-full border-[1px] border-tertiary bg-white text-tertiary text-[16px] font-semibold py-2.5 rounded-md">
-                        Contact Sales
-                      </Button>
+          {/* ENTERPRISE */}
+          <div className="p-5 bg-white border shadow-sm rounded-2xl border-tertiary/10">
+            <h3 className="text-[18px] font-bold text-secondary">Enterprise Plan</h3>
+            <p className="mt-1 text-[13px] text-tertiary">For institutions and organizations</p>
 
-                      <h3 className="font-medium text-secondary text-[18px] mt-6 mb-3">What's Included</h3>
-                      <ul className="space-y-2 text-sm font-normal text-rare">
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Everything in Professional
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Multi-user accounts
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Custom integrations
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Dedicated support
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> SLA guarantee
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Advanced security
-                        </li>
-                        <li className="flex items-center gap-2">
-                          <CircleCheck size={13} className="text-primary" /> Team management
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-tertiary font-normal text-[14px] text-center">
-                      Need help choosing the right plan?
-                    </p>
-                    <p className="text-primary text-[14px] font-semibold text-center">Contact our sales team</p>
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-          </Tabs>
+            <div className="mt-6 text-[30px] font-bold text-secondary">Custom pricing</div>
+
+            <Button className="mt-5 w-full rounded-lg border border-tertiary/30 bg-white py-6 text-[14px] font-semibold text-tertiary hover:bg-tertiary/5">
+              Contact Sales
+            </Button>
+
+            <h4 className="mt-6 text-[15px] font-semibold text-secondary">What&apos;s Included</h4>
+            <ul className="mt-3 space-y-2 text-[13px] text-rare">
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Everything in Professional
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Multi-user accounts
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Custom integrations
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Dedicated support
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> SLA guarantee
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Advanced security
+              </li>
+              <li className="flex items-center gap-2">
+                <CircleCheck size={14} className="text-primary" /> Team management
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-6 text-center">
+          <p className="text-[13px] text-tertiary">Need help choosing the right plan?</p>
+          <button className="text-[13px] font-semibold text-primary hover:underline">
+            Contact our sales team
+          </button>
+        </div>
+      </TabsContent>
+    </div>
+  </div>
+</Tabs>
+
         </div>
       </div>
     </>

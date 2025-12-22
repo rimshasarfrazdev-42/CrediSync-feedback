@@ -4,7 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Global base styles */
 :root {
   font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
     "Segoe UI", sans-serif;
@@ -12,7 +11,15 @@
 
 /* Optional: base background + text color */
 body {
-  background-color: #F8FAFB; /* bg color */
+  background-color: white; /* bg color */
   color: #111827;            /* secondary color */
 }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE & Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;             /* Chrome, Safari */
+}

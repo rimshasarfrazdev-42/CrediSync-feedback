@@ -12,15 +12,20 @@ export default function ResetSuccess() {
 
   return (
     // <PublicLayout>
-    <div className="flex h-screen gap-6 p-4 bg-white">
+    <div className="flex h-screen gap-6 bg-white">
       {/* Left Side - Image */}
-      <div className="hidden w-1/2 border rounded-2xl md:flex">
-        <img src="/doctors-img.svg" alt="Business Meeting" className="object-cover w-full h-full rounded-2xl" />
-      </div>
+   <div className="hidden w-1/2 border lg:flex rounded-2xl">
+  <img
+    src="/doctors-img.svg"
+    alt="Medical professionals"
+    className="object-cover w-full h-full rounded-2xl"
+  />
+</div>
+
 
       {/* Right Side - Success Message */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm md:w-1/2 rounded-2xl">
-        <div className="w-full p-6 text-center">
+      <div className="flex items-center justify-center w-full px-4 py-8 border shadow-sm lg:w-1/2 rounded-2xl">
+        <div className="w-full text-center">
           <div className="flex items-center justify-center my-4">
             {/* <Link to="/">
               <img src="/Navbar-Logo.png" alt="NavBar-logo" className="w-[180px] md:w-[180px] lg:w-[200px] h-auto" />
@@ -29,15 +34,15 @@ export default function ResetSuccess() {
           {/* Check Icon */}
           <div className="flex justify-center mb-4">
             <div className="flex items-center justify-center ">
-              <img src="/check-mark.svg" />
+              <img src="/check-mark.svg" className="w-14 h-14"/>
             </div>
           </div>
 
           {/* Heading */}
-          <h1 className="mb-2 text-[31px] font-semibold text-secondary">
+          <h1 className="mb-3 text-xl font-semibold text-center text-secondary sm:text-2xl">
             Password Reset Successfully
           </h1>
-          <p className="mb-6 text-subtext text-sm sm:text-[18px]">
+          <p className="mb-6 md:px-14 px-2 text-center text-sm font-medium text-[#374151] sm:text-base">
             Your password has been updated. You can now use your new password to log in.
           </p>
 

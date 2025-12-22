@@ -15,6 +15,13 @@ const ActiveSharesTable = () => {
         Manage and track institutions that currently have access to your credentials.
       </p>
       <div className="overflow-hidden bg-white border border-tertiary/30 rounded-xl">
+       <div className="hidden grid-cols-5 px-3 py-3 text-sm font-medium md:grid bg-[#92949F1A] text-secondary">
+          <div>Institution</div>
+          <div>Access Type</div>
+          <div className='px-4 '>Status</div>
+          <div>Expiry Date</div>
+          <div className="text-right px-3">Actions</div>
+        </div>
         {activeSharesData.map((row, index) => (
           <div key={index} className="p-4 border-t md:p-0 md:border-t-0">
             {/* Mobile view */}
