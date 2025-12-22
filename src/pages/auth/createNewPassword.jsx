@@ -81,7 +81,7 @@ export default function CreateNewPassword() {
                 <input
                   type={showNewPassword ? 'text' : 'password'}
                   required
-                  placeholder="Strong Password"
+                  placeholder="Enter password"
                   value={newPassword}
                   onChange={handleNewPasswordChange}
                   className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
