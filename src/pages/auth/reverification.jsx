@@ -88,7 +88,7 @@ const reverification = () => {
   };
 
   return (
-    <div className="flex lg:h-screen gap-6 p-4 bg-white">
+    <div className="flex h-screen gap-6 bg-white">
       {/* Left Side - Image */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img
@@ -99,7 +99,7 @@ const reverification = () => {
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex items-center justify-center w-full  py-8 px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+      <div className="flex items-center justify-center w-full px-4 py-8 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
           <h1 className="mb-3 text-center text-[22px] font-semibold text-slate-900 sm:text-[28px]">

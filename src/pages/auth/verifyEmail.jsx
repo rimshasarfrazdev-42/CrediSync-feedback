@@ -147,7 +147,7 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="flex lg:h-screen gap-6 p-4 bg-white">
+    <div className="flex h-screen gap-6 bg-white">
       {/* Left Side - Image */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img

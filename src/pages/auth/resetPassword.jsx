@@ -43,14 +43,14 @@ export default function ResetPassword() {
   };
 
   return (
-    <div className="flex lg:h-screen gap-6   bg-white">
+    <div className="flex h-screen gap-6 bg-white">
       {/* Left Side - Image */}
       <div className="hidden w-1/2 border lg:flex rounded-2xl">
         <img src="/doctors-img.svg" alt="Medical professionals" className="object-cover w-full h-full rounded-2xl" />
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex items-center  py-12 justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+      <div className="flex items-center justify-center w-full px-4 py-12 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
           <h1 className="mb-1 text-base font-semibold text-center sm:text-lg md:text-xl lg:text-2xl text-slate-900">
