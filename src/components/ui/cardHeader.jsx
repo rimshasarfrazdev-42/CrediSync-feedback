@@ -16,9 +16,9 @@ function CardHeader({ heading, subText, status }) {
 
         {/* STATUS BADGE */}
         <div
-          className={`px-4 border rounded-full py-1 flex items-center gap-2 self-start sm:self-center transition-colors duration-200 
+          className={`px-3 border rounded-full py-1.5 flex items-center gap-2 self-start sm:self-center transition-colors duration-200 
           ${isUploaded
-              ? 'border-green-500 text-green-600 bg-green-50'
+              ? 'border-active text-active bg-transparent'
               : 'border-tertiary border-opacity-40 text-tertiary'
             }`}
         >

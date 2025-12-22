@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Lock, Camera, Upload, ShieldCheck, CircleCheck, Trash2, Image } from 'lucide-react';
+import { Lock, Camera, Upload, ShieldCheck, CircleCheck, Trash2, Image, X } from 'lucide-react';
 import CardHeader from '../ui/cardHeader';
 import { Button } from '../ui/button';
 import { Progress } from '../ui/progress';
@@ -29,7 +29,10 @@ function UploadCredentialsContainer() {
   const [fileData, setFileData] = useState(null);
   const [uploadedCount, setUploadedCount] = useState(0);
   const [errors, setErrors] = useState({});
-
+  const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const [tempPhoto, setTempPhoto] = useState(null);
+  const videoRef = useRef(null);
+  const canvasRef = useRef(null)
 
   const openFilePicker = () => {
     if (fileInputRef.current) {
@@ -165,6 +168,110 @@ function UploadCredentialsContainer() {
     updateProgress();
   }, []);
 
+  const startCamera = async () => {
+    setTempPhoto(null);
+    setIsCameraOpen(true)
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
+        audio: false
+      });
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        setIsCameraOpen(true);
+      }
+    } catch (err) {
+      if (err.name === 'NotAllowedError' || err.name === 'PermissionDeniedError') {
+        toast.error("Camera Access Denied", {
+          description: "Please allow camera access in your browser settings to verify your identity.",
+        });
+      } else {
+        toast.error("Camera Error", { description: "Could not find a working camera." });
+      }
+    }
+  };
+
+  const stopCamera = () => {
+    const stream = videoRef.current?.srcObject;
+    stream?.getTracks().forEach(track => track.stop());
+    setIsCameraOpen(false);
+    setTempPhoto(null);
+  };
+
+  const capturePhoto = () => {
+    const video = videoRef.current;
+    const canvas = canvasRef.current;
+
+    if (video && canvas) {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+      const dataUrl = canvas.toDataURL('image/jpeg', 0.9);
+      setTempPhoto(dataUrl);
+
+      const stream = video.srcObject;
+      stream?.getTracks().forEach(track => track.stop());
+    }
+  };
+  const retakePhoto = () => {
+    startCamera(); // Restart stream
+  };
+
+  const savePhoto = () => {
+    const byteString = atob(tempPhoto.split(',')[1]);
+    const mimeString = tempPhoto.split(',')[0].split(':')[1].split(';')[0];
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i++) { ia[i] = byteString.charCodeAt(i); }
+
+    const blob = new Blob([ab], { type: mimeString });
+    const file = new File([blob], "identity-capture.jpg", { type: "image/jpeg" });
+
+    setFileData(file);
+    verification.current = URL.createObjectURL(file);
+    setIsCameraOpen(false);
+    setTempPhoto(null);
+    updateProgress();
+  };
+
+  useEffect(() => {
+    if (!isCameraOpen) return;
+
+    const startStream = async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { facingMode: "user", width: { ideal: 1280 }, height: { ideal: 720 } },
+          audio: false,
+        });
+
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+        }
+      } catch (err) {
+        setIsCameraOpen(false);
+
+        if (err.name === "NotAllowedError") {
+          toast.error("Camera Access Denied", {
+            description: "Please allow camera access in browser settings.",
+          });
+        } else {
+          toast.error("Camera Error", {
+            description: "Unable to access camera.",
+          });
+        }
+      }
+    };
+
+    startStream();
+
+    return () => {
+      const stream = videoRef.current?.srcObject;
+      stream?.getTracks().forEach((track) => track.stop());
+    };
+  }, [isCameraOpen]);
   return (
     <>
       {/* Outer Container for max width */}
@@ -252,7 +359,9 @@ function UploadCredentialsContainer() {
                     <Camera size={40} />
                   </div>
 
-                  <Button className="text-center !bg-primary !text-white mt-4 text-[16px] font-semibold w-full flex items-center gap-2 justify-center">
+                  <Button className="text-center !bg-primary !text-white mt-4 text-[16px] font-semibold w-full flex items-center gap-2 justify-center"
+                    onClick={startCamera}
+                  >
                     <Camera size={24} />
                     <span>Take Photo</span>
                   </Button>
@@ -446,18 +555,74 @@ function UploadCredentialsContainer() {
             </div>
           </div>
         </div>
+        {isCameraOpen && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
+            <div className="bg-white rounded-2xl overflow-hidden w-full max-w-md shadow-2xl py-1">
+              <div className="px-6 py-1 flex justify-between items-center">
+                <h3 className=" text-xl font-bold text-secondary">
+                  {tempPhoto ? "Review Photo" : "Identity Verification"}
+                </h3>
+                <button onClick={stopCamera} className="p-2 hover:bg-zinc-100 rounded-full">
+                  <X size={24} className="text-zinc-500" />
+                </button>
+              </div>
+
+              <div className="relative aspect-square bg-black mx-6  rounded-xl overflow-hidden shadow-inner">
+                {tempPhoto ? (
+                  <img src={tempPhoto} className="w-full h-full object-cover" alt="Captured" />
+                ) : (
+                  <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover" />
+                )}
+
+                {!tempPhoto && (
+                  <div className="absolute inset-0 border-[30px] border-black/20 pointer-events-none">
+                    <div className="w-full h-full border-2 border-white/40 border-dashed rounded-full" />
+                  </div>
+                )}
+                <canvas ref={canvasRef} className="hidden" />
+              </div>
+
+              <div className="px-6 py-4 flex flex-col">
+                {tempPhoto ? (
+                  <div className="flex gap-4">
+                    <Button
+                      onClick={retakePhoto}
+                      className="flex-1 !bg-zinc-100 !text-secondary border border-zinc-200 py-6 font-bold"
+                    >
+                      Retake
+                    </Button>
+                    <Button
+                      onClick={savePhoto}
+                      className="flex-1 !bg-primary !text-white py-6 font-bold"
+                    >
+                      Use Photo
+                    </Button>
+                  </div>
+                ) : (
+                  <Button
+                    onClick={capturePhoto}
+                    className="w-full !bg-primary !text-white py-6 flex text-lg font-bold"
+                  >
+                    <Camera size={24} /> Take Photo
+                  </Button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Footer */}
-        <div className="flex items-center justify-center mx-auto w-full gap-2 px-4 py-5 text-sm sm:px-6 lg:px-8 text-tertiary">
-          {/* Add shrink-0 to prevent the icon from compressing on mobile */}
-          <Lock className="text-primary shrink-0" size={13} />
+        <div className="flex flex-col sm:flex-row items-center justify-center mx-auto w-full gap-2 px-4 py-5 sm:px-6 lg:px-8 text-center sm:text-left">
+          <Lock className="text-primary shrink-0" size={16} />
 
-          <span>HIPAA & SOC 2 Compliant • Your data is protected • All files encrypted</span>
+          <span className="text-sm text-tertiary">
+            HIPAA & SOC 2 Compliant • Your data is protected • All files encrypted
+          </span>
         </div>
+
       </div>
     </>
   );
 }
-{/* <span>HIPAA & SOC 2 Compliant • Your data is protected • All files encrypted</span> */ }
 
 export default UploadCredentialsContainer;
