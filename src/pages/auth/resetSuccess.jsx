@@ -12,7 +12,7 @@ export default function ResetSuccess() {
 
   return (
     // <PublicLayout>
-    <div className="flex h-screen gap-6 p-4 bg-white">
+    <div className="flex lg:h-screen gap-6 p-4 bg-white">
       {/* Left Side - Image */}
    <div className="hidden w-1/2 border lg:flex rounded-2xl">
   <img
@@ -24,7 +24,7 @@ export default function ResetSuccess() {
 
 
       {/* Right Side - Success Message */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+      <div className="flex items-center justify-center w-full py-8 px-4 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full text-center">
           <div className="flex items-center justify-center my-4">
             {/* <Link to="/">
@@ -34,15 +34,15 @@ export default function ResetSuccess() {
           {/* Check Icon */}
           <div className="flex justify-center mb-4">
             <div className="flex items-center justify-center ">
-              <img src="/check-mark.svg" />
+              <img src="/check-mark.svg" className="w-14 h-14"/>
             </div>
           </div>
 
           {/* Heading */}
-          <h1 className="mb-2 text-[31px] font-semibold text-secondary">
+          <h1 className="mb-2 text-[28px] font-semibold text-secondary">
             Password Reset Successfully
           </h1>
-          <p className="mb-6 text-subtext text-sm sm:text-[18px]">
+          <p className="mb-6 text-subtext text-sm sm:text-[16px]">
             Your password has been updated. You can now use your new password to log in.
           </p>
 

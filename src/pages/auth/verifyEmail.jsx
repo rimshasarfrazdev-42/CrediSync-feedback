@@ -147,7 +147,7 @@ export default function VerifyEmail() {
   };
 
   return (
-    <div className="flex h-screen gap-6 p-4 bg-white">
+    <div className="flex lg:h-screen gap-6 p-4 bg-white">
       {/* Left Side - Image */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img
@@ -158,15 +158,15 @@ export default function VerifyEmail() {
       </div>
 
       {/* Right Side - Verification Card */}
-      <div className="flex items-center justify-center w-full px-2 bg-white border shadow-sm lg:w-1/2 rounded-2xl">
+      <div className="flex items-center justify-center w-full px-4 bg-white border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           <div className="flex items-center justify-center my-4" />
 
-          <h2 className="mb-1 text-center font-semibold text-secondary text-[20px] sm:text-[24px] md:text-[28px] lg:text-[31px]">
+          <h2 className="mb-1 text-center font-semibold text-secondary text-[18px] sm:text-[20px] md:text-[22px] lg:text-[26px]">
             {config.heading}
           </h2>
 
-          <p className="mx-auto mb-6 max-w-xs sm:max-w-md md:max-w-xl text-center font-medium text-[#374151] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px]">
+          <p className="mx-auto mb-6 max-w-xs sm:max-w-md md:max-w-xl text-center font-medium text-[#374151] text-[12px] sm:text-[12px] md:text-[14px] lg:text-[16px]">
             {config.subText}
           </p>
 

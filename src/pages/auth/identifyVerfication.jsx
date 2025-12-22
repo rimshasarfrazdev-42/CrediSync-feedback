@@ -75,14 +75,14 @@ const IdentityVerification = () => {
   };
 
   return (
-    <div className="flex h-screen gap-6 p-4 bg-white">
+    <div className="flex lg:h-screen gap-6 p-4 bg-white">
       {/* Left Side - Image */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img src="/doctors-img.svg" alt="Medical professionals" className="object-cover w-full h-full rounded-2xl" />
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+      <div className="flex items-center justify-center w-full px-4  py-8 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
           <h1 className="mb-3 text-xl font-semibold text-center text-secondary sm:text-2xl">
