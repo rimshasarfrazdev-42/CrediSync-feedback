@@ -77,7 +77,7 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
 
   return (
     <div
-      className="fixed inset-0 z-40 flex items-center justify-center px-4 bg-slate-900/80 backdrop-blur-[2px] sm:px-6 overflow-hidden"
+      className="fixed inset-0 z-40 flex items-center justify-center px-4 bg-secondary/80 backdrop-blur-[2px] sm:px-6 overflow-hidden"
       onClick={handleOverlayClick}
     >
       <div

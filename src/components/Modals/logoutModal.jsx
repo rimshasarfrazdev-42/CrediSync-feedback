@@ -5,7 +5,7 @@ const LogoutAllDevicesModal = ({ isOpen, onCancel, onConfirm }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-slate-900/80 backdrop-blur-sm !mt-0">
+    <div className="fixed inset-0 z-50 flex items-center justify-center px-4 bg-secondary/80 backdrop-blur-sm !mt-0">
       <div
         className="w-full max-w-xl p-5 bg-white border rounded-2xl border-slate-300/80 "
       >

@@ -1,7 +1,8 @@
 import { Button } from '../../components/ui/button';
-import React from 'react';
+import React, { useState } from "react";
 import { FileText, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import CancelSubscriptionModal from '../Modals/cancelSubscriptionModal';
 function BillingManagementContainer() {
   const invoices = [
     { id: 'INV-001245', date: 'Oct 31, 2025', amount: '$29.99', status: 'Paid' },
@@ -9,8 +10,11 @@ function BillingManagementContainer() {
     { id: 'INV-001181', date: 'Aug 31, 2025', amount: '$29.99', status: 'Paid' },
   ];
 
+  const [openCancelModal, setOpenCancelModal] = useState(false);
+  const [loadingCancel, setLoadingCancel] = useState(false);
+
   const textSecondary = 'text-secondary';
-const navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div className="">
       <div className="grid w-full grid-cols-1 gap-6 p-4 bg-white border sm:p-6 min-h-60 border-tertiary/15 rounded-b-xl lg:rounded-tr-xl">
@@ -51,21 +55,40 @@ const navigate = useNavigate();
           {/* Buttons */}
           <div className="flex flex-col gap-3 mt-6 sm:flex-row sm:items-center">
             <Button
-            onClick={() => { navigate ("/choose-plan")}} // Placeholder for actual click handler
-            className="bg-primary text-white text-[14px] sm:text-[16px] font-semibold w-full sm:w-auto">
+              onClick={() => {
+                navigate('/choose-plan');
+              }} // Placeholder for actual click handler
+              className="bg-primary text-white text-[14px] sm:text-[16px] font-semibold w-full sm:w-auto"
+            >
               Change Plan
             </Button>
 
-            <Button className="bg-[#07244B] text-white text-[14px] sm:text-[16px] font-semibold border w-full sm:w-auto">
+            {/* <Button className="bg-[#07244B] text-white text-[14px] sm:text-[16px] font-semibold border w-full sm:w-auto">
               Update Payment Method
-            </Button>
-
-            <Button className="border border-red-500 text-red-500 text-[14px] sm:text-[16px] font-semibold rounded-md bg-white w-full sm:w-auto">
+            </Button> */}
+            <Button
+              onClick={() => setOpenCancelModal(true)}
+              className="border border-red-500 text-red-500 text-[14px] sm:text-[16px] font-semibold rounded-md bg-white w-full sm:w-auto"
+            >
               Cancel Subscription
             </Button>
           </div>
         </div>
+<CancelSubscriptionModal
+  open={openCancelModal}
+  onClose={() => setOpenCancelModal(false)}
+  loading={loadingCancel}
+  onConfirm={() => {
+    setLoadingCancel(true);
 
+    //  Call API here
+    setTimeout(() => {
+      setLoadingCancel(false);
+      setOpenCancelModal(false);
+      console.log("Subscription cancelled");
+    }, 1500);
+  }}
+/>
         {/* Billing History Card */}
         <div className="w-full p-4 bg-white border border-gray-200 shadow-sm rounded-xl sm:p-6">
           <div className="w-full">
@@ -154,27 +177,24 @@ const navigate = useNavigate();
         </div>
 
         {/* Compliance / Security Card */}
-      <div className="grid gap-4">
-  <div className="p-4 transition-shadow border rounded-lg hover:shadow-md">
-    {/* Icon + Heading */}
-    <div className="flex items-start gap-3">
-      <div className="flex-shrink-0 mt-1 text-primary">
-        <Shield size={25} />
-      </div>
+        <div className="grid gap-4">
+          <div className="p-4 transition-shadow border rounded-lg hover:shadow-md">
+            {/* Icon + Heading */}
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 mt-1 text-primary">
+                <Shield size={25} />
+              </div>
 
-      <p className="text-[18px] sm:text-[20px] font-semibold">
-        WCAG 2.1 AA Compliant
-      </p>
-    </div>
+              <p className="text-[18px] sm:text-[20px] font-semibold">WCAG 2.1 AA Compliant</p>
+            </div>
 
-    {/* Description (aligned under heading) */}
-    <p className="mt-2 ml-[37px] text-[14px] sm:text-[16px] font-normal text-rare">
-      All payment information is encrypted and processed securely via Stripe.
-      CrediSync is HIPAA &amp; SOC 2 compliant.
-    </p>
-  </div>
-</div>
-
+            {/* Description (aligned under heading) */}
+            <p className="mt-2 ml-[37px] text-[14px] sm:text-[16px] font-normal text-rare">
+              All payment information is encrypted and processed securely via Stripe. CrediSync is HIPAA &amp; SOC 2
+              compliant.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );
