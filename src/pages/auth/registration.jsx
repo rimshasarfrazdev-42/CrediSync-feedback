@@ -96,7 +96,7 @@ export default function SignUp() {
      
     >
       {/* Left Image */}
-      <div className="hidden w-1/2 lg:h-[960px] border rounded-2xl lg:flex">
+      <div className="hidden w-1/2  border rounded-2xl lg:flex">
         <img
           src="/doctors-img.svg"
           alt="Medical professionals"
@@ -105,7 +105,7 @@ export default function SignUp() {
       </div>
 
       {/* Right Form */}
-      <div className="flex items-center justify-center w-full px-3 bg-white shadow-sm lg:border lg:w-1/2 rounded-2xl sm:px-4 md:px-6">
+      <div className="flex items-center  py-8 justify-center w-full px-3 bg-white shadow-sm lg:border lg:w-1/2 rounded-2xl sm:px-4 md:px-6">
         <div className="w-full">
           <div className="mb-5 text-center">
             <h2 className="text-[22px] sm:text-[28px] font-semibold text-secondary">Registration</h2>

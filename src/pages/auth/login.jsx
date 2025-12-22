@@ -20,7 +20,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex h-screen gap-6 p-2 bg-white">
+    <div className="flex lg:h-screen gap-6 lg:p-2 py-12  bg-white">
       {/* Left Side */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img

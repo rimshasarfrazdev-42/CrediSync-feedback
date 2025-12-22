@@ -57,14 +57,14 @@ export default function CreateNewPassword() {
   };
 
   return (
-    <div className="flex h-screen gap-6 bg-white">
+    <div className="flex lg:h-screen gap-6 bg-white">
       {/* Left Side - Image */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img src="/doctors-img.svg" alt="Medical professionals" className="object-cover w-full h-full rounded-2xl" />
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+      <div className="flex items-center   py-8 justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
           <h1 className="mb-1 text-xl font-semibold text-center sm:text-2xl text-slate-900">Create New Password</h1>
@@ -92,7 +92,7 @@ export default function CreateNewPassword() {
                   onClick={() => setShowNewPassword((prev) => !prev)}
                   className="absolute inset-y-0 flex items-center text-gray-500 right-3 hover:text-gray-700"
                 >
-                  {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showNewPassword ? <Eye size={18} />: <EyeOff size={18} />}
                 </button>
               </div>
 
@@ -117,7 +117,7 @@ export default function CreateNewPassword() {
                   onClick={() => setShowConfirmPassword((prev) => !prev)}
                   className="absolute inset-y-0 flex items-center text-gray-500 right-3 hover:text-gray-700"
                 >
-                  {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showConfirmPassword ? <Eye size={18} />: <EyeOff size={18} />}
                 </button>
               </div>
 

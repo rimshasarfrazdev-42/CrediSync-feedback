@@ -46,20 +46,20 @@ const ProfessionalRoleSection = () => {
   };
 
   return (
-    <div className="flex h-screen gap-6 p-4 bg-white">
+    <div className="flex lg:h-screen gap-6 p-4 bg-white">
       {/* Left Side - Image */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img src="/doctors-img.svg" alt="Medical professionals" className="object-cover w-full h-full rounded-2xl" />
       </div>
 
       {/* Right Side - Content */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+      <div className="flex items-center justify-center w-full px-4  py-8 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
-          <h1 className="mb-3 text-center text-2xl font-semibold text-secondary sm:text-[31px]">
+          <h1 className="mb-3 text-center text-xl font-semibold text-secondary sm:text-[24px]">
             Select Your Professional Role
           </h1>
-          <p className="mb-6 text-center text-sm font-medium text-secondary sm:text-[20px]">
+          <p className="mb-6 text-center text-sm font-medium text-secondary sm:text-[16px]">
             Choose the designation that best matches your practice to tailor your onboarding.
           </p>
 

@@ -88,7 +88,7 @@ const reverification = () => {
   };
 
   return (
-    <div className="flex h-screen gap-6 p-4 bg-white">
+    <div className="flex lg:h-screen gap-6 p-4 bg-white">
       {/* Left Side - Image */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img
@@ -99,13 +99,13 @@ const reverification = () => {
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
+      <div className="flex items-center justify-center w-full  py-8 px-4 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
-          <h1 className="mb-3 text-center text-2xl font-semibold text-slate-900 sm:text-[31px]">
+          <h1 className="mb-3 text-center text-[22px] font-semibold text-slate-900 sm:text-[28px]">
             Identity Verification
           </h1>
-          <p className="mb-6 text-center text-sm font-medium text-slate-900 sm:text-[20px]">
+          <p className="mb-6 text-center text-sm font-medium text-slate-900 sm:text-[16px]">
             Validate your credentials against the official NPI Registry. Your
             data remains private and encrypted.
           </p>
@@ -138,7 +138,7 @@ const reverification = () => {
                 inputMode="numeric"
                 maxLength={10}
                 required
-                placeholder={isVerified ? "**********" : "10-digit NPI"}
+                placeholder={isVerified ? "**********" : "10-digits NPI"}
                 value={isVerified ? "**********" : npiNumber}
                 onChange={handleNpiChange}
                 readOnly={isVerified}
