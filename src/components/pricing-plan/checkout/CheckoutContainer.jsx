@@ -4,6 +4,7 @@ import { Input } from '../../../components/ui/input';
 import { useNavigate } from 'react-router-dom';
 import { checkOutSchema } from '../../../validator/checkOutSchema';
 import WelcomeBanner from '../../DashBoard/WelcomeBanner';
+import TermsConditionsModal from '../../../pages/legal/TermConditionModal';
 
 function CheckoutContainer() {
   const navigate = useNavigate();
@@ -22,6 +23,7 @@ function CheckoutContainer() {
   const [expiryDate, setExpiryDate] = useState('');
   const [renewDate, setRenewDate] = useState('');
   const [errors, setErrors] = useState({});
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   // Handle input changes
   const handleChange = (e) => {
@@ -42,6 +44,15 @@ function CheckoutContainer() {
   }, []);
 
   const subscribeHandler = async () => {
+    // ✅ Terms validation (SAFE here)
+    if (!termsAccepted) {
+      setErrors((prev) => ({
+        ...prev,
+        terms: 'You must agree to the Terms & Conditions',
+      }));
+      return;
+    }
+
     try {
       setErrors({});
       await checkOutSchema.validate(form, { abortEarly: false });
@@ -49,9 +60,7 @@ function CheckoutContainer() {
       const paymentInfo = { ...form, expiryDate, renewDate, plan };
       localStorage.setItem('paymentInfo', JSON.stringify(paymentInfo));
 
-      // Clear expiry after submission
       setExpiryDate('');
-
       navigate('/subscription-active');
     } catch (err) {
       const formattedErrors = {};
@@ -62,6 +71,7 @@ function CheckoutContainer() {
     }
   };
 
+  const [openTerms, setOpenTerms] = useState(false);
   return (
     <div className="grid w-full grid-cols-1 gap-5 ">
       {/* <div className="p-5 h-[120px] bg-gradient-to-r from-[#F4F9FF] to-[#F8FAFC] rounded-[12px] shadow-md">
@@ -70,10 +80,10 @@ function CheckoutContainer() {
           Enter your payment information to activate your subscription
         </p>
       </div> */}
-       <WelcomeBanner
+      <WelcomeBanner
         heading="Complete Your Purchase"
         subHeading=" Enter your payment information to activate your subscription"
-        />
+      />
 
       <div className="w-full bg-transparent">
         <div className="grid w-full grid-cols-1 gap-8 p-6 bg-white border border-tertiary border-opacity-15 rounded-3xl lg:grid-cols-12">
@@ -102,7 +112,12 @@ function CheckoutContainer() {
               </div>
               <div className="flex flex-col">
                 <p className="text-[18px] font-medium mb-2 text-secondary">Card Number</p>
-                <Input name="cardNumber" placeholder="1234 5678 9012 3456" value={form.cardNumber} onChange={handleChange} />
+                <Input
+                  name="cardNumber"
+                  placeholder="1234 5678 9012 3456"
+                  value={form.cardNumber}
+                  onChange={handleChange}
+                />
                 {errors.cardNumber && <p className="text-sm text-red-500">{errors.cardNumber}</p>}
               </div>
             </div>
@@ -121,7 +136,12 @@ function CheckoutContainer() {
 
             <div className="flex flex-col">
               <p className="text-[18px] font-medium mb-2 text-secondary">Billing Address</p>
-              <Input name="billingAddress" placeholder="Enter your Billing Address" value={form.billingAddress} onChange={handleChange} />
+              <Input
+                name="billingAddress"
+                placeholder="Enter your Billing Address"
+                value={form.billingAddress}
+                onChange={handleChange}
+              />
               {errors.billingAddress && <p className="text-sm text-red-500">{errors.billingAddress}</p>}
             </div>
 
@@ -158,7 +178,9 @@ function CheckoutContainer() {
             </div>
 
             <ul className="ml-5 space-y-1 text-sm font-normal list-disc text-rare">
-              {plan?.features?.slice(0, 4)?.map((feature, idx) => <li key={idx}>{feature}</li>)}
+              {plan?.features?.slice(0, 4)?.map((feature, idx) => (
+                <li key={idx}>{feature}</li>
+              ))}
             </ul>
             <hr />
 
@@ -182,15 +204,52 @@ function CheckoutContainer() {
             </div>
 
             <div className="flex items-start gap-2">
-              <input type="checkbox" className="mt-1 text-primary" />
-              <span className="text-sm font-normal text-secondary">
-                I agree to the <a className="underline text-primary">Terms & Conditions</a>
-              </span>
+              <input
+                id="terms"
+                type="checkbox"
+                checked={termsAccepted}
+                onChange={(e) => {
+                  setTermsAccepted(e.target.checked);
+                  if (e.target.checked) {
+                    setErrors((prev) => ({ ...prev, terms: undefined }));
+                  }
+                }}
+                className="mt-1 text-primary"
+              />
+
+              <label htmlFor="terms" className="text-sm font-normal text-secondary">
+                I agree to the{' '}
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOpenTerms(true);
+                  }}
+                  className="underline text-primary hover:text-primary/80"
+                >
+                  Terms & Conditions
+                </button>
+              </label>
             </div>
+
+            {errors.terms && <p className="mt-1 text-sm text-red-500">{errors.terms}</p>}
+
+            <TermsConditionsModal
+              open={openTerms}
+              onClose={() => setOpenTerms(false)}
+              onAccept={() => {
+                setTermsAccepted(true);
+                setErrors((prev) => ({ ...prev, terms: undefined }));
+                setOpenTerms(false);
+              }}
+            />
 
             <p className="text-sm text-tertiary">Renews automatically on {renewDate}. Cancel anytime.</p>
 
-            <Button className="w-full !bg-primary !text-white py-3 rounded-md text-[16px] font-semibold" onClick={subscribeHandler}>
+            <Button
+              className="w-full !bg-primary !text-white py-3 rounded-md text-[16px] font-semibold"
+              onClick={subscribeHandler}
+            >
               Subscribe & Pay
             </Button>
           </div>
