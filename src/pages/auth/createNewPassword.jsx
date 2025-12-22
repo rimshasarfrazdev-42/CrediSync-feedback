@@ -57,7 +57,7 @@ export default function CreateNewPassword() {
   };
 
   return (
-    <div className="flex h-screen gap-6 p-4 bg-white">
+    <div className="flex h-screen gap-6 bg-white">
       {/* Left Side - Image */}
       <div className="hidden w-1/2 border rounded-2xl lg:flex">
         <img src="/doctors-img.svg" alt="Medical professionals" className="object-cover w-full h-full rounded-2xl" />
@@ -65,9 +65,9 @@ export default function CreateNewPassword() {
 
       {/* Right Side - Form */}
       <div className="flex items-center justify-center w-full px-4 border shadow-sm lg:w-1/2 rounded-2xl">
-        <div className="w-full p-6 bg-white">
+        <div className="w-full bg-white">
           {/* Heading */}
-          <h1 className="mb-1 text-xl sm:text-2xl font-semibold text-center text-slate-900">Create New Password</h1>
+          <h1 className="mb-1 text-xl font-semibold text-center sm:text-2xl text-slate-900">Create New Password</h1>
           <p className="mb-6 text-md font-medium text-center text-[#374151] sm:text-lg">
             Enter your email address and we&apos;ll send you instructions to reset your password
           </p>
@@ -90,7 +90,7 @@ export default function CreateNewPassword() {
                 <button
                   type="button"
                   onClick={() => setShowNewPassword((prev) => !prev)}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
+                  className="absolute inset-y-0 flex items-center text-gray-500 right-3 hover:text-gray-700"
                 >
                   {showNewPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
@@ -115,7 +115,7 @@ export default function CreateNewPassword() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmPassword((prev) => !prev)}
-                  className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700"
+                  className="absolute inset-y-0 flex items-center text-gray-500 right-3 hover:text-gray-700"
                 >
                   {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>

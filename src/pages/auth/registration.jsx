@@ -92,7 +92,7 @@ export default function SignUp() {
 
   return (
     <div
-      className="flex h-screen gap-6 p-3 bg-white sm:p-4 md:p-6"
+      className="flex gap-6 p-3 bg-white sm:p-4 md:p-6"
      
     >
       {/* Left Image */}
@@ -179,7 +179,7 @@ export default function SignUp() {
                 <input
                   name="password"
                   type="password"
-                  placeholder="Strong Password"
+                  placeholder="Enter Password"
                   value={formData.password}
                   onChange={handleChange}
                   className={`w-full p-2.5 border rounded-md focus:ring-2 focus:outline-none text-[14px] sm:text-[15px] ${
