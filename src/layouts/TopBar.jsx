@@ -6,7 +6,9 @@ export default function TopBar({ toggleSidebar, isSidebarOpen, openModal }) {
   const handleClick = () => {
     navigate("/notification");
   };
-
+const handleClick2 = () => {
+    navigate("/account-setting?tab=profile");
+  };
   return (
     <header className="sticky top-0 z-40 w-full bg-white border-b border-tertiary/20">
       <div className="flex items-center justify-between px-3 py-3 sm:px-4 sm:py-4 md:px-6 md:py-[20.5px]">
@@ -73,7 +75,7 @@ export default function TopBar({ toggleSidebar, isSidebarOpen, openModal }) {
         </div> */}
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
         <div className="relative cursor-pointer" onClick={handleClick}>
-          <img src="/Dashboard/bellIcon.svg" alt="Notification Icon" className=" w-8 h-8 sm:w-9 sm:h-9" />
+          <img src="/Dashboard/bellIcon.svg" alt="Notification Icon" className="w-8 h-8 sm:w-9 sm:h-9" />
           <span className="absolute -top-1 -right-1 text-[10px] w-4 h-4 rounded-full flex items-center justify-center bg-white font-semibold text-primary border border-primary/20">
             3
           </span>
@@ -81,8 +83,8 @@ export default function TopBar({ toggleSidebar, isSidebarOpen, openModal }) {
         <img
           src="/Dashboard/userIcon.svg"
           alt="User Icon"
-          className="cursor-pointer  w-8 h-8 sm:w-9 sm:h-9"
-          onClick={openModal}
+          className="w-8 h-8 cursor-pointer sm:w-9 sm:h-9"
+          onClick={handleClick2}
         />
       </div>
       </div>
