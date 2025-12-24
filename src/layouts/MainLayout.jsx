@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import SideBar from '../layouts/sideBar/Sidebar';
 import TopBar from './TopBar';
-import UpgradeAccountModal from '../components/Modals/Dashboard/UpgradeAccountModal';
+//import UpgradeAccountModal from '../components/Modals/Dashboard/UpgradeAccountModal';
 export default function MainLayout({ children }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true); // Default open on desktop
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,10 +21,10 @@ export default function MainLayout({ children }) {
       `}
       >
         <TopBar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} openModal={openModal} />
-        <main className="p-4 md:p-6 flex-1">{children}</main>
+        <main className="flex-1 p-4 md:p-6">{children}</main>
       </div>
       {isSidebarOpen && <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={toggleSidebar}></div>}
-      {isModalOpen && <UpgradeAccountModal closeModal={closeModal} />}
+      {/* {isModalOpen && <UpgradeAccountModal closeModal={closeModal} />} */}
     </div>
   );
 }

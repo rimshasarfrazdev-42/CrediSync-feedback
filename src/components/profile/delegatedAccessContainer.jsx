@@ -113,10 +113,10 @@ function DelegatedAccessContainer() {
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           {/* Left Content */}
           <div className="space-y-1">
-            <h2 className="flex items-center gap-2 text-lg font-semibold text-gray-800 sm:text-xl">
+            <h2 className="flex items-center gap-2 text-lg font-semibold text-[#111827] sm:text-xl">
               Delegated Access
             </h2>
-            <p className={`text-sm sm:text-base font-normal ${textTertiary}`}>
+            <p className={`text-xs sm:text-sm font-normal text-[#92949F]`}>
               Manage who can access and help manage your CrediSync account. You control who can
               view or update your information.
             </p>
@@ -134,7 +134,7 @@ function DelegatedAccessContainer() {
                 <tr>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left text-sm font-semibold whitespace-nowrap ${textSecondary} tracking-wider`}
                   >
                     Delegate Name
                   </th>
@@ -146,7 +146,7 @@ function DelegatedAccessContainer() {
                   </th>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left text-sm font-semibold whitespace-nowrap ${textSecondary} tracking-wider`}
                   >
                     Role / Organization
                   </th>
@@ -217,10 +217,9 @@ function DelegatedAccessContainer() {
 
         {/* Bottom Security Note */}
         <div className="flex items-start justify-center w-full gap-2 px-2 mt-2 text-center sm:items-center sm:text-left text-primary">
-          <Lock className="flex-shrink-0 w-4 h-4 mt-1 sm:mt-0 text-primary" />
-          <span className={`leading-snug ${textTertiary} text-sm sm:text-base font-normal`}>
-            Your information is securely verified against official medical databases. No PHI is
-            shared without your consent.
+          <Lock className="flex-shrink-0 w-4 h-4  sm:mt-0 text-primary" />
+          <span className={`leading-snug ${textTertiary} text-xs sm:text-sm font-normal`}>
+           All delegate actions are logged for compliance and auditing. You can view your full access history under Legal & Consent Logs.
           </span>
         </div>
       </div>

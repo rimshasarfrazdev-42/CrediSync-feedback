@@ -10,8 +10,8 @@ const WelcomeBanner = ({ heading, subHeading, buttonText, openModal, icon, class
       `}
     >
       <div>
-        <h2 className="text-xl font-bold text-black md:text-2xl">{heading}</h2>
-        <p className="mt-1 text-sm md:text-base text-tertiary">{subHeading}</p>
+        <h2 className="text-xl font-bold text-[#111827] md:text-2xl">{heading}</h2>
+        <p className="mt-1 text-sm md:text-base text-[#374151]">{subHeading}</p>
       </div>
       {buttonText && (
         <button
