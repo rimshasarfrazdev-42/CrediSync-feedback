@@ -25,14 +25,14 @@ const handleClick2 = () => {
                 <img
                   src="/Dashboard/hamburger.svg"
                   alt="Open Menu"
-                  className="w-8 h-8 sm:w-9 sm:h-9"
+                  className="w-8 h-8 sm:w-9 sm:h-9 "
                 />
               </button>
 
               <img
                 src="/Dashboard/logo.svg"
                 alt="logo"
-                className="w-32 sm:w-40 md:w-44 max-w-[55vw] object-contain"
+                className="w-44 sm:w-48 md:w-52 max-w-[55vw] object-contain hidden sm:block"
               />
             </div>
           ) : (

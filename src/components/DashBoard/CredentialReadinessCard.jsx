@@ -3,7 +3,7 @@ export const CredentialReadinessCard = ({ heading, subHeading, button, percentag
   const arcLength = Math.PI * radius;
   const offset = arcLength - (percentage / 100) * arcLength;
   return (
-    <div className="w-full  mt-4 rounded-xl border border-tertiary/10 shadow-sm p-6 flex flex-col items-center sm:items-start hover:shadow-md">
+    <div className="w-full  mt-6 rounded-xl border border-tertiary/10 shadow-sm p-6 flex flex-col items-start hover:shadow-md ">
       <h2 className="text-xl font-semibold text-black">{heading}</h2>
       <p className="text-sm text-tertiary mb-2">{subHeading}</p>
       <div className="flex flex-col items-center w-full">

@@ -5,7 +5,7 @@ import ScoreBreakdown from '../components/Readiness/ScoreBreakdown';
 export const Readiness = () => {
   return (
     <>
-      <div className="h-100 bg-white">
+      <div className=" bg-white">
         <MainLayout>
           <WelcomeBanner
             heading={`Readiness Score`}
