@@ -134,7 +134,7 @@ function DelegatedAccessContainer() {
                 <tr>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left text-sm font-semibold whitespace-nowrap ${textSecondary} tracking-wider`}
                   >
                     Delegate Name
                   </th>
@@ -146,7 +146,7 @@ function DelegatedAccessContainer() {
                   </th>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left text-sm font-semibold whitespace-nowrap ${textSecondary} tracking-wider`}
                   >
                     Role / Organization
                   </th>
