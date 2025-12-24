@@ -64,7 +64,7 @@ function RevokeDelegateDialog({ delegate, onRevoke }) {
 
           <DialogClose asChild>
             <Button
-              className="w-full text-[16px] text-white font-semibold bg-red-500 hover:bg-red-600"
+              className="w-full text-[16px] text-white font-semibold bg-[#EF4444] hover:bg-red-600"
               onClick={handleConfirm}
             >
               Yes, Revoke Access

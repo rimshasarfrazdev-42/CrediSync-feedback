@@ -1,5 +1,5 @@
 import { Button } from '../../components/ui/button';
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import { FileText, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import CancelSubscriptionModal from '../Modals/cancelSubscriptionModal';
@@ -62,33 +62,40 @@ function BillingManagementContainer() {
             >
               Change Plan
             </Button>
-
+            <Button
+              onClick={() => {
+                navigate('/checkout');
+              }} 
+              className="bg-[#07244B] text-white text-[14px] sm:text-[16px] font-semibold w-full sm:w-auto"
+            >
+              Update Payment Method
+            </Button>
             {/* <Button className="bg-[#07244B] text-white text-[14px] sm:text-[16px] font-semibold border w-full sm:w-auto">
               Update Payment Method
             </Button> */}
             <Button
               onClick={() => setOpenCancelModal(true)}
-              className="border border-red-500 text-red-500 text-[14px] sm:text-[16px] font-semibold rounded-md bg-white w-full sm:w-auto"
+              className="border border-[#EF4444] text-[#EF4444] text-[14px] sm:text-[16px] font-semibold rounded-md bg-white w-full sm:w-auto"
             >
               Cancel Subscription
             </Button>
           </div>
         </div>
-<CancelSubscriptionModal
-  open={openCancelModal}
-  onClose={() => setOpenCancelModal(false)}
-  loading={loadingCancel}
-  onConfirm={() => {
-    setLoadingCancel(true);
+        <CancelSubscriptionModal
+          open={openCancelModal}
+          onClose={() => setOpenCancelModal(false)}
+          loading={loadingCancel}
+          onConfirm={() => {
+            setLoadingCancel(true);
 
-    //  Call API here
-    setTimeout(() => {
-      setLoadingCancel(false);
-      setOpenCancelModal(false);
-      console.log("Subscription cancelled");
-    }, 1500);
-  }}
-/>
+            //  Call API here
+            setTimeout(() => {
+              setLoadingCancel(false);
+              setOpenCancelModal(false);
+              console.log('Subscription cancelled');
+            }, 1500);
+          }}
+        />
         {/* Billing History Card */}
         <div className="w-full p-4 bg-white border border-gray-200 shadow-sm rounded-xl sm:p-6">
           <div className="w-full">
@@ -98,7 +105,7 @@ function BillingManagementContainer() {
             <div className="hidden sm:block">
               <div className="w-full max-w-full bg-white border-[1px] border-tertiary/25 rounded-xl shadow-lg overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-tertiary/10">
+                  <thead className="bg-[#92949F1A]">
                     <tr>
                       <th className={`px-4 py-3 text-left text-sm font-semibold ${textSecondary} tracking-wider`}>
                         Invoice
@@ -130,7 +137,7 @@ function BillingManagementContainer() {
                           {invoice.amount}
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          <span className="inline-flex px-4 py-1 text-xs font-semibold leading-5 text-[#22C55E] bg-[#22C55E]/10 rounded-full">
+                          <span className="inline-flex px-4 py-1 text-xs font-semibold leading-5 text-[#22C55E] bg-[#22C55E1A] rounded-full">
                             {invoice.status}
                           </span>
                         </td>
