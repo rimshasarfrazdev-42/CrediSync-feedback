@@ -46,7 +46,7 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
       {/* Education Records Container */}
       <div className="grid w-full grid-cols-1 gap-6 mt-5">
         {InsuranceFormsRef.current?.map((block, index) => (
-          <div className="w-full p-5 border rounded-3xl border-zinc-200" key={block.id}>
+          <div className="w-full mt-2 lg:p-5 lg:mt-5 lg:border rounded-3xl border-zinc-200" key={block.id}>
             <div className="flex items-center justify-between mb-5">
               <p className="text-lg font-semibold text-secondary">Add Insurance Details</p>
               {InsuranceFormsRef.current.length > 1 && (
@@ -80,7 +80,7 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
               <div className="flex flex-col">
                 <p className="mb-2 text-base font-semibold text-secondary">Coverage Limits<span className="ml-1 text-red-500">*</span></p>
                 <Select value={block.coverageLimits || undefined} onValueChange={(value) => (block.coverageLimits = value)}>
-                  <SelectTrigger className="w-full h-10 border border-gray-300 text-left items-center">
+                  <SelectTrigger className="items-center w-full h-10 text-left border border-gray-300">
                     <SelectValue placeholder="Select Coverage Limits " />
                   </SelectTrigger>
                   <SelectContent className="bg-white border border-gray-300 ">
@@ -101,7 +101,7 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                     onChange={(e) => handleDateChange(e, block, 'startDate')}
                     className="pr-12"
                   />
-                  <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                  <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                     <input
                       type="date"
                       value={
@@ -161,7 +161,7 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                     onChange={(e) => handleDateChange(e, block, 'endDate')}
                     className="pr-12"
                   />
-                  <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                  <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                     <input
                       type="date"
                       value={

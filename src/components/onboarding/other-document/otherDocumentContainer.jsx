@@ -76,7 +76,7 @@ function OtherDocumentContainer({
       {/* Education Records Container */}
       <div className="grid w-full grid-cols-1 gap-6 mt-5">
         {documentFormsRef.current?.map((block, index) => (
-          <div className="w-full p-5 border rounded-3xl border-zinc-200">
+          <div className="w-full mt-2 lg:p-5 lg:mt-5 lg:border rounded-3xl border-zinc-200">
             <div className="flex items-center justify-between mb-5" key={block.id}>
               <p className="text-lg font-semibold text-secondary">Other Document</p>
               {documentFormsRef.current.length > 1 && (
@@ -136,7 +136,7 @@ function OtherDocumentContainer({
                       setRerender(prev => prev + 1);
                     }}
                   />
-                  <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                  <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                     <input
                       type="date"
                       value={getNativeDateValue(block, 'issueDate')}
@@ -176,7 +176,7 @@ function OtherDocumentContainer({
                       setRerender(prev => prev + 1);
                     }}
                   />
-                  <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                  <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                     <input
                       type="date"
                       value={getNativeDateValue(block, 'expiryDate')}
