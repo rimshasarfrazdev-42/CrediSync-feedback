@@ -69,10 +69,10 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
   return (
     <>
       <FormStepHeader info="Personal Info" step="1" progress={17} />
-      <div className="grid w-full grid-cols-1 gap-4 p-5 mt-5 border  md:grid-cols-2 lg:grid-cols-3 min-h-96 rounded-3xl border-zinc-200">
+      <div className="grid w-full grid-cols-1 gap-4 mt-2 lg:p-5 lg:mt-5 lg:border md:grid-cols-2 lg:grid-cols-3 min-h-96 rounded-3xl border-tertiary/30">
         <div className="flex flex-col">
 
-          <p className="mb-2 text-base font-semibold text-secondary">First Name<span className="text-red-500 ml-1">*</span></p>
+          <p className="mb-2 text-base font-semibold text-secondary">First Name<span className="ml-1 text-red-500">*</span></p>
           <Input
             placeholder="Enter First Name"
             value={fullName.split(' ')[0] || ''}
@@ -95,7 +95,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
           {errors.middleInitial && <p className="text-sm text-red-600">{errors.middleInitial}</p>}
         </div>
         <div className="flex flex-col">
-          <p className="mb-2 text-base font-semibold text-secondary">Last Name<span className="text-red-500 ml-1">*</span></p>
+          <p className="mb-2 text-base font-semibold text-secondary">Last Name<span className="ml-1 text-red-500">*</span></p>
           <Input
             placeholder="Enter Last Name"
             value={fullName.split(' ').slice(1).join(' ')}
@@ -130,7 +130,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
               onChange={(e) => setDateOfBirth(e.target.value)}
               className="pr-12"
             />
-            <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+            <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
               <input
                 type="date"
                 value={
@@ -189,7 +189,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
         </div>
 
         <div className="flex flex-col">
-          <p className="mb-2 text-base font-semibold text-secondary">Email<span className="text-red-500 ml-1">*</span></p>
+          <p className="mb-2 text-base font-semibold text-secondary">Email<span className="ml-1 text-red-500">*</span></p>
           <Input
             placeholder="you@hospital.org"
             defaultValue={refs.emailRef.current}
@@ -199,7 +199,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
         </div>
         <div className="flex flex-col">
           <p className="mb-2 text-base font-semibold text-secondary">
-            Contact Number<span className="text-red-500 ml-1">*</span>
+            Contact Number<span className="ml-1 text-red-500">*</span>
           </p>
           <div className="flex gap-2">
             <div className="w-[110px]">
@@ -210,7 +210,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
                   refs.contactRef.current = `${val} ${currentNumber}`;
                 }}
               >
-                <SelectTrigger className="h-10 border-gray-300 text-left">
+                <SelectTrigger className="h-10 text-left border-gray-300">
                   <SelectValue placeholder="+1" />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
@@ -234,10 +234,10 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
               />
             </div>
           </div>
-          {errors.contact && <p className="text-sm text-red-600 mt-1">{errors.contact}</p>}
+          {errors.contact && <p className="mt-1 text-sm text-red-600">{errors.contact}</p>}
         </div>
         <div className="flex flex-col">
-          <p className="mb-2 text-base font-semibold text-secondary">Gender<span className="text-red-500 ml-1">*</span></p>
+          <p className="mb-2 text-base font-semibold text-secondary">Gender<span className="ml-1 text-red-500">*</span></p>
           <Select
             value={gender || undefined}
             onValueChange={(value) => {
@@ -257,7 +257,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
           {errors.gender && <p className="text-sm text-red-600">{errors.gender}</p>}
         </div>
         <div className="flex flex-col">
-          <p className="mb-2 text-base font-semibold">Address<span className="text-red-500 ml-1">*</span></p>
+          <p className="mb-2 text-base font-semibold">Address<span className="ml-1 text-red-500">*</span></p>
           <Input
             placeholder="123 Main St"
             defaultValue={refs.addressRef.current}
@@ -266,7 +266,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
           {errors.address && <p className="text-sm text-red-600">{errors.address}</p>}
         </div>
         <div className="flex flex-col">
-          <p className="mb-2 text-base font-semibold text-secondary">City<span className="text-red-500 ml-1">*</span></p>
+          <p className="mb-2 text-base font-semibold text-secondary">City<span className="ml-1 text-red-500">*</span></p>
           <Input
             placeholder="City"
             defaultValue={refs.cityRef.current}
@@ -275,7 +275,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
           {errors.city && <p className="text-sm text-red-600">{errors.city}</p>}
         </div>
         <div className="flex flex-col">
-          <p className="mb-2 text-base font-semibold text-secondary">State<span className="text-red-500 ml-1">*</span></p>
+          <p className="mb-2 text-base font-semibold text-secondary">State<span className="ml-1 text-red-500">*</span></p>
           <Input
             placeholder="CA"
             value={state}
@@ -287,7 +287,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
           {errors.state && <p className="text-sm text-red-600">{errors.state}</p>}
         </div>
         <div className="flex flex-col">
-          <p className="mb-2 text-base font-semibold text-secondary">Zip<span className="text-red-500 ml-1">*</span></p>
+          <p className="mb-2 text-base font-semibold text-secondary">Zip<span className="ml-1 text-red-500">*</span></p>
           <Input
             placeholder="Zip Code"
             defaultValue={refs.zipRef.current}
@@ -297,7 +297,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
         </div>
         <div className="flex flex-col">
           <p className="mb-2 text-base font-semibold text-secondary">
-            Country<span className="text-red-500 ml-1">*</span>
+            Country<span className="ml-1 text-red-500">*</span>
           </p>
           <Select
             defaultValue={refs.countryRef.current || undefined}
@@ -319,7 +319,7 @@ function PersonalInfoContainer({ refs, errors, setErrors, handleNextStep }) {
           </Select>
 
           {errors.country && (
-            <p className="text-sm text-red-600 mt-1">{errors.country}</p>
+            <p className="mt-1 text-sm text-red-600">{errors.country}</p>
           )}
         </div>
       </div>

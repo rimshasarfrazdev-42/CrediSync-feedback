@@ -60,7 +60,7 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
       <FormStepHeader info="Licenses & Certifications" step="4" progress={67} />
 
       <div className="grid w-full grid-cols-1 gap-6 mt-5">
-        <div className="w-full p-5 border rounded-3xl border-zinc-200">
+        <div className="w-full mt-2 lg:p-5 lg:mt-5 lg:border rounded-3xl border-zinc-200">
           <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2">
 
             {/* License Number - FIX: Switched to value */}
@@ -106,7 +106,7 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
                     setRerender(prev => prev + 1);
                   }}
                 />
-                <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                   <input
                     type="date"
                     value={getNativeDateValue(licenseRefs.issueDateRef)}
@@ -146,7 +146,7 @@ function LicenseCertificationContainer({ licenseRefs, setRerender, errors }) {
                     setRerender(prev => prev + 1);
                   }}
                 />
-                <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                   <input
                     type="date"
                     value={getNativeDateValue(licenseRefs.expiryDateRef)}

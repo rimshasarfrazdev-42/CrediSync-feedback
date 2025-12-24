@@ -8,7 +8,7 @@ export const NotificationsCard = () => {
     navigate ('/notification');
   }
   return (
-    <div className="flex flex-col w-full h-full p-6 mt-4 bg-white border shadow-sm rounded-xl hover:shadow-md border-tertiary/10">
+    <div className="flex flex-col w-full  p-6 mt-6  bg-white border shadow-sm rounded-xl hover:shadow-md border-tertiary/10">
       <h2 className="text-xl font-semibold text-black">Recent Notifications</h2>
       <p className="mb-3 text-sm text-tertiary">Important updates and alerts</p>
       <div className="flex-grow space-y-2">

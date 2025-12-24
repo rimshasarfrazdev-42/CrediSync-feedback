@@ -39,7 +39,7 @@ function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm,
       <div className="grid w-full grid-cols-1 gap-6 mt-5">
         {affiliationFormsRef.current?.map((block, index) => (
           <div key={block.id}>
-            <div className="w-full p-5 border rounded-3xl border-zinc-200">
+            <div className="w-full mt-2 lg:p-5 lg:mt-5 lg:border rounded-3xl border-zinc-200">
               <div className="flex items-center justify-between mb-5">
                 <p className="text-lg font-semibold text-secondary">Add Affiliations</p>
                 {affiliationFormsRef.current.length > 1 && (
@@ -71,7 +71,7 @@ function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm,
                       }}
                       className="pr-12"
                     />
-                    <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                    <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                       <input
                         type="date"
                         value={getNativeDateValue(block, 'startDate')}
@@ -131,7 +131,7 @@ function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm,
                       }}
                       className="pr-12"
                     />
-                    <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                    <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                       <input
                         type="date"
                         value={getNativeDateValue(block, 'endDate')}

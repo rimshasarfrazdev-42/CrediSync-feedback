@@ -40,15 +40,15 @@ function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, se
     <>
       <FormStepHeader info="Education Info" step="2" progress={33} />
 
-      <div className="flex  justify-end my-5">
-        {/* <p className="text-lg text-secondary font-semibold">Education</p> */}
+      <div className="flex justify-end my-5">
+        {/* <p className="text-lg font-semibold text-secondary">Education</p> */}
 
         <Button onClick={addMoreForm}>Add Another</Button>
       </div>
 
       <div className="grid w-full grid-cols-1 gap-6 mt-5">
         {educationFormsRef.current?.map((block, index) => (
-          <div key={block.id} className="w-full p-5 border rounded-3xl border-zinc-200">
+          <div key={block.id} className="w-full mt-2 lg:p-5 lg:mt-5 lg:border rounded-3xl border-zinc-200">
             <div className="flex items-center justify-between mb-5">
               <p className="text-lg font-semibold text-secondary">Add Education Record</p>
 
@@ -88,7 +88,7 @@ function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, se
                     onChange={(e) => handleDateChange(e, block, 'startDate')}
                     className="pr-12"
                   />
-                  <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                  <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                     <input
                       type="date"
                       value={
@@ -149,7 +149,7 @@ function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, se
                     onChange={(e) => handleDateChange(e, block, 'endDate')}
                     className="pr-12"
                   />
-                  <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                  <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                     <input
                       type="date"
                       value={

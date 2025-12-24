@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
+
 import {
   Dialog,
   DialogClose,
@@ -24,7 +25,7 @@ function DialogSection({
   setState,
   refs,
   isDialogOpen,
-  setIsDialogOpen
+  setIsDialogOpen,
 }) {
   const [isEditing, setIsEditing] = useState(false);
 
@@ -79,7 +80,7 @@ function DialogSection({
   return (
     <>
       <Dialog
-        className='!bg-white'
+        className="!bg-white"
         open={isDialogOpen}
         onOpenChange={(open) => {
           if (!open && isEditing) {
@@ -114,7 +115,8 @@ function DialogSection({
             <div className="flex w-full p-3 mt-2 space-x-2 text-sm font-normal border rounded-lg bg-primary/10 border-primary/30 text-primary">
               <ShieldCheck className="flex-shrink-0 w-6 h-6 mt-1 md:mt-0" />
               <p className="leading-relaxed text-left sm:text-start">
-                Your information is securely verified against official medical databases. No PHI is shared without your consent.
+                Your information is securely verified against official medical databases. No PHI is shared without your
+                consent.
               </p>
             </div>
           </DialogHeader>
@@ -122,7 +124,7 @@ function DialogSection({
           <div className="py-4 space-y-4">
             {/* 2. Review Your Details Section */}
             <section className="p-4 space-y-4 border shadow-sm rounded-xl">
-              <div className="flex gap-8 items-start sm:items-center justify-between">
+              <div className="flex items-start justify-between gap-8 sm:items-center">
                 <h3 className="text-lg font-medium text-secondary">Review Your Details</h3>
                 <Button
                   variant="ghost"
@@ -169,15 +171,11 @@ function DialogSection({
                       readOnly={!isEditing}
                       className={`pr-12 border-gray-300 ${!isEditing ? 'bg-gray-50' : ''}`}
                     />
-                    <span className="absolute inset-y-0 right-3 flex items-center text-gray-400 cursor-pointer">
+                    <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                       <input
                         type="date"
                         disabled={!isEditing}
-                        value={
-                          dateOfBirth
-                            ? dateOfBirth.split('/').reverse().join('-')
-                            : ''
-                        }
+                        value={dateOfBirth ? dateOfBirth.split('/').reverse().join('-') : ''}
                         max={new Date().toISOString().split('T')[0]}
                         onChange={(e) => {
                           const value = e.target.value;
@@ -264,7 +262,7 @@ function DialogSection({
                     className="flex flex-col items-start justify-between p-4 transition-shadow border rounded-lg sm:flex-row sm:items-center hover:shadow-md"
                   >
                     {/* Icon */}
-                    <div className="flex items-center sm:justify-center flex-shrink-0 w-10 h-10 text-primary">
+                    <div className="flex items-center flex-shrink-0 w-10 h-10 sm:justify-center text-primary">
                       <Shield size={30} />
                     </div>
 
@@ -277,8 +275,9 @@ function DialogSection({
                     {/* Status */}
                     <div className="flex items-center mt-2 space-x-2 sm:mt-0">
                       <span
-                        className={`text-sm font-normal ${check.status === 'Verified' ? 'text-green-500' : 'text-yellow-600'
-                          }`}
+                        className={`text-sm font-normal ${
+                          check.status === 'Verified' ? 'text-green-500' : 'text-yellow-600'
+                        }`}
                       >
                         {check.status}
                       </span>
@@ -291,8 +290,15 @@ function DialogSection({
 
             {/* 4. Consent Checkbox */}
             <div className="flex p-4 border rounded-lg shadow-sm sm:flex-row sm:items-start sm:space-x-4">
-              <Checkbox id="consent" className="flex-shrink-0 mr-2 sm:mr-0 rounded-[3px] mt-1 sm:mt-0" required />
-              <div className="flex flex-col">
+              <div className="flex-shrink-0 mt-1 sm:mt-0">
+                <input
+                  id="consent"
+                  type="checkbox"
+                  required
+                  className="w-4 h-4 border border-gray-400 rounded-sm accent-primary focus:ring-0"
+                />
+              </div>
+              <div className="flex flex-col ml-2 sm:ml-0">
                 <label htmlFor="consent" className="text-sm font-medium leading-snug text-secondary sm:leading-none">
                   I consent to CrediSync retrieving my professional records for credentialing verification.
                 </label>

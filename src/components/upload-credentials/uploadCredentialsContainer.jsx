@@ -278,7 +278,7 @@ function UploadCredentialsContainer() {
       <div className="w-full mx-auto">
         {/* Header Section */}
         <div className="w-full px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-10 ">
-          <div className="flex flex-col w-full gap-4 p-5  border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
+          <div className="flex flex-col w-full gap-4 p-5 border shadow-sm rounded-3xl border-zinc-200 sm:p-6 lg:p-8">
             <p className="text-3xl sm:text-[39px] font-semibold text-secondary leading-tight">
               Upload Your Credentials
             </p>
@@ -287,7 +287,7 @@ function UploadCredentialsContainer() {
               Upload your key credentialing documents securely.
             </p>
 
-            <div className="flex items-start md:items-center gap-3 p-4 text-sm font-normal border rounded-lg bg-primary bg-opacity-10 border-primary border-opacity-30 text-primary sm:text-base">
+            <div className="flex items-start gap-3 p-4 text-sm font-normal border rounded-lg md:items-center bg-primary bg-opacity-10 border-primary border-opacity-30 text-primary sm:text-base">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -311,7 +311,7 @@ function UploadCredentialsContainer() {
         {/* CONTENT GRID */}
         <div className="grid w-full grid-cols-1 gap-6 px-4 mb-10 sm:px-6 lg:px-8 md:grid-cols-12">
           {/* LEFT SECTION – 8 COLUMNS */}
-          <div className="flex flex-col w-full gap-6 order-2 md:order-1  md:col-span-8">
+          <div className="flex flex-col order-2 w-full gap-6 md:order-1 md:col-span-8">
             {/* Photo Verification */}
             <div className="w-full p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
               <CardHeader
@@ -396,7 +396,7 @@ function UploadCredentialsContainer() {
               <div className="p-5 bg-white border shadow-sm rounded-3xl border-zinc-200">
                 <CardHeader
                   heading="Government-issued ID"
-                  subText="Indetity Verification • Driver's License, Passport, or State ID"
+                  subText="Identity Verification • Driver's License, Passport, or State ID"
                   status={GovernmentID.current ? 'Uploaded' : 'Pending'}
                 />
                 <DragAndDrop imageContainer={GovernmentID} savedImage={GovernmentID.current ? { ...GovernmentID.current } : null} onUpdate={updateProgress} />
@@ -518,7 +518,7 @@ function UploadCredentialsContainer() {
           </div>
 
           {/* RIGHT SIDEBAR – Upload Progress */}
-          <div className="w-full p-5 bg-white border shadow-sm md:col-span-4 rounded-3xl border-zinc-200 h-fit order-1 md:order-2">
+          <div className="order-1 w-full p-5 bg-white border shadow-sm md:col-span-4 rounded-3xl border-zinc-200 h-fit md:order-2">
             <div className="flex items-center justify-between mb-3">
               <p className="text-[20px] font-semibold text-secondary">Upload Progress</p>
               <p className="text-[16px] font-normal text-tertiary">{uploadedCount} of 9</p>
@@ -556,33 +556,33 @@ function UploadCredentialsContainer() {
           </div>
         </div>
         {isCameraOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm">
-            <div className="bg-white rounded-2xl overflow-hidden w-full max-w-md shadow-2xl py-1">
-              <div className="px-6 py-1 flex justify-between items-center">
-                <h3 className=" text-xl font-bold text-secondary">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-sm">
+            <div className="w-full max-w-md py-1 overflow-hidden bg-white shadow-2xl rounded-2xl">
+              <div className="flex items-center justify-between px-6 py-1">
+                <h3 className="text-xl font-bold text-secondary">
                   {tempPhoto ? "Review Photo" : "Identity Verification"}
                 </h3>
-                <button onClick={stopCamera} className="p-2 hover:bg-zinc-100 rounded-full">
+                <button onClick={stopCamera} className="p-2 rounded-full hover:bg-zinc-100">
                   <X size={24} className="text-zinc-500" />
                 </button>
               </div>
 
-              <div className="relative aspect-square bg-black mx-6  rounded-xl overflow-hidden shadow-inner">
+              <div className="relative mx-6 overflow-hidden bg-black shadow-inner aspect-square rounded-xl">
                 {tempPhoto ? (
-                  <img src={tempPhoto} className="w-full h-full object-cover" alt="Captured" />
+                  <img src={tempPhoto} className="object-cover w-full h-full" alt="Captured" />
                 ) : (
-                  <video ref={videoRef} autoPlay playsInline className="w-full h-full object-cover" />
+                  <video ref={videoRef} autoPlay playsInline className="object-cover w-full h-full" />
                 )}
 
                 {!tempPhoto && (
                   <div className="absolute inset-0 border-[30px] border-black/20 pointer-events-none">
-                    <div className="w-full h-full border-2 border-white/40 border-dashed rounded-full" />
+                    <div className="w-full h-full border-2 border-dashed rounded-full border-white/40" />
                   </div>
                 )}
                 <canvas ref={canvasRef} className="hidden" />
               </div>
 
-              <div className="px-6 py-4 flex flex-col">
+              <div className="flex flex-col px-6 py-4">
                 {tempPhoto ? (
                   <div className="flex gap-4">
                     <Button
@@ -612,7 +612,7 @@ function UploadCredentialsContainer() {
         )}
 
         {/* Footer */}
-        <div className="flex flex-col sm:flex-row items-center justify-center mx-auto w-full gap-2 px-4 py-5 sm:px-6 lg:px-8 text-center sm:text-left">
+        <div className="flex flex-col items-center justify-center w-full gap-2 px-4 py-5 mx-auto text-center sm:flex-row sm:px-6 lg:px-8 sm:text-left">
           <Lock className="text-primary shrink-0" size={16} />
 
           <span className="text-sm text-tertiary">
