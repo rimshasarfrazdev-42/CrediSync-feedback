@@ -1,11 +1,12 @@
 import { useState, useRef } from 'react';
 import { statusColors, yourDocuments } from '../../constants/yourDocumentsData';
 import useClickOutside from '../../hooks/useClickOutside';
+import { RotateCcw } from 'lucide-react';
 export default function YourDocuments({ onViewDocument }) {
   const [statusOpen, setStatusOpen] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState('Status');
   const [actionOpenIndex, setActionOpenIndex] = useState(null);
-  const [showAll, setShowAll] = useState(false);
+  const [showAll, setShowAll] = useState(true);
   const actionMenuRef = useRef(null);
   const statusRef = useRef(null);
   const actionRefs = useRef({});
@@ -13,19 +14,24 @@ export default function YourDocuments({ onViewDocument }) {
     onViewDocument(doc);
     setActionOpenIndex(null);
   };
+  const handleResetFilter = () => {
+    setSelectedStatus('Status');
+    setStatusOpen(false);
+  };
+
   useClickOutside(statusRef, () => setStatusOpen(false));
   useClickOutside(actionMenuRef, () => setActionOpenIndex(null));
   const filteredDocuments =
     selectedStatus === 'Status' ? yourDocuments : yourDocuments.filter((doc) => doc.status === selectedStatus);
   const displayedDocuments = showAll ? filteredDocuments : filteredDocuments.slice(0, 3);
   return (
-    <div className="relative w-full p-4 mt-6 border shadow-sm sm:p-6 sm:mt-8 rounded-xl hover:shadow-md border-tertiary/10">
+    <div className="relative w-full p-4  border shadow-sm sm:p-6 mt-6 rounded-xl hover:shadow-md border-tertiary/10">
       <div className="relative flex flex-col gap-3 mb-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h2 className="text-base font-semibold sm:text-lg">Your Documents</h2>
           <p className="text-xs sm:text-sm text-tertiary">All credentials and certifications</p>
         </div>
-        <div ref={statusRef} className="relative w-full sm:w-auto sm:max-w-xs">
+        <div ref={statusRef} className="relative flex items-center gap-2 w-full sm:w-auto sm:max-w-xs">
           <button
             onClick={() => setStatusOpen(!statusOpen)}
             className="flex items-center justify-between w-full gap-1 px-3 py-2 text-sm border rounded-md border-tertiary-30 hover:bg-dashboard"
@@ -33,8 +39,19 @@ export default function YourDocuments({ onViewDocument }) {
             {selectedStatus}
             <img src="/Dashboard/downArrows.svg" alt="Down arrow" />
           </button>
+
+          {selectedStatus !== 'Status' && (
+            <button
+              onClick={handleResetFilter}
+              title="Reset filter"
+              className="p-2 border rounded-md hover:bg-dashboard transition"
+            >
+              <RotateCcw className='w-5 h-5 ' />
+            </button>
+          )}
+
           {statusOpen && (
-            <div className="absolute right-0 z-20 w-full mt-1 bg-white border rounded-md shadow-lg sm:w-fit">
+            <div className="absolute right-0 top-full z-20 w-full mt-1 bg-white border rounded-md shadow-lg sm:w-fit">
               {['Active', 'Completed', 'Expired'].map((option) => (
                 <p
                   key={option}
@@ -43,8 +60,8 @@ export default function YourDocuments({ onViewDocument }) {
                     setStatusOpen(false);
                   }}
                   className="px-3 py-1 text-[13px] cursor-pointer
-                  sm:hover:bg-gradient-to-r sm:hover:from-[#F4F9FF] sm:hover:to-[#F8FAFC]
-                  active:bg-gradient-to-r active:from-[#F4F9FF] active:to-[#F8FAFC]"
+          sm:hover:bg-gradient-to-r sm:hover:from-[#F4F9FF] sm:hover:to-[#F8FAFC]
+          active:bg-gradient-to-r active:from-[#F4F9FF] active:to-[#F8FAFC]"
                 >
                   {option}
                 </p>

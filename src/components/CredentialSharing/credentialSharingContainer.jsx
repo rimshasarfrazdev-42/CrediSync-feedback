@@ -19,7 +19,7 @@ const CredentialSharingContainer = ({ activeSharesContent, incomingRequestsConte
         openModal={openModal}
         icon="/CredentialSharing/Share.svg"
       />
-      <div className="w-full h-full mt-4">
+      <div className="w-full h-full mt-6">
       <div className="flex items-center p-1 border md:gap-2 w-fit bg-tertiary/5 md:p-2 rounded-t-xl border-tertiary/10 ">
         <button
           onClick={() => setActiveTab('active')}
