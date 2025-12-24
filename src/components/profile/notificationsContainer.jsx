@@ -38,7 +38,7 @@ function NotificationsContainer() {
               <h2 className="text-[18px] font-semibold text-secondary flex items-center gap-2">
                 Notification Preferences
               </h2>
-              <p className="mt-1 text-sm font-normal text-tertiary">Your current subscription</p>
+              <p className="mt-1 text-sm font-normal text-tertiary">Choose how you receive alerts and reminders.</p>
             </div>
           </div>
 
@@ -100,7 +100,7 @@ function NotificationsContainer() {
                   </p>
                 </div>
               </div>
-              <Button className='sm:w-48 text-[16px] font-semibold rounded-md' onClick={SavePreferenceHandler}>Save Preferences</Button>
+              <Button className='sm:w-48 text-[16px] py-6 font-semibold rounded-md' onClick={SavePreferenceHandler}>Save Preferences</Button>
             </div>
           </div>
         </div>

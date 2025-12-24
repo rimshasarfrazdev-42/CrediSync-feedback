@@ -46,12 +46,12 @@ function EditDelegateAccessDialog({ delegate, onSaveAccess }) {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="w-[90%] sm:w-[80%] md:w-[60%] lg:w-[55%] xl:w-[45%] max-h-[60vh] overflow-y-auto rounded-[20px] p-6 md:p-8">
+      <DialogContent className="w-[90%] sm:w-[80%] md:w-[60%] lg:w-[55%] xl:w-[45%] max-h-[60vh] overflow-y-auto rounded-[20px] p-4 md:p-6">
         <DialogHeader className="flex flex-col space-y-2">
-          <DialogTitle className="text-[20px] font-semibold text-gray-800">
+          <DialogTitle className="text-[20px] font-semibold text-secondary">
             <div className="space-y-1">
-              <h2 className="text-xl font-semibold text-gray-800">Edit Access</h2>
-              <p className="text-sm font-normal text-gray-500">
+              <h2 className="text-xl font-semibold text-secondary">Edit Access</h2>
+              <p className="text-sm font-normal text-tertiary">
                 Update the access level for this delegate.
               </p>
             </div>
@@ -60,12 +60,12 @@ function EditDelegateAccessDialog({ delegate, onSaveAccess }) {
 
         <section className="grid w-full grid-cols-1 gap-3">
           <div className="flex flex-col">
-            <p className="mb-1 text-base font-semibold text-gray-800">Delegate Name</p>
+            <p className="mb-1 text-base font-semibold text-secondary">Delegate Name</p>
             <Input
-              placeholder="e.g., Credentialing Coordinator — Acme Health"
+              placeholder={`${delegate.firstName} ${delegate.lastName}`}
               className="border-gray-300"
-              value={`${delegate.firstName} ${delegate.lastName}`}
-              readOnly
+              // value={`${delegate.firstName} ${delegate.lastName}`}
+              
             />
           </div>
           <div className="flex flex-col">

@@ -110,8 +110,8 @@ export default function AccountSettings() {
                       onClick={() => handleTabClick(tab.id)}
                       className={`flex shrink-0 items-center gap-1 sm:gap-2 px-3 sm:px-4 py-2 mb-[-1px] rounded-t-xl border-b-2 text-xs sm:text-sm whitespace-nowrap transition-colors ${
                         activeTab === tab.id
-                          ? "border-slate-200 bg-white rounded-xl text-slate-900"
-                          : "border-transparent text-slate-500 hover:text-slate-800"
+                          ? "border-slate-200 bg-white rounded-xl text-[#111827] font-semibold"
+                          : "border-transparent text-[#374151] font-semibold hover:text-slate-800"
                       }`}
                     >
                       {tab.icon && (

@@ -54,13 +54,13 @@ function AddDelegateDialog({ onAdd }) {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="w-[90%] sm:max-w-lg max-h-[85vh] overflow-y-auto rounded-xl p-6 md:p-8">
+      <DialogContent className="w-[90%] sm:max-w-lg max-h-[85vh] overflow-y-auto rounded-xl p-4 md:p-6">
         {/* Header */}
         <DialogHeader className="flex flex-col space-y-2">
-          <DialogTitle className="text-[20px] font-semibold text-gray-800">
+          <DialogTitle className="text-[20px] font-semibold text-secondary">
             <div className="space-y-1">
-              <h2 className="text-xl font-semibold text-gray-800">Add Delegate</h2>
-              <p className="text-sm font-normal text-gray-500">
+              <h2 className="text-xl font-semibold text-secondary">Add Delegate</h2>
+              <p className="text-sm font-normal text-tertiary">
                 Add a new delegated user who can view or manage provider credentials.
               </p>
             </div>
@@ -70,17 +70,17 @@ function AddDelegateDialog({ onAdd }) {
         {/* Form Section */}
         <section className="grid w-full grid-cols-1 gap-3">
           <div className="flex flex-col">
-            <p className="mb-1 text-base font-semibold text-gray-800">First Name</p>
+            <p className="mb-1 text-base font-semibold text-secondary">First Name</p>
             <Input
               name="firstName"
               placeholder="Enter First Name"
-              className="border-gray-300"
+              className="border-gray-300 "
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <p className="mb-1 text-base font-semibold text-gray-800">Last Name</p>
+            <p className="mb-1 text-base font-semibold text-secondary">Last Name</p>
             <Input
               name="lastName"
               placeholder="Enter Last Name"
@@ -90,7 +90,7 @@ function AddDelegateDialog({ onAdd }) {
             />
           </div>
           <div className="flex flex-col">
-            <p className="mb-1 text-base font-semibold text-gray-800">Email</p>
+            <p className="mb-1 text-base font-semibold text-secondary">Email</p>
             <Input
               name="email"
               placeholder="you@hospital.org"
@@ -100,17 +100,17 @@ function AddDelegateDialog({ onAdd }) {
             />
           </div>
           <div className="flex flex-col">
-            <p className="mb-1 text-base font-semibold text-gray-800">Role / Organization</p>
+            <p className="mb-1 text-base font-semibold text-secondary">Role / Organization</p>
             <Input
               name="role"
-              placeholder="e.g., Credentialing Coordinator — Acme Health"
+              placeholder="e.g.. Credentialing Coordinator — Acme Health"
               className="border-gray-300"
               value={role}
               onChange={(e) => setRole(e.target.value)}
             />
           </div>
           <div className="flex flex-col">
-            <p className="mb-1 text-base font-semibold text-gray-800">Access Level</p>
+            <p className="mb-1 text-base font-semibold text-secondary">Access Level</p>
             <Select value={access} onValueChange={(value) => setAccess(value)}>
               <SelectTrigger className="w-full h-10 border border-gray-300">
                 <SelectValue placeholder="View Only" />
@@ -128,7 +128,7 @@ function AddDelegateDialog({ onAdd }) {
           <DialogClose asChild>
             <Button
               variant="outline"
-              className="w-full text-[16px] font-semibold text-gray-700 border-gray-300 hover:bg-gray-50"
+              className="w-full text-[16px] font-semibold text-tertiary border-gray-300 hover:bg-gray-50"
             >
               Cancel
             </Button>
