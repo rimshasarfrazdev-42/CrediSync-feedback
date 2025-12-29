@@ -25,17 +25,17 @@ function RevokeDelegateDialog({ delegate, onRevoke }) {
         <Button
           variant="outline"
           size="sm"
-          className="border-red-500 border-[1px] text-red-600 hover:text-red-500 hover:bg-white h-9"
+          className="border-red-500 border-[1px] lg:text-sm text-xs text-red-600 hover:text-red-500 hover:bg-white h-9"
         >
           Revoke
         </Button>
       </DialogTrigger>
 
       <DialogContent className="w-[90%] sm:w-[80%] md:w-[60%] lg:w-[55%] xl:w-[45%] max-h-[55vh] overflow-y-auto rounded-[20px] p-6 md:p-8">
-        {/* ✅ Keep header content LEFT aligned on all viewports (mobile/tablet/desktop) */}
+        {/*  Keep header content LEFT aligned on all viewports (mobile/tablet/desktop) */}
         <DialogHeader className="space-y-2 text-left">
           <DialogTitle className="text-[20px] font-semibold text-secondary">
-            {/* ✅ Icon bigger + top-aligned */}
+            {/* Icon bigger + top-aligned */}
             <div className="flex items-start gap-3 text-left">
               <TriangleAlert className="w-7 h-7 sm:w-8 sm:h-8 text-red-500 mt-0.5 flex-shrink-0" />
 

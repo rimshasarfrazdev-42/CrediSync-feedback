@@ -1,13 +1,23 @@
 // src/whatever-path/DelegatedAccess/AddDelegateDialog.jsx
 import React, { useMemo, useState } from "react";
 import { Button } from "../../ui/button";
-import { Dialog, DialogClose, DialogContent, DialogFooter, DialogHeader, DialogTrigger } from "../../ui/dialog";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTrigger,
+} from "../../ui/dialog";
 import { DialogTitle } from "@radix-ui/react-dialog";
 import { Input } from "../../ui/input";
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "../../ui/select";
 
 function AddDelegateDialog({ onAdd }) {
   const ALLOWED_ACCESS = useMemo(() => ["View Only", "View & Edit"], []);
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  const [open, setOpen] = useState(false);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -15,7 +25,6 @@ function AddDelegateDialog({ onAdd }) {
   const [role, setRole] = useState("");
   const [access, setAccess] = useState("View Only");
 
-  // validation errors (added only)
   const [errors, setErrors] = useState({
     firstName: "",
     lastName: "",
@@ -24,50 +33,39 @@ function AddDelegateDialog({ onAdd }) {
     access: "",
   });
 
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const getValues = () => ({
+    firstName: firstName.trim(),
+    lastName: lastName.trim(),
+    email: email.trim(),
+    role: role.trim(),
+    access: String(access || "").trim(),
+  });
 
-  const validate = (values) => {
+  const validateAll = (values) => {
     const next = { firstName: "", lastName: "", email: "", role: "", access: "" };
 
-    const fn = String(values.firstName || "").trim();
-    const ln = String(values.lastName || "").trim();
-    const em = String(values.email || "").trim();
-    const rl = String(values.role || "").trim();
-    const ac = String(values.access || "").trim();
+    if (!values.firstName) next.firstName = "First Name is required";
+    if (!values.lastName) next.lastName = "Last Name is required";
 
-    if (!fn) next.firstName = "First Name is required";
-    if (!ln) next.lastName = "Last Name is required";
+    if (!values.email) next.email = "Email is required";
+    else if (!emailRegex.test(values.email)) next.email = "Enter a valid email address";
 
-    if (!em) next.email = "Email is required";
-    else if (!emailRegex.test(em)) next.email = "Enter a valid email address";
+    if (!values.role) next.role = "Role / Organization is required";
 
-    if (!rl) next.role = "Role / Organization is required";
-
-    if (!ac) next.access = "Access Level is required";
-    else if (!ALLOWED_ACCESS.includes(ac)) next.access = "Invalid Access Level selected";
+    if (!values.access) next.access = "Access Level is required";
+    else if (!ALLOWED_ACCESS.includes(values.access)) next.access = "Invalid Access Level selected";
 
     return next;
   };
 
-  const hasErrors = (errs) => Object.values(errs).some(Boolean);
+  const validateField = (name, values) => {
+    const v = validateAll(values);
+    return v[name] || "";
+  };
 
-  const handleSave = () => {
-    const v = validate({ firstName, lastName, email, role, access });
-    setErrors(v);
-    if (hasErrors(v)) return;
+  const hasErrors = (errs) => Object.values(errs).some((x) => Boolean(x));
 
-    const payload = {
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
-      email: email.trim(),
-      role: role.trim(),
-      access,
-      status: "Pending",
-    };
-
-    if (onAdd) onAdd(payload);
-
-    // reset fields
+  const resetForm = () => {
     setFirstName("");
     setLastName("");
     setEmail("");
@@ -76,14 +74,34 @@ function AddDelegateDialog({ onAdd }) {
     setErrors({ firstName: "", lastName: "", email: "", role: "", access: "" });
   };
 
+  const handleSave = () => {
+    const values = getValues();
+    const v = validateAll(values);
+    setErrors(v);
+
+    if (hasErrors(v)) return;
+
+    const payload = {
+      ...values,
+      access: values.access,
+      status: "Pending",
+    };
+
+    onAdd?.(payload);
+
+    resetForm();
+    setOpen(false); // close only when valid
+  };
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="font-semibold text-base sm:text-[16px] w-full sm:w-auto text-white">Add Delegate</Button>
+        <Button className="font-semibold text-base sm:text-[16px] w-full sm:w-auto text-white">
+          Add Delegate
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="w-[90%] sm:max-w-lg max-h-[85vh] overflow-y-auto rounded-xl p-4 md:p-6">
-        {/* Header */}
         <DialogHeader className="flex flex-col space-y-2">
           <DialogTitle className="text-[20px] font-semibold text-secondary">
             <div className="space-y-1">
@@ -95,99 +113,120 @@ function AddDelegateDialog({ onAdd }) {
           </DialogTitle>
         </DialogHeader>
 
-        {/* Form Section */}
         <section className="grid w-full grid-cols-1 gap-3">
+          {/* First Name */}
           <div className="flex flex-col">
             <p className="mb-1 text-base font-semibold text-secondary">First Name</p>
             <Input
               name="firstName"
               placeholder="Enter First Name"
-              className={`border-gray-300 ${errors.firstName ? "border-red-500 focus-visible:ring-red-500/30" : ""}`}
+              className={`border-gray-300 bg-white ${errors.firstName ? "border-red-500" : ""}`}
               value={firstName}
               onChange={(e) => {
                 const v = e.target.value;
                 setFirstName(v);
-                if (errors.firstName) setErrors((p) => ({ ...p, firstName: v.trim() ? "" : "First Name is required" }));
+                if (errors.firstName) {
+                  setErrors((p) => ({ ...p, firstName: v.trim() ? "" : "First Name is required" }));
+                }
               }}
-              onBlur={() => setErrors((p) => ({ ...p, ...validate({ firstName, lastName, email, role, access }) }))}
+              onBlur={() => {
+                const values = getValues();
+                setErrors((p) => ({ ...p, firstName: validateField("firstName", values) }));
+              }}
             />
             {errors.firstName ? <p className="mt-1 text-sm text-red-500">{errors.firstName}</p> : null}
           </div>
 
+          {/* Last Name */}
           <div className="flex flex-col">
             <p className="mb-1 text-base font-semibold text-secondary">Last Name</p>
             <Input
               name="lastName"
               placeholder="Enter Last Name"
-              className={`border-gray-300 ${errors.lastName ? "border-red-500 focus-visible:ring-red-500/30" : ""}`}
+              className={`border-gray-300 bg-white ${errors.lastName ? "border-red-500" : ""}`}
               value={lastName}
               onChange={(e) => {
                 const v = e.target.value;
                 setLastName(v);
-                if (errors.lastName) setErrors((p) => ({ ...p, lastName: v.trim() ? "" : "Last Name is required" }));
+                if (errors.lastName) {
+                  setErrors((p) => ({ ...p, lastName: v.trim() ? "" : "Last Name is required" }));
+                }
               }}
-              onBlur={() => setErrors((p) => ({ ...p, ...validate({ firstName, lastName, email, role, access }) }))}
+              onBlur={() => {
+                const values = getValues();
+                setErrors((p) => ({ ...p, lastName: validateField("lastName", values) }));
+              }}
             />
             {errors.lastName ? <p className="mt-1 text-sm text-red-500">{errors.lastName}</p> : null}
           </div>
 
+          {/* Email */}
           <div className="flex flex-col">
             <p className="mb-1 text-base font-semibold text-secondary">Email</p>
             <Input
               name="email"
               placeholder="you@hospital.org"
-              className={`border-gray-300 ${errors.email ? "border-red-500 focus-visible:ring-red-500/30" : ""}`}
+              className={`border-gray-300 bg-white  ${errors.email ? "border-red-500" : ""}`}
               value={email}
               onChange={(e) => {
                 const v = e.target.value;
                 setEmail(v);
                 if (errors.email) {
-                  const trimmed = v.trim();
+                  const t = v.trim();
                   setErrors((p) => ({
                     ...p,
-                    email: !trimmed ? "Email is required" : emailRegex.test(trimmed) ? "" : "Enter a valid email address",
+                    email: !t ? "Email is required" : emailRegex.test(t) ? "" : "Enter a valid email address",
                   }));
                 }
               }}
-              onBlur={() => setErrors((p) => ({ ...p, ...validate({ firstName, lastName, email, role, access }) }))}
+              onBlur={() => {
+                const values = getValues();
+                setErrors((p) => ({ ...p, email: validateField("email", values) }));
+              }}
             />
             {errors.email ? <p className="mt-1 text-sm text-red-500">{errors.email}</p> : null}
           </div>
 
+          {/* Role */}
           <div className="flex flex-col">
-            <p className="mb-1 text-base font-semibold text-gray-800 whitespace-nowrap">Role / Organization</p>
+            <p className="mb-1 text-base font-semibold text-secondary whitespace-nowrap">
+              Role / Organization
+            </p>
             <Input
               name="role"
               placeholder="e.g., Credentialing Coordinator — Acme Health"
-              className={`border-gray-300 ${errors.role ? "border-red-500 focus-visible:ring-red-500/30" : ""}`}
+              className={`border-gray-300 bg-white ${errors.role ? "border-red-500" : ""}`}
               value={role}
               onChange={(e) => {
                 const v = e.target.value;
                 setRole(v);
-                if (errors.role) setErrors((p) => ({ ...p, role: v.trim() ? "" : "Role / Organization is required" }));
+                if (errors.role) {
+                  setErrors((p) => ({ ...p, role: v.trim() ? "" : "Role / Organization is required" }));
+                }
               }}
-              onBlur={() => setErrors((p) => ({ ...p, ...validate({ firstName, lastName, email, role, access }) }))}
+              onBlur={() => {
+                const values = getValues();
+                setErrors((p) => ({ ...p, role: validateField("role", values) }));
+              }}
             />
             {errors.role ? <p className="mt-1 text-sm text-red-500">{errors.role}</p> : null}
           </div>
 
+          {/* Access */}
           <div className="flex flex-col">
-            <p className="mb-1 text-base font-semibold text-gray-800">Access Level</p>
+            <p className="mb-1 text-base font-semibold text-secondary">Access Level</p>
             <Select
               value={access}
               onValueChange={(value) => {
                 setAccess(value);
-                // validate immediately
-                const v = validate({ firstName, lastName, email, role, access: value });
-                setErrors((p) => ({ ...p, access: v.access }));
+                const values = { ...getValues(), access: value };
+                setErrors((p) => ({ ...p, access: validateField("access", values) }));
               }}
             >
-              <SelectTrigger
-                className={`w-full h-10 border ${errors.access ? "border-red-500 focus:ring-red-500/30" : "border-gray-300"}`}
-              >
+              <SelectTrigger className={`w-full h-10 border ${errors.access ? "border-red-500" : "border-gray-300"}`}>
                 <SelectValue placeholder="View Only" />
               </SelectTrigger>
-              <SelectContent className="bg-white border border-gray-300 ">
+              <SelectContent className="bg-white border border-gray-300">
                 <SelectItem value="View Only">View Only</SelectItem>
                 <SelectItem value="View & Edit">View & Edit</SelectItem>
               </SelectContent>
@@ -196,23 +235,24 @@ function AddDelegateDialog({ onAdd }) {
           </div>
         </section>
 
-        {/* Footer */}
         <DialogFooter className="flex flex-col-reverse gap-2 pt-4 sm:flex-row sm:justify-between">
           <DialogClose asChild>
             <Button
               variant="outline"
               className="w-full text-[16px] font-semibold text-tertiary border-gray-300 hover:bg-gray-50"
+              onClick={() => {
+                // optional: reset on cancel
+                resetForm();
+              }}
             >
               Cancel
             </Button>
           </DialogClose>
 
-          {/* DialogClose kept as-is; we block submit when invalid */}
-          <DialogClose asChild>
-            <Button className="w-full text-[16px] text-white font-semibold bg-primary" onClick={handleSave}>
-              Save &amp; Send Invite
-            </Button>
-          </DialogClose>
+          {/* No DialogClose here; we close manually only when valid */}
+          <Button className="w-full text-[16px] text-white font-semibold bg-primary" onClick={handleSave}>
+            Save &amp; Send Invite
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

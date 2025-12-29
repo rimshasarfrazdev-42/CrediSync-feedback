@@ -212,7 +212,7 @@ function CheckoutContainer() {
                     onClick={openDatePicker}
                     className="absolute p-1 -translate-y-1/2 rounded-md right-2 top-1/2 hover:bg-tertiary/10"
                   >
-                    <CalendarDays className="w-5 h-5 mb-5 text-tertiary" />
+                    <CalendarDays className="w-5 h-5 text-tertiary" />
                   </button>
                   {errors.expiryDate && <p className={`${textSizes.helper} text-red-500`}>{errors.expiryDate}</p>}
                   {/* Hidden native date input */}

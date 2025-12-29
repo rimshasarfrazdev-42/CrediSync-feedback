@@ -15,20 +15,20 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from ".
 
 function EditDelegateAccessDialog({ delegate, onSaveAccess }) {
   const ALLOWED_ACCESS = useMemo(() => ["View Only", "View & Edit"], []);
-  const [access, setAccess] = useState(delegate?.access || "View Only");
+  const [open, setOpen] = useState(false);
 
-  // ✅ validation errors (added only)
+  const [access, setAccess] = useState("View Only");
   const [errors, setErrors] = useState({ access: "" });
 
   useEffect(() => {
-    setAccess(delegate?.access || "View Only");
+    if (!delegate) return;
+    setAccess(delegate.access || "View Only");
     setErrors({ access: "" });
-  }, [delegate?.access]);
+  }, [delegate]);
 
   if (!delegate) return null;
 
-  // ✅ small helper validation (added only)
-  const validate = (nextAccess) => {
+  const validateAccess = (nextAccess) => {
     const value = String(nextAccess || "").trim();
     if (!value) return { access: "Access Level is required" };
     if (!ALLOWED_ACCESS.includes(value)) return { access: "Invalid Access Level selected" };
@@ -36,21 +36,28 @@ function EditDelegateAccessDialog({ delegate, onSaveAccess }) {
   };
 
   const handleSave = () => {
-    const v = validate(access);
+    const v = validateAccess(access);
     setErrors(v);
-
-    // block save if invalid
     if (v.access) return;
 
-    if (onSaveAccess) {
-      onSaveAccess(delegate.id, access);
+    onSaveAccess?.(delegate.id, access);
+    setOpen(false); // close only on success
+  };
+
+  const handleOpenChange = (nextOpen) => {
+    setOpen(nextOpen);
+
+    // optional: reset when closing without saving
+    if (!nextOpen && delegate) {
+      setAccess(delegate.access || "View Only");
+      setErrors({ access: "" });
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button variant="outline" size="sm" className="border-primary border-[1px] text-primary hover:bg-white h-9">
+        <Button variant="outline" size="sm" className="border-primary border-[1px] lg:text-sm text-xs text-primary hover:bg-white h-9">
           Edit Access
         </Button>
       </DialogTrigger>
@@ -66,16 +73,18 @@ function EditDelegateAccessDialog({ delegate, onSaveAccess }) {
         </DialogHeader>
 
         <section className="grid w-full grid-cols-1 gap-3">
+          {/* Name (read-only display) */}
           <div className="flex flex-col">
             <p className="mb-1 text-base font-semibold text-secondary">Delegate Name</p>
             <Input
-              placeholder={`${delegate.firstName} ${delegate.lastName}`}
-              className="border-gray-300"
-              // value={`${delegate.firstName} ${delegate.lastName}`}
-              
+              value={`${delegate.firstName || ""} ${delegate.lastName || ""}`.trim()}
+              readOnly
+              disabled
+              className="border-gray-300 cursor-not-allowed bg-gray-50"
             />
           </div>
 
+          {/* Access */}
           <div className="flex flex-col">
             <p className="mb-1 text-base font-semibold text-secondary">Access Level</p>
 
@@ -83,22 +92,18 @@ function EditDelegateAccessDialog({ delegate, onSaveAccess }) {
               value={access}
               onValueChange={(v) => {
                 setAccess(v);
-                // ✅ validate on change
-                setErrors(validate(v));
+                setErrors(validateAccess(v));
               }}
             >
-              <SelectTrigger
-                className={`w-full h-10 border ${errors.access ? "border-red-500" : "border-gray-300"}`}
-              >
+              <SelectTrigger className={`w-full h-10 border ${errors.access ? "border-red-500" : "border-gray-300"}`}>
                 <SelectValue placeholder="View Only" />
               </SelectTrigger>
-              <SelectContent className="bg-white border border-gray-300 ">
+              <SelectContent className="bg-white border border-gray-300">
                 <SelectItem value="View Only">View Only</SelectItem>
                 <SelectItem value="View & Edit">View & Edit</SelectItem>
               </SelectContent>
             </Select>
 
-            {/* ✅ error message (added only) */}
             {errors.access ? <p className="mt-1 text-sm text-red-500">{errors.access}</p> : null}
           </div>
         </section>
@@ -110,12 +115,9 @@ function EditDelegateAccessDialog({ delegate, onSaveAccess }) {
             </Button>
           </DialogClose>
 
-          {/* NOTE: DialogClose kept as-is (no UI/structure change). We just block save if invalid. */}
-          <DialogClose asChild>
-            <Button className="w-full text-[16px] text-white font-semibold" onClick={handleSave}>
-              Save Changes
-            </Button>
-          </DialogClose>
+          <Button className="w-full text-[16px] text-white font-semibold" onClick={handleSave}>
+            Save Changes
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
