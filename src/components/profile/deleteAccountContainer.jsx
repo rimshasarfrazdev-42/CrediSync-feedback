@@ -68,17 +68,17 @@ function DeleteAccountContainer() {
             <label className="flex items-start gap-3 cursor-pointer">
               <Checkbox
                 className="
-    mt-1
-    h-5 w-5
+    mt-2
+    h-4 w-4
     rounded-[4px]
     border-2 border-[#C32727]
     bg-white
     shadow-sm
     data-[state=unchecked]:bg-white
     data-[state=unchecked]:border-[#C32727]
-    data-[state=checked]:bg-[#C32727]
+    data-[state=checked]:bg-white
     data-[state=checked]:border-[#C32727]
-    data-[state=checked]:text-white
+    data-[state=checked]:text-[#C32727]
   "
               />
 
@@ -118,9 +118,9 @@ function DeleteAccountContainer() {
               {/* Footer */}
               <DialogFooter className="flex flex-col-reverse gap-2 pt-4 sm:flex-row sm:justify-between sm:gap-3">
                 <DialogClose asChild>
-                  {/* <Button className="w-full text-[14px] sm:text-[16px] font-semibold text-tertiary bg-white border border-tertiary rounded-md">
+                  <Button className="w-full text-[14px] sm:text-[16px] font-semibold text-tertiary bg-white border border-tertiary rounded-md">
                     Cancel
-                  </Button> */}
+                  </Button>
                 </DialogClose>
 
                 <Button className="w-full text-[14px] sm:text-[16px] text-white font-semibold bg-[#EF4444] hover:bg-red-600">

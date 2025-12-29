@@ -103,7 +103,7 @@ function TimeIcon() {
 function InfoIcon() {
   return (
     <svg
-        className="w-4 h-4 text-primary rotate-180 transition-transform "
+        className="w-4 h-4 transition-transform rotate-180 text-primary "
         viewBox="0 0 24 24"
         fill="none"
         stroke="currentColor"
@@ -118,33 +118,6 @@ function InfoIcon() {
   );
 }
 
-function CheckIcon() {
-  return (
-    <svg className="w-4 h-4 text-emerald-500" viewBox="0 0 20 20" fill="none">
-      <circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="1.5" />
-      <path
-        d="M7.5 10.2 9 11.7l3-3.4"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function DocumentIcon() {
-  return (
-    <svg className="w-4 h-4 text-slate-400" viewBox="0 0 20 20" fill="none">
-      <path
-        d="M6 2.5A1.5 1.5 0 0 1 7.5 1h5.086a1.5 1.5 0 0 1 1.06.44l3.414 3.414A1.5 1.5 0 0 1 17 5.914V16.5A1.5 1.5 0 0 1 15.5 18h-9A1.5 1.5 0 0 1 5 16.5v-14Z"
-        stroke="currentColor"
-        strokeWidth="1.4"
-      />
-      <path d="M12 1.25V4a1 1 0 0 0 1 1h2.75" stroke="currentColor" strokeWidth="1.4" />
-    </svg>
-  );
-}
 
 /** Top progress bar + legend */
 function ChecklistProgress({ items }) {
@@ -179,9 +152,9 @@ function ChecklistProgress({ items }) {
       </div>
 
       {/* legend */}
-      <div className="flex  items-center gap-4 mt-3 text-xs sm:text-sm">
+      <div className="flex items-center gap-4 mt-3 text-xs sm:text-sm">
         {order.map((key) => (
-          <div key={key} className="flex sm:items-center gap-1">
+          <div key={key} className="flex gap-1 sm:items-center">
             {STATUS_CONFIG[key].icon}
             <span className="font-medium text-subtext">
               {STATUS_CONFIG[key].label} ({counts[key]})

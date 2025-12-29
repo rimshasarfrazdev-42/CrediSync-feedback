@@ -68,10 +68,10 @@ const AccessLevelSelector = ({ initialValue, status, onChange }) => {
       onValueChange={handleValueChange}
       disabled={status === 'Pending'}
     >
-      <SelectTrigger className="w-[140px] h-9 text-sm text-secondary border-gray-300">
+      <SelectTrigger className="w-[140px] h-9 lg:text-sm text-xs text-secondary border-gray-300">
         <SelectValue placeholder="Select Access" />
       </SelectTrigger>
-      <SelectContent className="z-50 bg-white border border-gray-300 shadow-lg ">
+      <SelectContent className="z-50 text-xs bg-white border border-gray-300 shadow-lg lg:text-sm ">
         <SelectItem value="View Only">View Only</SelectItem>
         <SelectItem value="View & Edit">View & Edit</SelectItem>
       </SelectContent>
@@ -134,37 +134,37 @@ function DelegatedAccessContainer() {
                 <tr>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold whitespace-nowrap ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left lg:text-sm text-xs font-semibold whitespace-nowrap ${textSecondary} tracking-wider`}
                   >
                     Delegate Name
                   </th>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left lg:text-sm text-xs font-semibold ${textSecondary} tracking-wider`}
                   >
                     Email
                   </th>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold whitespace-nowrap ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left lg:text-sm text-xs font-semibold whitespace-nowrap ${textSecondary} tracking-wider`}
                   >
                     Role / Organization
                   </th>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left lg:text-sm text-xs font-semibold ${textSecondary} tracking-wider`}
                   >
                     Access Level
                   </th>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left lg:text-sm text-xs font-semibold ${textSecondary} tracking-wider`}
                   >
                     Status
                   </th>
                   <th
                     scope="col"
-                    className={`px-4 py-3 text-left text-sm font-semibold ${textSecondary} tracking-wider`}
+                    className={`px-4 py-3 text-left lg:text-sm text-xs font-semibold ${textSecondary} tracking-wider`}
                   >
                     Actions
                   </th>
@@ -177,26 +177,26 @@ function DelegatedAccessContainer() {
                     key={delegate.id}
                     className="transition-colors duration-150 hover:bg-gray-50"
                   >
-                    <td className={`px-4 py-4 whitespace-nowrap text-sm font-medium ${textTertiary}`}>
+                    <td className={`px-4 py-4 whitespace-nowrap lg:text-sm text-xs font-medium ${textTertiary}`}>
                       {delegate.firstName} {delegate.lastName}
                     </td>
-                    <td className={`px-4 py-4 whitespace-nowrap text-sm ${textTertiary}`}>
+                    <td className={`px-4 py-4 whitespace-nowrap lg:text-sm text-xs ${textTertiary}`}>
                       {delegate.email}
                     </td>
-                    <td className={`px-4 py-4 whitespace-nowrap text-sm ${textTertiary}`}>
+                    <td className={`px-4 py-4 whitespace-nowrap lg:text-sm text-xs ${textTertiary}`}>
                       {delegate.role}
                     </td>
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
+                    <td className="px-4 py-4 text-xs lg:text-sm whitespace-nowrap">
                       <AccessLevelSelector
                         initialValue={delegate.access}
                         status={delegate.status}
                         onChange={(value) => handleUpdateAccess(delegate.id, value)}
                       />
                     </td>
-                    <td className="px-4 py-4 text-sm whitespace-nowrap">
+                    <td className="px-4 py-4 text-xs lg:text-sm whitespace-nowrap">
                       {getStatusBadge(delegate.status)}
                     </td>
-                    <td className="px-4 py-4 space-x-2 text-sm whitespace-nowrap">
+                    <td className="px-4 py-4 space-x-2 text-xs lg:text-sm whitespace-nowrap">
                       <EditDelegateAccessDialog
                         delegate={delegate}
                         onSaveAccess={handleUpdateAccess}
@@ -217,7 +217,7 @@ function DelegatedAccessContainer() {
 
         {/* Bottom Security Note */}
         <div className="flex items-start justify-center w-full gap-2 px-2 mt-2 text-center sm:items-center sm:text-left text-primary">
-          <Lock className="flex-shrink-0 w-4 h-4  sm:mt-0 text-primary" />
+          <Lock className="flex-shrink-0 w-4 h-4 sm:mt-0 text-primary" />
           <span className={`leading-snug ${textTertiary} text-xs sm:text-sm font-normal`}>
            All delegate actions are logged for compliance and auditing. You can view your full access history under Legal & Consent Logs.
           </span>
