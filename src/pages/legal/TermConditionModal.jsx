@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
-
+import { Checkbox } from '../../components/ui/checkbox';
 const TermsConditionsModal = ({ open, onClose, onAccept }) => {
   const [isChecked, setIsChecked] = useState(false);
 
@@ -100,18 +100,27 @@ const TermsConditionsModal = ({ open, onClose, onAccept }) => {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 px-6 py-4 border-t border-[#e4e8f1] ">
           {/* Checkbox */}
           <label className="inline-flex items-center gap-2 text-[0.8rem] text-slate-700 whitespace-nowrap">
-            <input
-              type="checkbox"
-              className="h-3.5 w-3.5 rounded border border-[#b6bfd1]"
+            <Checkbox
+              className="
+    h-3.5 w-3.5
+    rounded-[2px]
+    border border-primary
+    bg-white
+    shadow-sm
+    data-[state=unchecked]:bg-white
+    data-[state=unchecked]:border-gray-400
+    data-[state=checked]:bg-primary
+    data-[state=checked]:border-primary
+    data-[state=checked]:text-white
+  "
               checked={isChecked}
-              onChange={(e) => setIsChecked(e.target.checked)}
+              onCheckedChange={(value) => setIsChecked(value)}
             />
             <span>I have read and agree to this document.</span>
           </label>
 
           {/* Buttons */}
           <div className="flex flex-col items-center justify-center w-full gap-2 sm:flex-row sm:justify-end">
-            
             <button
               type="button"
               onClick={handleAccept}

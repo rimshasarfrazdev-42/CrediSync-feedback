@@ -48,7 +48,7 @@ function DeleteAccountContainer() {
               The following data will be permanently deactivated:
             </h3>
 
-            <ul className="space-y-3 text-[#C32727] font-normal text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed">
+            <ul className="space-y-1 text-[#C32727] font-normal text-[13px] sm:text-[14px] md:text-[15px] leading-relaxed">
               {[
                 'Viewing or managing your credentials in the Credential Vault.',
                 'Sharing or verifying credentials with institutions.',

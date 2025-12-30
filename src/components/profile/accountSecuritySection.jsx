@@ -182,9 +182,9 @@ function AccountSecuritySection() {
                   type="button"
                   onClick={() => toggleShowPassword('current')}
                   className="absolute inset-y-0 right-0 flex items-center px-3 text-tertiary hover:text-slate-700"
-                  aria-label={showPassword.current ? 'Hide password' : 'Show password'}
+                  aria-label={showPassword.current ? 'Show password' : 'Hide password'}
                 >
-                  {showPassword.current ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword.current ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                 </button>
               </div>
               {errors.currentPassword && <p className="text-xs text-red-600 sm:text-sm">{errors.currentPassword}</p>}
@@ -214,9 +214,9 @@ function AccountSecuritySection() {
                   type="button"
                   onClick={() => toggleShowPassword('new')}
                   className="absolute inset-y-0 right-0 flex items-center px-3 text-tertiary hover:text-slate-700"
-                  aria-label={showPassword.new ? 'Hide password' : 'Show password'}
+                  aria-label={showPassword.new ? 'Show password' : 'Hide password'}
                 >
-                  {showPassword.new ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword.new ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                 </button>
               </div>
               {errors.newPassword && <p className="text-xs text-red-600 sm:text-sm">{errors.newPassword}</p>}
@@ -246,9 +246,9 @@ function AccountSecuritySection() {
                   type="button"
                   onClick={() => toggleShowPassword('confirm')}
                   className="absolute inset-y-0 right-0 flex items-center px-3 text-tertiary hover:text-slate-700"
-                  aria-label={showPassword.confirm ? 'Hide password' : 'Show password'}
+                  aria-label={showPassword.confirm ? 'Show password' : 'Hide password'}
                 >
-                  {showPassword.confirm ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  {showPassword.confirm ? <Eye className="w-4 h-4" /> : <EyeOff className="w-4 h-4" />}
                 </button>
               </div>
               {errors.confirmPassword && <p className="text-xs text-red-600 sm:text-sm">{errors.confirmPassword}</p>}

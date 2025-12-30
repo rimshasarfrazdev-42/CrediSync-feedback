@@ -51,8 +51,8 @@ const VerifiedSection = () => {
           </p>
 
           <div className="p-3 mb-4 text-[14px] text-[#111827] border border-gray-200 rounded-md bg-gray-100">
-            <div className="flex items-center gap-2">
-              <span className="mt-0.5 text-base text-[#374151] shrink-0">
+            <div className="flex gap-2">
+              <span className="mt-[3px] text-base text-[#374151] shrink-0">
                 <img src="/info.svg" alt="success" />
               </span>
               <p className="leading-snug">

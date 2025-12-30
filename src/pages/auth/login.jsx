@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'; // ⬅ ADD THIS
 import { routePaths } from '../../constants/paths';
+import { Eye, EyeOff } from 'lucide-react';
 
 const Login = () => {
   const navigate = useNavigate(); // ⬅ ADD THIS
@@ -8,6 +9,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +20,8 @@ const Login = () => {
     navigate(routePaths.Dashboard);
     // OR navigate("/dashboard") if your path is plain string
   };
+
+  const viewPasswordHandler = ()=> setShowPassword((prev)=> !prev)
 
   return (
     <div className="flex h-screen gap-6 bg-white lg:p-2">
@@ -49,10 +53,21 @@ const Login = () => {
             </div>
 
             {/* Password */}
-            <div>
+            <div className='relative'>
               <label className="block mb-1 text-[14px] sm:text-[16px] font-medium text-gray-700">Password</label>
+              {showPassword ? (
+                  <Eye size={18} 
+                    className="text-md absolute top-11 right-4 cursor-pointer text-gray-500 hover:text-gray-700"
+                    onClick={viewPasswordHandler}
+                  />
+                ) : (
+                  <EyeOff size={18} 
+                    className="text-md absolute top-11 right-4 cursor-pointer text-gray-500 hover:text-gray-700"
+                    onClick={viewPasswordHandler}
+                  />
+                )}
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
