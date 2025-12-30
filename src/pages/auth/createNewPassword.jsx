@@ -67,9 +67,9 @@ export default function CreateNewPassword() {
       <div className="flex items-center justify-center w-full px-4 py-8 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
-          <h1 className="mb-1 text-xl font-semibold text-center sm:text-2xl text-slate-900">Create New Password</h1>
-          <p className="mb-6 text-md font-medium text-center text-[#374151] sm:text-lg">
-            Enter your email address and we&apos;ll send you instructions to reset your password
+          <h1 className="mb-2 text-xl font-semibold text-center sm:text-[31px] text-slate-900">Create New Password</h1>
+          <p className="mb-6 text-md font-medium text-center text-[#374151] sm:text-[18px]">
+            Please enter your new password
           </p>
 
           {/* Form */}

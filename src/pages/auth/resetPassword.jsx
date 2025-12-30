@@ -53,17 +53,17 @@ export default function ResetPassword() {
       <div className="flex items-center justify-center w-full px-4 py-12 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
-          <h1 className="mb-1 text-base font-semibold text-center sm:text-lg md:text-xl lg:text-2xl text-slate-900">
+          <h1 className="mb-2 text-base font-semibold text-center sm:text-lg md:text-xl lg:text-[31px] text-slate-900">
             Reset Your Password
           </h1>
-          <p className="mb-6  px-6 text-xs font-medium text-center sm:text-xs md:text-sm lg:text-sm text-[#374151]">
+          <p className="mb-6  px-6 text-xs font-medium text-center sm:text-xs md:text-sm lg:text-[18px] text-[#374151]">
             Enter your email address and we&apos;ll send you instructions to reset your password.
           </p>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block mb-1 text-[14px] font-medium text-gray-700">Email Address</label>
+              <label className="block mb-1 text-[18px] font-medium text-gray-700">Email Address</label>
               <input
                 type="email"
                 required
@@ -80,7 +80,7 @@ export default function ResetPassword() {
             <button
               type="submit"
               onClick={handleSubmit}
-              className="w-full py-2.5 text-[14px] font-semibold text-white transition-colors bg-primary rounded-md hover:bg-[#123057]"
+              className="w-full py-2.5 text-[16px] font-semibold text-white transition-colors bg-primary rounded-md hover:bg-[#123057]"
             >
               Send Reset Instruction
             </button>

@@ -34,17 +34,17 @@ const Home = () => {
   };
 
 return (
- <div className="bg-gradient-to-r from-[#F0FFFE] to-[#F8FAFC] lg:min-h-[100svh] w-full px-3 sm:px-6 ">
+ <div className="bg-gradient-to-r from-[#F0FFFE] to-[#F8FAFC]  lg:min-h-[100svh] w-full px-3 sm:px-6 ">
 
-  <main className="w-full max-w-none">
+  <main className="w-full max-w-none min-h-screen">
 
       {/* Use grid so footer has reserved space on md+ and never overlaps content */}
-    <section className="flex w-full flex-col py-4 lg:min-h-[100svh] lg:py-6">
+    <section className="flex w-full flex-col py-4 min-h-[100svh] lg:min-h-[100svh] lg:py-6">
 
         {/* CONTENT */}
         <div className="flex flex-col flex-1">
           {/* Heading */}
-          <header className="mb-4 text-center md:mb-6">
+          <header className="mb-5 text-center md:mb-6">
             <h1 className="text-[1.5rem] md:text-[2.2rem] font-bold tracking-tight text-[#163B6D]">
               Welcome to CrediSync
             </h1>
@@ -106,7 +106,7 @@ return (
           </div>
 
           {/* Button options card */}
-          <div className="mt-4">
+          <div className="mt-5">
             <div className="flex flex-col rounded-2xl overflow-hidden border border-[#d3e2ff] bg-white shadow-[0_10px_25px_rgba(15,27,61,0.06)]">
               <div className="grid grid-cols-1 gap-3 p-4 md:grid-cols-2 md:gap-6 md:px-5">
                 <div className="flex flex-col">
@@ -123,7 +123,7 @@ return (
                     Delegate to my Admin / Coordinator
                   </button>
 
-                  <p className="mt-2 text-center text-[13px] sm:text-[14px] md:text-[16px] text-[#526183]">
+                  <p className=" mt-4 mb-3 sm:mb-0 sm:mt-2 text-center text-[13px] sm:text-[14px] md:text-[16px] text-[#526183]">
                     Send a secure link so your team can complete The Intake for you.
                   </p>
                 </div>
@@ -148,7 +148,7 @@ return (
                     I’ve got this for now!
                   </button>
 
-                  <p className="mt-2 text-center text-[13px] sm:text-[14px] md:text-[16px] text-[#526183]">
+                  <p className="mt-4 sm:mt-2 text-center text-[13px] sm:text-[14px] md:text-[16px] text-[#526183]">
                     Start your Intake — about 5 minutes to verify your credentials.
                   </p>
                 </div>
@@ -158,7 +158,7 @@ return (
 
           <button
       onClick={handelClick}
-      className="mx-auto mt-2 mb-0 lg:mt-10 text-[13px] sm:text-[14px] md:text-[16px] underline text-primary font-semibold"
+      className="mx-auto mt-4 mb-0 lg:mt-10 text-[13px] sm:text-[14px] md:text-[16px] underline text-primary font-semibold"
     >
       Watch later from my Dashboard
     </button>

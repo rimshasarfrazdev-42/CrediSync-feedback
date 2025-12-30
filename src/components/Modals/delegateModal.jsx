@@ -133,7 +133,7 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
                   className="w-full appearance-none rounded-md border border-[#d7dde6] bg-white px-3 py-2.5 pr-9 text-sm text-slate-900 focus:border-[#163B6D] focus:outline-none focus:ring-2 focus:ring-[#163B6D]/70"
                   required
                 >
-                  <option value="">Select Role</option>
+                  <option value="" disabled hidden>Select Role</option>
                   {roleOptions.map((opt) => (
                     <option key={opt} value={opt}>
                       {opt}
