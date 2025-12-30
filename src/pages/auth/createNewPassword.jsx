@@ -67,15 +67,15 @@ export default function CreateNewPassword() {
       <div className="flex items-center justify-center w-full px-4 py-8 border shadow-sm lg:w-1/2 rounded-2xl">
         <div className="w-full bg-white">
           {/* Heading */}
-          <h1 className="mb-1 text-xl font-semibold text-center sm:text-2xl text-slate-900">Create New Password</h1>
-          <p className="mb-6 text-md font-medium text-center text-[#374151] sm:text-lg">
-            Enter your email address and we&apos;ll send you instructions to reset your password
+          <h1 className="mb-2 text-xl font-semibold text-center sm:text-[31px] text-slate-900">Create New Password</h1>
+          <p className="mb-6 text-md font-medium text-center text-[#374151] sm:text-[18px]">
+            Please enter your new password
           </p>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block mb-1 text-[18px] font-medium text-gray-700">New Password</label>
+              <label className="block mb-1 text-[18px] font-medium text-secondary">New Password</label>
 
               <div className="relative">
                 <input
@@ -84,7 +84,7 @@ export default function CreateNewPassword() {
                   placeholder="Enter password"
                   value={newPassword}
                   onChange={handleNewPasswordChange}
-                  className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
+                  className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-tertiary focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
                 />
 
                 <button
@@ -100,7 +100,7 @@ export default function CreateNewPassword() {
             </div>
 
             <div>
-              <label className="block mb-1 text-[18px] font-medium text-gray-700">Confirm Password</label>
+              <label className="block mb-1 text-[18px] font-medium text-secondary">Confirm Password</label>
 
               <div className="relative">
                 <input
@@ -109,7 +109,7 @@ export default function CreateNewPassword() {
                   placeholder="Re-enter your password"
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
-                  className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
+                  className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-tertiary focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
                 />
 
                 <button

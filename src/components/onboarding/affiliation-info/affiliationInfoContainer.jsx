@@ -30,7 +30,7 @@ function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm,
   };
   return (
     <>
-      <FormStepHeader info="Affiliations" step="3" progress={50} />
+      <FormStepHeader info="Affiliations Details" step="3" progress={50} />
       <div className="flex justify-end my-5">
         {/* <p className="text-lg text-secondary">Affiliations</p> */}
         <Button onClick={addMoreAffiliationForm}>Add Another</Button>
@@ -41,7 +41,7 @@ function AffiliationInfoContainer({ affiliationFormsRef, addMoreAffiliationForm,
           <div key={block.id}>
             <div className="w-full mt-2 lg:p-5 lg:mt-5 lg:border rounded-3xl border-zinc-200">
               <div className="flex items-center justify-between mb-5">
-                <p className="text-lg font-semibold text-secondary">Add Affiliations</p>
+                <p className="text-lg font-semibold text-secondary">Add Affiliations Details</p>
                 {affiliationFormsRef.current.length > 1 && (
                   <Trash2
                     size={18}

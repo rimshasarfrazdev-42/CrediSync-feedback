@@ -65,8 +65,9 @@ const UploadDocumentModal = ({ isOpen, onClose }) => {
             <div>
               <label className="text-base font-medium text-secondary">Issue Date (Optional)</label>
               <input
-                type="date"
+                type="text"
                 value={issueDate}
+                placeholder='MM/DD/YYYY'
                 onChange={(e) => setIssueDate(e.target.value)}
                 className={`w-full border rounded-md mt-1 p-2.5 text-sm focus:ring-1 focus:ring-primary
                   ${issueDate ? 'text-secondary' : 'text-tertiary'}`}
@@ -75,8 +76,9 @@ const UploadDocumentModal = ({ isOpen, onClose }) => {
             <div>
               <label className="text-base font-medium text-secondary">Expire Date (Optional)</label>
               <input
-                type="date"
+                type="text"
                 value={expireDate}
+                placeholder='MM/DD/YYYY'
                 onChange={(e) => setExpireDate(e.target.value)}
                 className={`w-full border rounded-md mt-1 p-2.5 text-sm focus:ring-1 focus:ring-primary
                   ${expireDate ? 'text-secondary' : 'text-tertiary'}`}

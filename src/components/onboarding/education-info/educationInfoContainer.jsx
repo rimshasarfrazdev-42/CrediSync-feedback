@@ -38,7 +38,7 @@ function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, se
 
   return (
     <>
-      <FormStepHeader info="Education Info" step="2" progress={33} />
+      <FormStepHeader info="Education Details" step="2" progress={33} />
 
       <div className="flex justify-end my-5">
         {/* <p className="text-lg font-semibold text-secondary">Education</p> */}
@@ -50,7 +50,7 @@ function EducationInfoContainer({ educationFormsRef, addMoreForm, deleteForm, se
         {educationFormsRef.current?.map((block, index) => (
           <div key={block.id} className="w-full mt-2 lg:p-5 lg:mt-5 lg:border rounded-3xl border-zinc-200">
             <div className="flex items-center justify-between mb-5">
-              <p className="text-lg font-semibold text-secondary">Add Education Record</p>
+              <p className="text-lg font-semibold text-secondary">Add Education Details</p>
 
               {educationFormsRef.current.length > 1 && (
                 <Trash2 size={18} className="text-red-600 cursor-pointer" onClick={() => deleteForm(block.id)} />

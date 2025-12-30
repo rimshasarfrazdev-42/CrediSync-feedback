@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import useClickOutside from '../../../hooks/useClickOutside';
+import { X } from 'lucide-react';
 export default function DocumentViewModal({ doc, onClose, onOpenReplace, onOpenVerification, onOpenDelete }) {
   if (!doc) return null;
   const modalRef = useRef(null);
@@ -27,9 +28,13 @@ export default function DocumentViewModal({ doc, onClose, onOpenReplace, onOpenV
       <div className="absolute inset-0 bg-secondary/80"></div>
       <div ref={modalRef} className="relative w-full max-w-2xl bg-white border border-gray-200 shadow-xl rounded-xl">
         <div className="px-6 pt-6">
-          <h2 className="text-xl font-semibold">{doc.type}</h2>
+          <div className="w-full flex justify-between">
+            <h2 className="text-xl font-semibold">{doc.type}</h2>
+            <X className='cursor-pointer' onClick={onClose}/>
+          </div>
           <p className="text-sm text-tertiary">Document details and metadata</p>
         </div>
+
         <div className="p-6">
           <div className="flex flex-col items-center justify-center border border-dotted border-tertiary/30 bg-tertiary/5 rounded-xl h-60">
             <img src="/CredentialVault/document.svg" className="w-10 opacity-60" />
@@ -43,7 +48,7 @@ export default function DocumentViewModal({ doc, onClose, onOpenReplace, onOpenV
             </div>
             <div>
               <p className="text-sm text-tertiary">Status</p>
-              <span className="px-3 py-1 text-xs font-medium text-green-700 bg-green-100 rounded-full">
+              <span className="px-3 py-1 text-xs font-medium text-[#22C55E] bg-green-100 rounded-full">
                 {doc.status}
               </span>
             </div>
