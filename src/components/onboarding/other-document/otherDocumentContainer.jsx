@@ -95,7 +95,7 @@ function OtherDocumentContainer({
 
               {/* file upload functionality */}
               <div className="flex flex-col space-y-2">
-                <p className="text-base font-semibold text-secondary">Upload file<span className="ml-1 text-red-500">*</span></p>
+                <p className="text-base font-semibold text-secondary">Upload file</p>
                 <div
                   className="flex items-center justify-between h-10 p-2 transition-colors border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50"
                   onClick={() => block.fileInputRef.current.click()}
@@ -126,7 +126,7 @@ function OtherDocumentContainer({
               </div>
 
               <div className="flex flex-col">
-                <p className="mb-2 text-base font-semibold text-secondary">Issue Date<span className="ml-1 text-red-500">*</span></p>
+                <p className="mb-2 text-base font-semibold text-secondary">Issue Date</p>
                 <div className="relative">
                   <Input
                     placeholder="MM/DD/YYYY"
@@ -166,7 +166,7 @@ function OtherDocumentContainer({
               </div>
 
               <div className="flex flex-col">
-                <p className="mb-2 text-base font-semibold text-secondary">Expiry Date<span className="ml-1 text-red-500">*</span></p>
+                <p className="mb-2 text-base font-semibold text-secondary">Expiry Date</p>
                 <div className="relative">
                   <Input
                     placeholder="MM/DD/YYYY"

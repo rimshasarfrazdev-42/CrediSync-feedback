@@ -75,7 +75,7 @@ export default function CreateNewPassword() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block mb-1 text-[18px] font-medium text-gray-700">New Password</label>
+              <label className="block mb-1 text-[18px] font-medium text-secondary">New Password</label>
 
               <div className="relative">
                 <input
@@ -84,7 +84,7 @@ export default function CreateNewPassword() {
                   placeholder="Enter password"
                   value={newPassword}
                   onChange={handleNewPasswordChange}
-                  className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
+                  className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-tertiary focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
                 />
 
                 <button
@@ -100,7 +100,7 @@ export default function CreateNewPassword() {
             </div>
 
             <div>
-              <label className="block mb-1 text-[18px] font-medium text-gray-700">Confirm Password</label>
+              <label className="block mb-1 text-[18px] font-medium text-secondary">Confirm Password</label>
 
               <div className="relative">
                 <input
@@ -109,7 +109,7 @@ export default function CreateNewPassword() {
                   placeholder="Re-enter your password"
                   value={confirmPassword}
                   onChange={handleConfirmPasswordChange}
-                  className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
+                  className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-tertiary focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
                 />
 
                 <button

@@ -15,7 +15,7 @@ const DocSearchField = ({ block, index, errors, handleValueChange, docOptions })
     return (
         <div className="flex flex-col">
             <p className="mb-2 text-base font-semibold text-secondary">
-                Document Type<span className="ml-1 text-red-500">*</span>
+                Document Type
             </p>
 
             <Popover open={open} onOpenChange={setOpen}>

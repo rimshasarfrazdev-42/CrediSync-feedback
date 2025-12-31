@@ -63,14 +63,14 @@ export default function ResetPassword() {
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block mb-1 text-[18px] font-medium text-gray-700">Email Address</label>
+              <label className="block mb-1 text-[18px] font-medium text-secondary">Email Address</label>
               <input
                 type="email"
                 required
                 placeholder="you@hospital.org"
                 value={email}
                 onChange={handleEmailChange}
-                className="w-full p-2.5 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
+                className="w-full p-2.5 pr-10 text-sm text-black bg-white border border-[#d7dde6] rounded-md placeholder:text-tertiary focus:outline-none focus:ring-2 focus:ring-[#1f4fbf]/70 focus:border-[#1f4fbf]"
               />
 
               {/* 🔹 Email Error */}
