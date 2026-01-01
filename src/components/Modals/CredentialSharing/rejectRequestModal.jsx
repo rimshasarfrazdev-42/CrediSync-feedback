@@ -21,14 +21,15 @@ export default function RejectRequestModal({ closeModal }) {
           className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-1 focus:ring-primary"
         ></textarea>
         <div className="flex flex-col items-center justify-between gap-4 mt-4 md:flex-row">
+          
+          <button className="w-full py-2 font-medium text-white transition bg-red-500 rounded-md hover:bg-red-600">
+            Confirm Rejection
+          </button>
           <button
             className="w-full py-2 font-medium transition border rounded-md border-subtext/40 text-tertiary hover:bg-gray-50 "
             onClick={closeModal}
           >
             Cancel
-          </button>
-          <button className="w-full py-2 font-medium text-white transition bg-red-500 rounded-md hover:bg-red-600">
-            Confirm Rejection
           </button>
         </div>
       </div>

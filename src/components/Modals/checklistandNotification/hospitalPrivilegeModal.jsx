@@ -88,6 +88,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
       className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 bg-secondary/80 sm:px-6"
       aria-modal="true"
       role="dialog"
+      onClick={onClose}
     >
       <div className="relative w-full max-w-lg bg-white shadow-xl rounded-2xl">
         <form onSubmit={handleSubmit} className="max-h-[90vh] overflow-y-auto hide-scrollbar px-4 py-5 sm:px-6 sm:py-6">
@@ -101,7 +102,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
 
           {/* Hospital Name */}
           <div className="mb-3 sm:mb-4">
-            <label className="block text-xs font-medium text-secondary sm:text-sm">Hospital Name</label>
+            <label className="block mb-1 text-xs font-medium text-secondary sm:text-sm">Hospital Name</label>
             <input
               type="text"
               name="hospitalName"
@@ -115,7 +116,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
 
           {/* Street Address */}
           <div className="mb-3 sm:mb-4">
-            <label className="block text-xs font-medium text-secondary sm:text-sm">Street Address</label>
+            <label className="block mb-1 text-xs font-medium text-secondary sm:text-sm">Street Address</label>
             <input
               type="text"
               name="streetAddress"
@@ -127,7 +128,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
             {errorText('streetAddress')}
           </div>
           <div className="mb-3 sm:mb-4">
-            <label className="block text-xs font-medium text-secondary sm:text-sm">City</label>
+            <label className="block mb-1 text-xs font-medium text-secondary sm:text-sm">City</label>
             <input
               type="text"
               name="city"
@@ -141,7 +142,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
           {/* City / State / Zip */}
           <div className="grid grid-cols-1 gap-3 mb-3 sm:mb-4 sm:grid-cols-2">
             <div className="sm:col-span-1">
-              <label className="block text-xs font-medium text-secondary sm:text-sm">State</label>
+              <label className="block mb-1 text-xs font-medium text-secondary sm:text-sm">State</label>
               <input
                 type="text"
                 name="state"
@@ -154,7 +155,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
             </div>
 
             <div className="sm:col-span-1">
-              <label className="block text-xs font-medium text-secondary sm:text-sm">Zip</label>
+              <label className="block mb-1 text-xs font-medium text-secondary sm:text-sm">Zip</label>
               <input
                 type="text"
                 name="zip"
@@ -169,7 +170,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
 
           {/* Phone */}
           <div className="mb-3 sm:mb-4">
-            <label className="block text-xs font-medium text-secondary sm:text-sm">Phone</label>
+            <label className="block mb-1 text-xs font-medium text-secondary sm:text-sm">Phone</label>
             <input
               type="tel"
               name="phone"
@@ -184,7 +185,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
           {/* Start / End Date */}
           <div className="grid grid-cols-1 gap-3 mb-3 sm:mb-4 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-medium text-secondary sm:text-sm">Start Date</label>
+              <label className="block mb-1 text-xs font-medium text-secondary sm:text-sm">Start Date</label>
               <input
                 type="text"
                 name="startDate"
@@ -196,7 +197,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
               {errorText('startDate')}
             </div>
             <div>
-              <label className="block text-xs font-medium text-secondary sm:text-sm">End Date</label>
+              <label className="block mb-1 text-xs font-medium text-secondary sm:text-sm">End Date</label>
               <input
                 type="text"
                 name="endDate"
@@ -212,7 +213,7 @@ export default function HospitalPrivilegeModal({ open, onClose, onSave, initialV
           {/* Fax (Optional) */}
           <div className="mb-4 sm:mb-5">
             <div className="flex items-center justify-between">
-              <label className="block text-xs font-medium text-secondary sm:text-sm">Fax (Optional)</label>
+              <label className="block mb-1 text-xs font-medium text-secondary sm:text-sm">Fax (Optional)</label>
             </div>
             <input
               type="text"

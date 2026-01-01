@@ -107,7 +107,7 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
                 value={adminName}
                 onChange={(e) => setAdminName(e.target.value)}
                 placeholder="e.g., Sarah Johnson"
-                className="w-full rounded-md border border-[#d7dde6] bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-tertiary focus:border-[#163B6D] focus:outline-none focus:ring-2 focus:ring-[#163B6D]/70"
+                className="w-full rounded-md border border-[#d7dde6] bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-tertiary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/70"
               />
             </div>
 
@@ -119,7 +119,7 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@clinic.com"
-                className="w-full rounded-md border border-[#d7dde6] bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-tertiary focus:border-[#163B6D] focus:outline-none focus:ring-2 focus:ring-[#163B6D]/70"
+                className="w-full rounded-md border border-[#d7dde6] bg-white px-3 py-2.5 text-sm text-slate-900 placeholder:text-tertiary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/70"
                 required
               />
             </div>
@@ -130,7 +130,7 @@ const DelegateModal = ({ isOpen, onClose, onSendInvite }) => {
                 <select
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  className="w-full appearance-none rounded-md border border-[#d7dde6] bg-white px-3 py-2.5 pr-9 text-sm text-slate-900 focus:border-[#163B6D] focus:outline-none focus:ring-2 focus:ring-[#163B6D]/70"
+                  className="w-full appearance-none rounded-md border border-[#d7dde6] bg-white px-3 py-2.5 pr-9 text-sm text-slate-900 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/70"
                   required
                 >
                   <option value="" disabled hidden>Select Role</option>

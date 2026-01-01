@@ -23,14 +23,15 @@ export default function ExtendExpiryModal({ closeModal }) {
           placeholder="MM/DD/YYYY"
         />
         <div className="flex flex-col items-center justify-between gap-4 mt-4 md:flex-row">
-          <button
+         
+          <button className="w-full bg-primary text-white py-3 rounded-md font-medium hover:bg-[#093557] transition">
+            Save Changes
+          </button>
+           <button
             className="w-full py-3 font-medium transition border rounded-md border-subtext/40 text-tertiary hover:bg-gray-50 "
             onClick={closeModal}
           >
             Cancel
-          </button>
-          <button className="w-full bg-primary text-white py-3 rounded-md font-medium hover:bg-[#093557] transition">
-            Save Changes
           </button>
         </div>
       </div>

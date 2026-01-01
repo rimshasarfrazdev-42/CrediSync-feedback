@@ -62,7 +62,7 @@ export const checklistItemsData = [
     tooltip:
       "Required for all hospital onboarding and privileging processes.",
     actions: [
-      { id: "add-entry", label: "Add Entry", variant: "outline" },
+      { id: "add-entry", label: "Add Entry", variant: "primary" },
       { id: "mark-na", label: "Mark N/A", variant: "ghost" },
     ],
     assignees: [

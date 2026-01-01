@@ -62,14 +62,14 @@ function BillingManagementContainer() {
             >
               Change Plan
             </Button>
-            <Button
+            {/* <Button
               onClick={() => {
                 navigate('/checkout');
               }} 
               className="bg-[#07244B] text-white text-[14px] sm:text-[16px] font-semibold w-full sm:w-auto"
             >
               Update Payment Method
-            </Button>
+            </Button> */}
             {/* <Button className="bg-[#07244B] text-white text-[14px] sm:text-[16px] font-semibold border w-full sm:w-auto">
               Update Payment Method
             </Button> */}

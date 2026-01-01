@@ -8,6 +8,7 @@ import RecentDocumentsCard from '../components/DashBoard/RecentDocumentsCard';
 import UploadButton from '../components/DashBoard/UploadButton';
 
 export const Dashboard = () => {
+
   return (
     <>
       <MainLayout>
@@ -29,7 +30,12 @@ export const Dashboard = () => {
         </div>
 
         <RecentDocumentsCard />
-
+{/* {viewDoc && (
+        <Vie
+          doc={viewDoc}
+          onClose={closeViewModal}
+        />
+      )} */}
         {/* <SessionTimeoutModal /> */}
       </MainLayout>
     </>

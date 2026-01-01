@@ -78,6 +78,7 @@ export default function SetReminderModal({
       className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 bg-secondary/80 sm:px-6"
       aria-modal="true"
       role="dialog"
+      onClick={onClose}
     >
       <div className="w-full max-w-md bg-white shadow-xl rounded-2xl">
         <form onSubmit={handleSubmit} className="px-4 py-5 sm:px-6 sm:py-6">
@@ -141,7 +142,7 @@ export default function SetReminderModal({
           </div>
 
           {/* Footer buttons */}
-          <div className=" w-full flex flex-col-reverse gap-3 mt-3 sm:flex-row sm:justify-end">
+          <div className="flex flex-col-reverse w-full gap-3 mt-3 sm:flex-row sm:justify-end">
             <button
               type="button"
               onClick={onClose}

@@ -45,7 +45,7 @@ return (
         <div className="flex flex-col flex-1">
           {/* Heading */}
           <header className="mb-5 text-center md:mb-6">
-            <h1 className="text-[1.5rem] md:text-[2.2rem] font-bold tracking-tight text-[#163B6D]">
+            <h1 className="text-[1.5rem] md:text-[2.2rem] font-bold tracking-tight text-primary">
               Welcome to CrediSync
             </h1>
             <p className="mx-auto mt-2 max-w-[720px] text-[0.9rem] md:text-[1.05rem] text-[#374151] leading-snug">

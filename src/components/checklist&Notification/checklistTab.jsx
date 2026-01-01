@@ -235,8 +235,8 @@ function ChecklistItemCard({ item, onAction }) {
                       action.variant === 'primary'
                         ? 'inline-flex items-center rounded-lg bg-primary px-3.5 py-2 text-xs font-semibold text-white hover:bg-[#082b5a] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 sm:text-sm'
                         : action.variant === 'ghost'
-                          ? 'inline-flex items-center rounded-lg border border-transparent px-3.5 py-2 text-xs font-medium text-slate-700 underline hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 sm:text-sm'
-                          : 'inline-flex items-center rounded-lg border border-primary px-3.5 py-2 text-xs font-medium text-primary hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 sm:text-sm'
+                          ? 'inline-flex items-center rounded-lg border border-transparent px-3.5 py-2 text-xs font-bold text-slate-700 underline sm:text-[16px]'
+                          : 'inline-flex items-center rounded-lg border border-primary px-3.5 py-2 text-xs font-bold text-primary sm:text-sm'
                     }
                   >
                     {action.label}

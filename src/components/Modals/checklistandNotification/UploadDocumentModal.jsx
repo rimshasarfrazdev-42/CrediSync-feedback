@@ -133,6 +133,7 @@ export default function UploadDocumentModal({
       className="fixed inset-0 z-50 flex items-center justify-center px-4 py-6 bg-secondary/80 sm:px-6"
       aria-modal="true"
       role="dialog"
+      onClick={handleCancel}
     >
       <div className="w-full max-w-xl bg-white shadow-xl rounded-2xl">
         <form
@@ -252,7 +253,7 @@ export default function UploadDocumentModal({
             <button
               type="button"
               onClick={handleCancel}
-              className="inline-flex justify-center sm:w-1/2 px-4 py-2 text-sm font-medium bg-white border rounded-md border-slate-300 text-slate-700 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+              className="inline-flex justify-center px-4 py-2 text-sm font-medium bg-white border rounded-md sm:w-1/2 border-slate-300 text-slate-700 hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
             >
               Cancel
             </button>

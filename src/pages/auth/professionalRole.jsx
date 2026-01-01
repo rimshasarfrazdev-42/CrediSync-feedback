@@ -73,8 +73,8 @@ const ProfessionalRoleSection = () => {
                   key={role.id}
                   type="button"
                   onClick={() => setSelectedRole(role.id)}
-                  className={`flex h-full flex-col justify-between rounded-lg border p-3 text-left transition-shadow focus:outline-none focus:ring-2 focus:ring-[#163B6D]/60 ${
-                    isActive ? 'border-[#163B6D] bg-primary/10 shadow-md' : 'border-[#d7dde6] bg-white hover:shadow-sm'
+                  className={`flex h-full flex-col justify-between rounded-lg border p-3 text-left transition-shadow focus:outline-none focus:ring-2 focus:ring-primary/60 ${
+                    isActive ? 'border-primary bg-primary/10 shadow-md' : 'border-[#d7dde6] bg-white hover:shadow-sm'
                   }`}
                 >
                   <div className="flex items-start justify-between gap-2">
@@ -85,7 +85,7 @@ const ProfessionalRoleSection = () => {
 
                     <span
                       className={`mt-1 inline-flex h-3.5 w-3.5 items-center justify-center rounded-full border ${
-                        isActive ? 'border-[#163B6D] bg-primary' : 'bg-[#92949F]'
+                        isActive ? 'border-primary bg-primary' : 'bg-[#92949F]'
                       }`}
                     />
                   </div>

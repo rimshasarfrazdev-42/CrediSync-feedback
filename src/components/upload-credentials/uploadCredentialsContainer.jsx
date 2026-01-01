@@ -129,7 +129,7 @@ function UploadCredentialsContainer() {
       err.inner?.forEach((e) => (formatted[e.path] = e.message));
       setErrors(formatted);
     }
-    navigate("/verification");
+    navigate("/login");
   };
 
   // Save and resume function can be implemented here
