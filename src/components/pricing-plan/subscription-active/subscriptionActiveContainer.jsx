@@ -8,7 +8,7 @@ function SubscriptionActiveContainer() {
   const [data, setData] = useState(null);
   const navigate = useNavigate();
 const handelSubmit=()=>{
-  navigate("/dashboard");
+  navigate("/account-setting?tab=account");
 }
   useEffect(() => {
     const subscription = JSON.parse(localStorage.getItem("paymentInfo"));
@@ -127,7 +127,7 @@ const handelSubmit=()=>{
           <Button
           onClick={handelSubmit}
            className="w-full !text-white !bg-primary py-3 rounded-md font-semibold text-[14px] sm:text-[15px] md:text-[16px]">
-            Go to Dashboard
+            Go to Settings
           </Button>
         </div>
       </div>

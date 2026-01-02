@@ -28,7 +28,7 @@ const UploadDocumentModal = ({ isOpen, onClose }) => {
         <p className="text-sm text-tertiary">Add a new credential or certification to your vault</p>
         <div className="mt-4 space-y-4">
           <div ref={documentTypeRef} className="relative">
-            <label className="text-base font-medium text-secondary mb-1">Document Type</label>
+            <label className="mb-1 text-base font-medium text-secondary">Document Type</label>
             <button
               onClick={() => setSelectDocumentOpen(!selectDocument)}
               className={`border rounded-md px-3 py-2 w-full flex justify-between items-center
@@ -38,7 +38,7 @@ const UploadDocumentModal = ({ isOpen, onClose }) => {
               <img src="/Dashboard/downArrows.svg" alt="arrow" />
             </button>
             {selectDocument && (
-              <div className="absolute mt-1 bg-white border rounded-md shadow-lg z-20 w-full">
+              <div className="absolute z-20 w-full mt-1 bg-white border rounded-md shadow-lg">
                 {['PDF', 'JPG', 'PNG', 'DOCX'].map((opt) => (
                   <p
                     key={opt}
@@ -61,13 +61,13 @@ const UploadDocumentModal = ({ isOpen, onClose }) => {
                 ${issuer ? 'text-secondary' : 'text-tertiary'}`}
             />
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <div>
               <label className="text-base font-medium text-secondary">Issue Date (Optional)</label>
               <input
                 type="text"
                 value={issueDate}
-                placeholder='MM/DD/YYYY'
+                placeholder="MM/DD/YYYY"
                 onChange={(e) => setIssueDate(e.target.value)}
                 className={`w-full border rounded-md mt-1 p-2.5 text-sm focus:ring-1 focus:ring-primary
                   ${issueDate ? 'text-secondary' : 'text-tertiary'}`}
@@ -78,7 +78,7 @@ const UploadDocumentModal = ({ isOpen, onClose }) => {
               <input
                 type="text"
                 value={expireDate}
-                placeholder='MM/DD/YYYY'
+                placeholder="MM/DD/YYYY"
                 onChange={(e) => setExpireDate(e.target.value)}
                 className={`w-full border rounded-md mt-1 p-2.5 text-sm focus:ring-1 focus:ring-primary
                   ${expireDate ? 'text-secondary' : 'text-tertiary'}`}
@@ -112,7 +112,14 @@ const UploadDocumentModal = ({ isOpen, onClose }) => {
           <button onClick={onClose} className="w-full py-2 border rounded-md text-tertiary hover:bg-tertiary/10">
             Cancel
           </button>
-          <button className="w-full py-2 text-white rounded-md bg-primary hover:bg-[#093759]">Upload</button>
+          <button
+            disabled={!file}
+            className={`w-full py-2 rounded-md text-white transition
+    ${file ? 'bg-primary hover:bg-[#093759]' : 'bg-primary/50 cursor-not-allowed'}
+  `}
+          >
+            Upload
+          </button>
         </div>
       </div>
     </div>

@@ -7,7 +7,6 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '.
 import { toast } from 'sonner';
 
 function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, deleteInsuranceForm, setRerender, errors }) {
-
   const formatNativeDate = (nativeValue) => {
     if (!nativeValue) return '';
     const [year, month, day] = nativeValue.split('-');
@@ -21,8 +20,8 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
   const handleFileChange = (e, block) => {
     const selectedFile = e.target.files?.[0];
     if (selectedFile && selectedFile.size > 2097152) {
-      toast.error("File is too large. Max limit is 2MB.");
-      e.target.value = "";
+      toast.error('File is too large. Max limit is 2MB.');
+      e.target.value = '';
       return;
     }
     if (selectedFile) {
@@ -60,26 +59,39 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
 
             <div className="grid w-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
               <div className="flex flex-col">
-                <p className="mb-2 text-base font-semibold text-secondary">Insurer Name<span className="ml-1 text-red-500">*</span></p>
+                <p className="mb-2 text-base font-semibold text-secondary">
+                  Insurer Name<span className="ml-1 text-red-500">*</span>
+                </p>
                 <Input
                   placeholder="Insurer Name"
                   defaultValue={block.insurerName}
                   onChange={(e) => (block.insurerName = e.target.value)}
                 />
-                {errors[`Insurance[${index}].insurerName`] && (<p className="text-sm text-red-600">{errors[`Insurance[${index}].insurerName`]}</p>)}
+                {errors[`Insurance[${index}].insurerName`] && (
+                  <p className="text-sm text-red-600">{errors[`Insurance[${index}].insurerName`]}</p>
+                )}
               </div>
               <div className="flex flex-col">
-                <p className="mb-2 text-base font-semibold text-secondary">Policy Number<span className="ml-1 text-red-500">*</span></p>
+                <p className="mb-2 text-base font-semibold text-secondary">
+                  Policy Number<span className="ml-1 text-red-500">*</span>
+                </p>
                 <Input
                   placeholder="POL-3381209"
                   defaultValue={block.policyNumber}
                   onChange={(e) => (block.policyNumber = e.target.value)}
                 />
-                {errors[`Insurance[${index}].policyNumber`] && (<p className="text-sm text-red-600">{errors[`Insurance[${index}].policyNumber`]}</p>)}
+                {errors[`Insurance[${index}].policyNumber`] && (
+                  <p className="text-sm text-red-600">{errors[`Insurance[${index}].policyNumber`]}</p>
+                )}
               </div>
               <div className="flex flex-col">
-                <p className="mb-2 text-base font-semibold text-secondary">Coverage Limits<span className="ml-1 text-red-500">*</span></p>
-                <Select value={block.coverageLimits || undefined} onValueChange={(value) => (block.coverageLimits = value)}>
+                <p className="mb-2 text-base font-semibold text-secondary">
+                  Coverage Limits<span className="ml-1 text-red-500">*</span>
+                </p>
+                <Select
+                  value={block.coverageLimits || undefined}
+                  onValueChange={(value) => (block.coverageLimits = value)}
+                >
                   <SelectTrigger className="items-center w-full h-10 text-left border border-gray-300">
                     <SelectValue placeholder="Select Coverage Limits " />
                   </SelectTrigger>
@@ -90,10 +102,14 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                     <SelectItem value="$5,000,000 / $150,000,000">$5,000,000 / $150,000,000</SelectItem>
                   </SelectContent>
                 </Select>
-                {errors[`Insurance[${index}].coverageLimits`] && (<p className="text-sm text-red-600">{errors[`Insurance[${index}].coverageLimits`]}</p>)}
+                {errors[`Insurance[${index}].coverageLimits`] && (
+                  <p className="text-sm text-red-600">{errors[`Insurance[${index}].coverageLimits`]}</p>
+                )}
               </div>
               <div className="flex flex-col">
-                <p className="mb-2 text-base font-semibold text-secondary">Start Date<span className="ml-1 text-red-500">*</span></p>
+                <p className="mb-2 text-base font-semibold text-secondary">
+                  Start Date<span className="ml-1 text-red-500">*</span>
+                </p>
                 <div className="relative">
                   <Input
                     placeholder="MM/DD/YYYY"
@@ -104,11 +120,7 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                   <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                     <input
                       type="date"
-                      value={
-                        block.startDate
-                          ? block.startDate.split('/').reverse().join('-')
-                          : ''
-                      }
+                      value={block.startDate ? block.startDate.split('/').reverse().join('-') : ''}
                       onChange={(e) => {
                         const value = e.target.value;
                         if (value) {
@@ -150,10 +162,14 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                     </svg>
                   </span>
                 </div>
-                {errors[`Insurance[${index}].startDate`] && (<p className="text-sm text-red-600">{errors[`Insurance[${index}].startDate`]}</p>)}
+                {errors[`Insurance[${index}].startDate`] && (
+                  <p className="text-sm text-red-600">{errors[`Insurance[${index}].startDate`]}</p>
+                )}
               </div>
               <div className="flex flex-col">
-                <p className="mb-2 text-base font-semibold text-secondary">End Date<span className="ml-1 text-red-500">*</span></p>
+                <p className="mb-2 text-base font-semibold text-secondary">
+                  End Date<span className="ml-1 text-red-500">*</span>
+                </p>
                 <div className="relative">
                   <Input
                     placeholder="MM/DD/YYYY"
@@ -164,11 +180,7 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                   <span className="absolute inset-y-0 flex items-center text-gray-400 cursor-pointer right-3">
                     <input
                       type="date"
-                      value={
-                        block.endDate
-                          ? block.endDate.split('/').reverse().join('-')
-                          : ''
-                      }
+                      value={block.endDate ? block.endDate.split('/').reverse().join('-') : ''}
                       onChange={(e) => {
                         const value = e.target.value;
                         if (value) {
@@ -210,24 +222,32 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                     </svg>
                   </span>
                 </div>
-                {errors[`Insurance[${index}].endDate`] && (<p className="text-sm text-red-600">{errors[`Insurance[${index}].endDate`]}</p>)}
+                {errors[`Insurance[${index}].endDate`] && (
+                  <p className="text-sm text-red-600">{errors[`Insurance[${index}].endDate`]}</p>
+                )}
               </div>
               <div className="flex flex-col space-y-2">
-                <p className="text-base font-semibold text-secondary">Insurance Certificate<span className="ml-1 text-red-500">*</span></p>
+                <p className="text-base font-semibold text-secondary">
+                  Insurance Certificate<span className="ml-1 text-red-500">*</span>
+                </p>
                 <div
                   className="flex items-center justify-between h-10 p-2 transition-colors border border-gray-200 rounded-md cursor-pointer hover:bg-gray-50"
                   onClick={() => block.fileInputRef.current.click()}
                 >
-                  <p
-                    className={`truncate text-sm ${block.uploadCertificate ? 'text-secondary' : 'text-gray-500'}`}
-                  >
-                    {block.uploadCertificate
-                      ? block.uploadCertificate.name
-                      :
-                      <span className="">Upload COI or Malpractice File (Max 2MB)</span>
+                  <p className={`truncate text-sm ${block.uploadCertificate ? 'text-secondary' : 'text-gray-500'}`}>
+                    {block.uploadCertificate ? (
+                      block.uploadCertificate.name
+                    ) : (
+                      <>
+                        {/* Small screens */}
+                        <span className="sm:hidden">Upload file</span>
 
-                    }
+                        {/* Large screens */}
+                        <span className="hidden sm:inline">Upload COI or Malpractice File (Max 2MB)</span>
+                      </>
+                    )}
                   </p>
+
                   <div className="flex items-center space-x-2">
                     {block.uploadCertificate && (
                       <Trash2
@@ -247,7 +267,9 @@ function InsuranceInfoContainer({ InsuranceFormsRef, addMoreInsuranceForm, delet
                     className="hidden"
                   />
                 </div>
-                {errors[`Insurance[${index}].uploadCertificate`] && (<p className="text-sm text-red-600">{errors[`Insurance[${index}].uploadCertificate`]}</p>)}
+                {errors[`Insurance[${index}].uploadCertificate`] && (
+                  <p className="text-sm text-red-600">{errors[`Insurance[${index}].uploadCertificate`]}</p>
+                )}
               </div>
             </div>
           </div>

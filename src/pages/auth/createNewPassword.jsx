@@ -127,7 +127,7 @@ export default function CreateNewPassword() {
             <button
               onClick={handleSubmit}
               type="submit"
-              className="w-full py-2.5 text-[16px] font-semibold text-white transition-colors bg-[#163B6D] rounded-md hover:bg-[#123057]"
+              className="w-full py-2.5 text-[16px] font-semibold text-white transition-colors bg-primary rounded-md hover:bg-[#123057]"
             >
               Next
             </button>

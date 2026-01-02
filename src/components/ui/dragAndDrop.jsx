@@ -155,7 +155,7 @@ function DragAndDrop({ imageContainer, onUpdate, savedImage }) {
               <Upload size={35} />
             </div>
             <p className="text-subtext text-[16px] font-normal">Drag & drop your file here, or</p>
-            <Button className="!bg-primary !text-white px-8 mt-4" onClick={openFilePicker}>
+            <Button className="!bg-primary !text-white px-8 mt-4 " onClick={openFilePicker}>
               Browse Files
             </Button>
             <p className="text-tertiary mt-2 text-[14px]">Accepted: JPG, PNG (Max 5MB)</p>
@@ -163,12 +163,12 @@ function DragAndDrop({ imageContainer, onUpdate, savedImage }) {
         ) : (
           <button
             onClick={openFilePicker}
-            className="flex flex-col items-center gap-2 text-primary hover:text-primary-dark transition-colors"
+            className="flex flex-col items-center gap-2 transition-colors text-primary hover:text-primary-dark"
           >
-            <div className="p-2 border-2 border-dashed border-primary rounded-full">
+            <div className="p-2 border-2 border-dashed rounded-full border-primary">
               <Plus size={24} />
             </div>
-            <span className="font-semibold text-sm">Add another file</span>
+            <span className="text-sm font-semibold">Add another file</span>
           </button>
         )}
       </div>

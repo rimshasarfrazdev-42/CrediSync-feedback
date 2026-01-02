@@ -11,17 +11,23 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const WELCOME_KEY = "credisync_welcome_seen";
 
-    console.log({ email, password, rememberMe });
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-    //  After login success → Navigate to dashboard
-    navigate(routePaths.Dashboard);
-    // OR navigate("/dashboard") if your path is plain string
-  };
+  // ✅ after login success
+  const hasSeenWelcome = localStorage.getItem(WELCOME_KEY) === "true";
 
-  const viewPasswordHandler = ()=> setShowPassword((prev)=> !prev)
+  if (hasSeenWelcome) {
+    navigate("/dashboard"); // or routePaths.Dashboard
+  } else {
+    navigate(routePaths.Home); // your Welcome screen route
+  }
+};
+
+
+  const viewPasswordHandler = () => setShowPassword((prev) => !prev);
 
   return (
     <div className="flex h-screen gap-6 bg-white lg:p-2">
@@ -53,21 +59,23 @@ const Login = () => {
             </div>
 
             {/* Password */}
-            <div className='relative'>
+            <div className="relative">
               <label className="block mb-1 text-[14px] sm:text-[16px] font-medium text-gray-700">Password</label>
               {showPassword ? (
-                  <Eye size={18} 
-                    className="text-md absolute top-11 right-4 cursor-pointer text-gray-500 hover:text-gray-700"
-                    onClick={viewPasswordHandler}
-                  />
-                ) : (
-                  <EyeOff size={18} 
-                    className="text-md absolute top-11 right-4 cursor-pointer text-gray-500 hover:text-gray-700"
-                    onClick={viewPasswordHandler}
-                  />
-                )}
+                <Eye
+                  size={18}
+                  className="absolute text-gray-500 cursor-pointer text-md top-11 right-4 hover:text-gray-700"
+                  onClick={viewPasswordHandler}
+                />
+              ) : (
+                <EyeOff
+                  size={18}
+                  className="absolute text-gray-500 cursor-pointer text-md top-11 right-4 hover:text-gray-700"
+                  onClick={viewPasswordHandler}
+                />
+              )}
               <input
-                type={showPassword ? "text" : "password"}
+                type={showPassword ? 'text' : 'password'}
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -102,6 +110,18 @@ const Login = () => {
                 Sign Up
               </Link>
             </p>
+            {/* thin line + institution link */}
+            <div className="pt-4 mt-6 text-[14px] sm:text-[16px] text-center border-t border-gray-200 text- text-slate-700">
+              <span>Are you an institution? </span>
+              <a
+                href="https://org-credisync.netlify.app/"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-primary"
+              >
+                Login or Signup here
+              </a>
+            </div>
           </form>
         </div>
       </div>

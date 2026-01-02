@@ -124,7 +124,7 @@ const PrivacyPolicyModal = ({ open, onClose, onAccept }) => {
               onClick={handleAccept}
               disabled={!isChecked}
               className={`w-full sm:w-auto px-4 py-2 text-[0.8rem] font-semibold rounded-md text-white transition-colors ${
-                isChecked ? 'bg-[#163B6D] hover:bg-[#123057]' : 'bg-[#163B6D]/60 cursor-not-allowed'
+                isChecked ? 'bg-primary hover:bg-[#123057]' : 'bg-primary/60 cursor-not-allowed'
               }`}
             >
               Accept &amp; Continue

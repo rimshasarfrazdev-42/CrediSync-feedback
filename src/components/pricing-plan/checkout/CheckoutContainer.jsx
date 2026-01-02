@@ -116,7 +116,7 @@ function CheckoutContainer() {
       await checkOutSchema.validate(
         {
           ...form,
-          expiryDate, 
+          expiryDate,
         },
         { abortEarly: false },
       );
@@ -194,8 +194,8 @@ function CheckoutContainer() {
               <div className="flex flex-col">
                 <p className={`${textSizes.label} font-medium mb-2 text-secondary`}>Expiration Date</p>
 
+                {/* Input + icon wrapper */}
                 <div className="relative">
-                  {/* Visible input */}
                   <Input
                     type="text"
                     placeholder="MM/DD/YYYY"
@@ -205,7 +205,6 @@ function CheckoutContainer() {
                     onClick={openDatePicker}
                   />
 
-                  {/* Single custom icon */}
                   <button
                     type="button"
                     aria-label="Select expiration date"
@@ -214,7 +213,7 @@ function CheckoutContainer() {
                   >
                     <CalendarDays className="w-5 h-5 text-tertiary" />
                   </button>
-                  {errors.expiryDate && <p className={`${textSizes.helper} text-red-500`}>{errors.expiryDate}</p>}
+
                   {/* Hidden native date input */}
                   <input
                     ref={expiryInputRef}
@@ -225,6 +224,11 @@ function CheckoutContainer() {
                     tabIndex={-1}
                     aria-hidden="true"
                   />
+                </div>
+
+                {/* Error space OUTSIDE */}
+                <div className="min-h-[1.25rem] mt-1">
+                  {errors.expiryDate && <p className={`${textSizes.helper} text-red-500`}>{errors.expiryDate}</p>}
                 </div>
               </div>
 

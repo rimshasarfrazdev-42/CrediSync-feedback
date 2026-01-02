@@ -1,10 +1,10 @@
 
 
 export const routePaths = {
-  Home: '/',
+  Home: '/welcome',
   register : "/register",
   VerifyEmail : "/verify-email",
-  Login: "/login",
+  Login: "/",
   ResetPassword: "/reset-password",
   CreateNewPassword: "/create-new-password",
   IdentityVerification: "/verification",
