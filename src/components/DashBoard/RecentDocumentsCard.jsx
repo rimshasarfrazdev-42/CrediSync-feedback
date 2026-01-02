@@ -278,7 +278,6 @@ export default function RecentDocumentsCard({ onViewDocument }) {
         )}
       </div>
 
-      {/* ✅ Delete modal once */}
       {isDeleteOpen && (
         <DeleteDocumentModal
           doc={selectedDoc}

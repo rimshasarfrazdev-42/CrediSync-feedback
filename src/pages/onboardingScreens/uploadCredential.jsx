@@ -1,5 +1,6 @@
-import UploadCredentialsContainer from '../../components/upload-credentials/uploadCredentialsContainer'
+
 import React from 'react'
+import UploadCredentialsContainer from '../../components/upload-credentials/uploadCredentialContainer'
 
 function UploadCredential() {
   return (

@@ -3,6 +3,9 @@ import DelegateModal from '../components/Modals/delegateModal';
 import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const WELCOME_KEY = "credisync_welcome_seen";
+const markWelcomeSeen = () => localStorage.setItem(WELCOME_KEY, "true");
+
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -29,14 +32,20 @@ const Home = () => {
     console.log('Invite payload:', payload);
   };
 
-  const handelClick = () => {
-    navigate('/login');
-  };
+const handelClick = () => {
+  markWelcomeSeen();
+  navigate("/dashboard"); // or routePaths.Dashboard
+};
+
+const handelClick2 = () => {
+  markWelcomeSeen();
+  navigate("/dashboard"); // keep your current route, or change to your intake route
+};
 
 return (
  <div className="bg-gradient-to-r from-[#F0FFFE] to-[#F8FAFC]  lg:min-h-[100svh] w-full px-3 sm:px-6 ">
 
-  <main className="w-full max-w-none min-h-screen">
+  <main className="w-full min-h-screen max-w-none">
 
       {/* Use grid so footer has reserved space on md+ and never overlaps content */}
     <section className="flex w-full flex-col py-4 min-h-[100svh] lg:min-h-[100svh] lg:py-6">
@@ -108,8 +117,8 @@ return (
           {/* Button options card */}
           <div className="mt-5">
             <div className="flex flex-col rounded-2xl overflow-hidden border border-[#d3e2ff] bg-white shadow-[0_10px_25px_rgba(15,27,61,0.06)]">
-              <div className="grid grid-cols-1 gap-3 p-4 md:grid-cols-2 md:gap-6 md:px-5">
-                <div className="flex flex-col">
+              <div className="grid grid-cols-1 gap-3 p-4 md:grid-cols-1 md:gap-6 md:px-5">
+                {/* <div className="flex flex-col">
                   <button
                     type="button"
                     onClick={handleDelegateClick}
@@ -126,7 +135,7 @@ return (
                   <p className=" mt-4 mb-3 sm:mb-0 sm:mt-2 text-center text-[13px] sm:text-[14px] md:text-[16px] text-[#526183]">
                     Send a secure link so your team can complete The Intake for you.
                   </p>
-                </div>
+                </div> */}
 
                 <DelegateModal
                   isOpen={showModal}
@@ -136,7 +145,7 @@ return (
 
                 <div className="flex flex-col">
                   <button
-                    onClick={handelClick}
+                    onClick={handelClick2}
                     type="button"
                     className={[
                       "w-full px-4 py-3.5 bg-primary text-white text-center font-semibold",

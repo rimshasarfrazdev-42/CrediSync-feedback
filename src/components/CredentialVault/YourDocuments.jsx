@@ -176,13 +176,12 @@ export default function YourDocuments({ onViewDocument }) {
                             Share
                           </button>
 
-                          <button
+                         <button
                             type="button"
-                            onClick={() => openDeleteModal(doc)} // ✅ doc (not row)
-                            className="flex w-full items-center gap-2 px-2 py-2 sm:hover:bg-gradient-to-r sm:hover:from-[#F4F9FF] sm:hover:to-[#F8FAFC]"
+                            onClick={() => openDeleteModal(doc)}
+                            className="flex items-center w-full gap-2 px-2 py-2 text-red-500 hover:bg-dashboard"
                           >
-                            <Trash2Icon className="w-4 h-4" />
-                            Delete
+                            <Trash2Icon className="w-4 h-4" /> Delete
                           </button>
                         </div>
                       )}
@@ -244,14 +243,13 @@ export default function YourDocuments({ onViewDocument }) {
                       Share
                     </button>
 
-                    <button
-                      type="button"
-                      onClick={() => openDeleteModal(doc)} // ✅ doc (not row)
-                      className="flex w-full items-center gap-2 px-2 py-2 active:bg-[#F4F9FF]"
-                    >
-                      <Trash2Icon className="w-4 h-4" />
-                      Delete
-                    </button>
+                 <button
+                            type="button"
+                            onClick={() => openDeleteModal(doc)}
+                            className="flex items-center w-full gap-2 px-2 py-2 text-red-500 hover:bg-dashboard"
+                          >
+                            <Trash2Icon className="w-4 h-4" /> Delete
+                          </button>
                   </div>
                 )}
               </div>
